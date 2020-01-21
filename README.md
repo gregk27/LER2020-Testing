@@ -1,3 +1,3 @@
 # LER2020 Robot A - FRC Infinite Recharge
 
-Document project here!
+The java namespace of the robot is "ler.robot"
