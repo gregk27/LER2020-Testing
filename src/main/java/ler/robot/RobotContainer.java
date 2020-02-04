@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import ler.robot.Constants.OIConstants;
+import ler.robot.RobotMap;
 import ler.robot.commands.DefaultDrive;
 import ler.robot.commands.HalveDriveSpeed;
 import ler.robot.subsystems.DriveSubsystem;
@@ -47,7 +47,7 @@ public class RobotContainer {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   // The driver's controller
-  XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+  XboxController m_driverController = new XboxController(RobotMap.OIConstants.kDriverControllerPort);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
