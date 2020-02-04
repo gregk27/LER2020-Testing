@@ -23,7 +23,7 @@ public class OI {
     // The driver's controller
     public XboxController driverController = new XboxController(RobotMap.OIConstants.DRIVER_CONTROLLER_PORT);
 
-    public JoystickButton halfSpeedButton = new JoystickButton(driverController, Button.kBumperRight.value);
+    public JoystickButton halfSpeedButton = new JoystickButton(driverController, RobotMap.OIConstants.HALF_SPEED_BUTTON);
 
     /**
      * Use this method to define your button->command mappings. Buttons can be

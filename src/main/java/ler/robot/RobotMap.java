@@ -9,6 +9,8 @@ package ler.robot;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
@@ -31,6 +33,8 @@ public final class RobotMap {
 
   public static final class OIConstants {
     public static final int DRIVER_CONTROLLER_PORT = 1;
+    
+    public static final int HALF_SPEED_BUTTON = Button.kBumperRight.value;
   }
 
   // The motors on the left side of the drive.
