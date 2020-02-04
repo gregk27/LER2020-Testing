@@ -47,7 +47,7 @@ public class RobotContainer {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   // The driver's controller
-  XboxController m_driverController = new XboxController(RobotMap.OIConstants.kDriverControllerPort);
+  XboxController m_driverController = new XboxController(RobotMap.OIConstants.DRIVER_CONTROLLER_PORT);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
