@@ -9,12 +9,12 @@ package ler.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import ler.robot.subsystems.DriveSubsystem;
+import ler.robot.subsystems.Drivetrain;
 
 public class HalveDriveSpeed extends CommandBase {
-  private final DriveSubsystem m_drive;
+  private final Drivetrain m_drive;
 
-  public HalveDriveSpeed(DriveSubsystem drive) {
+  public HalveDriveSpeed(Drivetrain drive) {
     m_drive = drive;
   }
 

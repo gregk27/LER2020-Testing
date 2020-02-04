@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import ler.robot.RobotMap;
 
-public class DriveSubsystem extends SubsystemBase {
+public class Drivetrain extends SubsystemBase {
   
 
   /*
@@ -36,7 +36,7 @@ public class DriveSubsystem extends SubsystemBase {
   /**
    * Creates a new DriveSubsystem.
    */
-  public DriveSubsystem() {
+  public Drivetrain() {
     // Sets the distance per pulse for the encoders
     /*
     m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);

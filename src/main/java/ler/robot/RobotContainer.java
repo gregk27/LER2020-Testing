@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import ler.robot.RobotMap;
 import ler.robot.commands.DefaultDrive;
 import ler.robot.commands.HalveDriveSpeed;
-import ler.robot.subsystems.DriveSubsystem;
+import ler.robot.subsystems.Drivetrain;
 
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -29,7 +29,7 @@ import static edu.wpi.first.wpilibj.XboxController.Button;
  */
 public class RobotContainer {
   // The robot's subsystems
-  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final Drivetrain m_robotDrive = new Drivetrain();
 
   // The autonomous routines
 
