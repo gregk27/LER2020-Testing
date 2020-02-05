@@ -11,12 +11,12 @@ import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.RobotMap;
-import ler.robot.subsystems.ShooterSubsystem;
+import ler.robot.subsystems.Shooter;
 
 public class DefaultShooter extends CommandBase {
   private int currentSpeed;
 
-  private final ShooterSubsystem m_shooter;
+  private final Shooter shooter;
   private final int speedCount = RobotMap.ShooterConstants.speeds.length;
 
     /**
@@ -26,12 +26,12 @@ public class DefaultShooter extends CommandBase {
    * @param faster
    * @param slower
    */
-  public DefaultShooter(ShooterSubsystem subsystem, BooleanSupplier zero, BooleanSupplier faster, BooleanSupplier slower) {
+  public DefaultShooter(Shooter subsystem, BooleanSupplier zero, BooleanSupplier faster, BooleanSupplier slower) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_shooter = subsystem;
+    shooter = subsystem;
     if (zero.getAsBoolean()){
       currentSpeed = 0;
-      m_shooter.talonResetPos();
+      shooter.talonResetPos();
     }
     if (faster.getAsBoolean()){
       currentSpeed++;
@@ -46,13 +46,13 @@ public class DefaultShooter extends CommandBase {
       }
     }
 
-    addRequirements(m_shooter);
+    addRequirements(shooter);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.setShooterSpeed(currentSpeed);
+    shooter.setShooterSpeed(currentSpeed);
   }
 
 }

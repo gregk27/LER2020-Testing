@@ -16,12 +16,12 @@ import ler.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-public class ShooterSubsystem extends SubsystemBase{
+public class Shooter extends SubsystemBase{
   private int currentSpeed = 0;
   /**
    * Creates a new ShooterSubsystem.
    */
-  public ShooterSubsystem() {
+  public Shooter() {
 
   }
 

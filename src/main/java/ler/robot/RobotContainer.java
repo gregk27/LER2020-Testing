@@ -19,6 +19,7 @@ import ler.robot.commands.DefaultDrive;
 import ler.robot.commands.DefaultShooter;
 import ler.robot.commands.HalveDriveSpeed;
 import ler.robot.subsystems.Drivetrain;
+import ler.robot.subsystems.Shooter;
 
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -62,7 +63,7 @@ public class RobotContainer {
     //default shooter commands
     shooter.setDefaultCommand(
       new DefaultShooter(
-          m_robotShooter,
+          shooter,
           () -> Robot.oi.driverController.getXButton(),
           () -> Robot.oi.driverController.getAButtonReleased(),
           () -> Robot.oi.driverController.getYButtonReleased()));
