@@ -35,14 +35,6 @@ public final class RobotMap {
     public static final int RIGHT_MOTOR_3 = 6;
   }
 
-  public static final class OIConstants {
-    public static final int DRIVER_CONTROLLER_PORT = 1;
-    public static final int OPERATOR_CONTROLLER_PORT = 2;
-
-    
-    public static final int HALF_SPEED_BUTTON = Button.kBumperRight.value;
-    public static final int INTAKE_BUTTON = Button.kA.value;
-  }
 
   public static final class ShooterConstants {
     public static final int talonShooterTop = 8;

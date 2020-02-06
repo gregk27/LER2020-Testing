@@ -23,12 +23,21 @@ import ler.robot.subsystems.Conveyor;
  */
 public class OI {
 
-    // The driver's controller
-    public XboxController driverController = new XboxController(RobotMap.OIConstants.DRIVER_CONTROLLER_PORT);
-    public XboxController operatorController = new XboxController(RobotMap.OIConstants.OPERATOR_CONTROLLER_PORT);
+    public static final int DRIVER_CONTROLLER_PORT = 1;
+    public static final int OPERATOR_CONTROLLER_PORT = 2;
 
-    public JoystickButton halfSpeedButton = new JoystickButton(driverController, RobotMap.OIConstants.HALF_SPEED_BUTTON);
-    public JoystickButton intakeButton = new JoystickButton(operatorController, RobotMap.OIConstants.INTAKE_BUTTON);
+    
+    public static final class ButtonMappings {
+        public static final int HALF_SPEED_BUTTON = Button.kBumperRight.value;
+        public static final int INTAKE_BUTTON = Button.kA.value;
+    }
+
+    // The driver's controller
+    public XboxController driverController = new XboxController(DRIVER_CONTROLLER_PORT);
+    public XboxController operatorController = new XboxController(OPERATOR_CONTROLLER_PORT);
+
+    public JoystickButton halfSpeedButton = new JoystickButton(driverController, ButtonMappings.HALF_SPEED_BUTTON);
+    public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
     /**
      * Use this method to define your button->command mappings. Buttons can be
      * created by instantiating a {@link GenericHID} or one of its subclasses
