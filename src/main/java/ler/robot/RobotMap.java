@@ -26,54 +26,48 @@ import ler.robot.subsystems.Shooter;
  * constants are needed, to reduce verbosity.
  */
 public final class RobotMap {
-  public static final class DriveConstants {
+  /**
+   * Subclass to hold all mapping constants (motors, DIO ports, etc)
+   */
+  public static final class Mappings {
     public static final int LEFT_MOTOR_1 = 1;
     public static final int LEFT_MOTOR_2 = 2;
     public static final int LEFT_MOTOR_3 = 3;
     public static final int RIGHT_MOTOR_1 = 4;
     public static final int RIGHT_MOTOR_2 = 5;
     public static final int RIGHT_MOTOR_3 = 6;
-  }
-
-
-  public static final class ShooterConstants {
+    
     public static final int talonShooterTop = 8;
     public static final int talonShooterBottom = 9;
-
-  }
-  public static final class ConveyorConstants {
+    
     //TODO: Calibrate the fake values
     public static final int talonConveyor = 2708;
-
-
-  }
-  public static final class IntakeConstants {
-     //TODO: Calibrate the fake values
-    public static final int talonIntake = 2708;
+    //TODO: Calibrate the fake values
+   public static final int talonIntake = 2708;
   }
 
   // The motors on the left side of the drive.
-  public static final CANSparkMax leftMotor1 = new CANSparkMax(DriveConstants.LEFT_MOTOR_1, MotorType.kBrushless);
-  public static final CANSparkMax leftMotor2 = new CANSparkMax(DriveConstants.LEFT_MOTOR_2, MotorType.kBrushless);
-  public static final CANSparkMax leftMotor3 = new CANSparkMax(DriveConstants.LEFT_MOTOR_3, MotorType.kBrushless);
+  public static final CANSparkMax leftMotor1 = new CANSparkMax(Mappings.LEFT_MOTOR_1, MotorType.kBrushless);
+  public static final CANSparkMax leftMotor2 = new CANSparkMax(Mappings.LEFT_MOTOR_2, MotorType.kBrushless);
+  public static final CANSparkMax leftMotor3 = new CANSparkMax(Mappings.LEFT_MOTOR_3, MotorType.kBrushless);
   
 
   // The motors on the right side of the drive.
-  public static final CANSparkMax rightMotor1 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_1, MotorType.kBrushless);
-  public static final CANSparkMax rightMotor2 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_2, MotorType.kBrushless);
-  public static final CANSparkMax rightMotor3 = new CANSparkMax(DriveConstants.RIGHT_MOTOR_3, MotorType.kBrushless);
+  public static final CANSparkMax rightMotor1 = new CANSparkMax(Mappings.RIGHT_MOTOR_1, MotorType.kBrushless);
+  public static final CANSparkMax rightMotor2 = new CANSparkMax(Mappings.RIGHT_MOTOR_2, MotorType.kBrushless);
+  public static final CANSparkMax rightMotor3 = new CANSparkMax(Mappings.RIGHT_MOTOR_3, MotorType.kBrushless);
 
   // The robot's drive
   public static final DifferentialDrive m_drive = new DifferentialDrive(leftMotor1, rightMotor1);
 
   // The talons on the shooter
-  public static final TalonSRX talonShooterTop = new TalonSRX(ShooterConstants.talonShooterTop);
-  public static final TalonSRX talonShooterBottom = new TalonSRX(ShooterConstants.talonShooterBottom);
+  public static final TalonSRX talonShooterTop = new TalonSRX(Mappings.talonShooterTop);
+  public static final TalonSRX talonShooterBottom = new TalonSRX(Mappings.talonShooterBottom);
 
   //The conveyor 
-  public static final TalonSRX talonConveyor = new TalonSRX(ConveyorConstants.talonConveyor);
+  public static final TalonSRX talonConveyor = new TalonSRX(Mappings.talonConveyor);
   //The intake
-  public static final TalonSRX talonIntake = new TalonSRX(IntakeConstants.talonIntake);
+  public static final TalonSRX talonIntake = new TalonSRX(Mappings.talonIntake);
   public static void init(){
     leftMotor2.follow(leftMotor1);
     leftMotor3.follow(leftMotor1);
