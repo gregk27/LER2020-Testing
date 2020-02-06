@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import ler.robot.subsystems.Shooter;
 
 
 /**
@@ -47,16 +48,6 @@ public final class RobotMap {
     public static final int talonShooterTop = 8;
     public static final int talonShooterBottom = 9;
 
-    public static final double kP = 0.25;
-    public static final double kI = 0.001;
-    public static final double kD = 20;
-    public static final double kF = 1;
-
-    public static final int[] speeds = {0, 300, 600, 900, 1200};
-    public static final int ZEROSPEED = 0;
-
-    //Cycles per revolution of encoders on shooter
-    public static final int cPR = 64;
   }
   public static final class ConveyorConstants {
     //TODO: Calibrate the fake values
@@ -107,10 +98,10 @@ public final class RobotMap {
     //shooter init
     talonShooterTop.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-    talonShooterTop.config_kF(0, ShooterConstants.kF);
-    talonShooterTop.config_kP(0, ShooterConstants.kP);
-    talonShooterTop.config_kI(0, ShooterConstants.kI);
-    talonShooterTop.config_kD(0, ShooterConstants.kD);
+    talonShooterTop.config_kF(0, Shooter.kF);
+    talonShooterTop.config_kP(0, Shooter.kP);
+    talonShooterTop.config_kI(0, Shooter.kI);
+    talonShooterTop.config_kD(0, Shooter.kD);
     
   }
 }

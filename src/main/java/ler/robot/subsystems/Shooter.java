@@ -17,6 +17,18 @@ import ler.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Shooter extends SubsystemBase{
+  
+  public static final double kP = 0.25;
+  public static final double kI = 0.001;
+  public static final double kD = 20;
+  public static final double kF = 1;
+
+  public static final int[] speeds = {0, 300, 600, 900, 1200};
+  public static final int ZEROSPEED = 0;
+
+  //Cycles per revolution of encoders on shooter
+  public static final int cPR = 64;
+
   private int currentSpeed = 0;
   /**
    * Creates a new ShooterSubsystem.
@@ -26,7 +38,7 @@ public class Shooter extends SubsystemBase{
   }
 
   public void setShooterSpeed(int speed){
-    setSpecificShooterSpeed(RobotMap.ShooterConstants.speeds[speed]);
+    setSpecificShooterSpeed(speeds[speed]);
   }
 
   public void setSpecificShooterSpeed(double speed){
@@ -42,6 +54,6 @@ public class Shooter extends SubsystemBase{
   }
 
   public double getRevolutionsPerSecond(int rpsinput){
-    return ((rpsinput/RobotMap.ShooterConstants.cPR)*10)*0.314;
+    return ((rpsinput/cPR)*10)*0.314;
   }
 }

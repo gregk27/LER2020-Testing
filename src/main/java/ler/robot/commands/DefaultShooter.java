@@ -17,7 +17,7 @@ public class DefaultShooter extends CommandBase {
   private int currentSpeed;
 
   private final Shooter shooter;
-  private final int speedCount = RobotMap.ShooterConstants.speeds.length;
+  private final int speedCount = Shooter.speeds.length;
 
     /**
    * Creates a new default shooter
