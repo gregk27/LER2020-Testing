@@ -13,7 +13,10 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import ler.robot.commands.HalveDriveSpeed;
+import ler.robot.commands.IntakeCommand;
 import ler.robot.subsystems.Drivetrain;
+import ler.robot.subsystems.Intake;
+import ler.robot.subsystems.Conveyor;
 
 /**
  * Operator Interface, used to map buttons with the controllers
@@ -22,16 +25,17 @@ public class OI {
 
     // The driver's controller
     public XboxController driverController = new XboxController(RobotMap.OIConstants.DRIVER_CONTROLLER_PORT);
+    public XboxController operatorController = new XboxController(RobotMap.OIConstants.OPERATOR_CONTROLLER_PORT);
 
     public JoystickButton halfSpeedButton = new JoystickButton(driverController, RobotMap.OIConstants.HALF_SPEED_BUTTON);
-
+    public JoystickButton intakeButton = new JoystickButton(operatorController, RobotMap.OIConstants.INTAKE_BUTTON);
     /**
      * Use this method to define your button->command mappings. Buttons can be
      * created by instantiating a {@link GenericHID} or one of its subclasses
      * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
      * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
-    public void init(Drivetrain drivetrain) {
+    public void init(Drivetrain drivetrain, Intake intake, Conveyor conveyor){
         /*
          * // Grab the hatch when the 'A' button is pressed. new
          * JoystickButton(m_driverController, Button.kA.value) .whenPressed(new
@@ -41,6 +45,7 @@ public class OI {
          */
         // While holding the shoulder button, drive at half speed
         halfSpeedButton.whenHeld(new HalveDriveSpeed(drivetrain));
+        intakeButton.whileHeld(new IntakeCommand(intake,conveyor));
 
     }
 

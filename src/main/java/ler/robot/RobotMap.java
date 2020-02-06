@@ -9,7 +9,6 @@ package ler.robot;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -37,8 +36,11 @@ public final class RobotMap {
 
   public static final class OIConstants {
     public static final int DRIVER_CONTROLLER_PORT = 1;
+    public static final int OPERATOR_CONTROLLER_PORT = 2;
+
     
     public static final int HALF_SPEED_BUTTON = Button.kBumperRight.value;
+    public static final int INTAKE_BUTTON = Button.kA.value;
   }
 
   public static final class ShooterConstants {
@@ -55,6 +57,19 @@ public final class RobotMap {
 
     //Cycles per revolution of encoders on shooter
     public static final int cPR = 64;
+  }
+  public static final class ConveyorConstants {
+    //TODO: Calibrate the fake values
+    public static final int talonConveyor = 2708;
+    public static final double ConveyorIntakeSpeed = 0.25;
+    public static final double ConveyorShooterSpeed = 0.25;
+
+
+  }
+  public static final class IntakeConstants {
+     //TODO: Calibrate the fake values
+    public static final int talonIntake = 2708;
+    public static final double intakeSpeed = 0.5;
   }
 
   // The motors on the left side of the drive.
@@ -75,6 +90,10 @@ public final class RobotMap {
   public static final TalonSRX talonShooterTop = new TalonSRX(ShooterConstants.talonShooterTop);
   public static final TalonSRX talonShooterBottom = new TalonSRX(ShooterConstants.talonShooterBottom);
 
+  //The conveyor 
+  public static final TalonSRX talonConveyor = new TalonSRX(ConveyorConstants.talonConveyor);
+  //The intake
+  public static final TalonSRX talonIntake = new TalonSRX(IntakeConstants.talonIntake);
   public static void init(){
     leftMotor2.follow(leftMotor1);
     leftMotor3.follow(leftMotor1);

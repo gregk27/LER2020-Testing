@@ -15,11 +15,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import ler.robot.RobotMap;
+
 import ler.robot.commands.DefaultDrive;
+
 import ler.robot.commands.DefaultShooter;
 import ler.robot.commands.HalveDriveSpeed;
+import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Shooter;
+import ler.robot.subsystems.Intake;
 
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -32,8 +36,10 @@ import static edu.wpi.first.wpilibj.XboxController.Button;
 public class RobotContainer {
   // The robot's subsystems
   private final Shooter shooter = new Shooter();
-
+  private final Intake intake = new Intake();
+  private final Conveyor conveyor = new Conveyor();
   private final Drivetrain drivetrain = new Drivetrain();
+
 
   // The autonomous routines
 
@@ -55,7 +61,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    Robot.oi.init(drivetrain);
+    Robot.oi.init(drivetrain,intake,conveyor);
 
     // Configure default commands
     // Set the default drive command to split-stick arcade drive
