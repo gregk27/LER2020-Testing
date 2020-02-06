@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Conveyor extends SubsystemBase {
   
-  public static final double ConveyorIntakeSpeed = 0.25;
-  public static final double ConveyorShooterSpeed = 0.25;
+  public static final double INTAKE_SPEED = 0.25;
+  public static final double SHOOTER_SPEED = 0.25;
 
   /**
    * Creates a new Conveyor.

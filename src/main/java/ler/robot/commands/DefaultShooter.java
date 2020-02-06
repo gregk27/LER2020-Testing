@@ -17,7 +17,7 @@ public class DefaultShooter extends CommandBase {
   private int currentSpeed;
 
   private final Shooter shooter;
-  private final int speedCount = Shooter.speeds.length;
+  private final int speedCount = Shooter.SPEEDS.length;
 
     /**
    * Creates a new default shooter

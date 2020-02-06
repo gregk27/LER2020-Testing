@@ -37,13 +37,13 @@ public final class RobotMap {
     public static final int RIGHT_DRIVE_SPARK_2 = 5;
     public static final int RIGHT_DRIVE_SPARK_3 = 6;
     
-    public static final int shooterTopTalon = 8;
-    public static final int shooterBottomTalon = 9;
+    public static final int SHOOTER_TOP_TALON = 8;
+    public static final int SHOOTER_BOTTOM_TALON = 9;
     
     //TODO: Calibrate the fake values
-    public static final int conveyorTalon = 2708;
+    public static final int CONVEYOR_TALON = 2708;
     //TODO: Calibrate the fake values
-   public static final int intakeTalon = 2708;
+   public static final int INTAKE_TALON = 2708;
   }
 
   // The motors on the left side of the drive.
@@ -61,13 +61,13 @@ public final class RobotMap {
   public static final DifferentialDrive m_drive = new DifferentialDrive(leftDriveSpark1, rightDriveSpark1);
 
   // The talons on the shooter
-  public static final TalonSRX shooterTopTalon = new TalonSRX(Mappings.shooterTopTalon);
-  public static final TalonSRX shooterBottomTalon = new TalonSRX(Mappings.shooterBottomTalon);
+  public static final TalonSRX shooterTopTalon = new TalonSRX(Mappings.SHOOTER_TOP_TALON);
+  public static final TalonSRX shooterBottomTalon = new TalonSRX(Mappings.SHOOTER_BOTTOM_TALON);
 
   //The conveyor 
-  public static final TalonSRX conveyorMotor = new TalonSRX(Mappings.conveyorTalon);
+  public static final TalonSRX conveyorMotor = new TalonSRX(Mappings.CONVEYOR_TALON);
   //The intake
-  public static final TalonSRX intakeRoller = new TalonSRX(Mappings.intakeTalon);
+  public static final TalonSRX intakeRoller = new TalonSRX(Mappings.INTAKE_TALON);
 
 
   public static void init(){

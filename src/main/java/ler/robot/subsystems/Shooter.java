@@ -23,7 +23,7 @@ public class Shooter extends SubsystemBase{
   public static final double kD = 20;
   public static final double kF = 1;
 
-  public static final int[] speeds = {0, 300, 600, 900, 1200};
+  public static final int[] SPEEDS = {0, 300, 600, 900, 1200};
   public static final int ZEROSPEED = 0;
 
   //Cycles per revolution of encoders on shooter
@@ -38,7 +38,7 @@ public class Shooter extends SubsystemBase{
   }
 
   public void setShooterSpeed(int speed){
-    setSpecificShooterSpeed(speeds[speed]);
+    setSpecificShooterSpeed(SPEEDS[speed]);
   }
 
   public void setSpecificShooterSpeed(double speed){
