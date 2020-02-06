@@ -58,8 +58,8 @@ public class Drivetrain extends SubsystemBase {
     right *= 0.25;
     System.out.println(left);
     System.out.println(right);
-    RobotMap.leftMotor1.set(left);
-    RobotMap.rightMotor1.set(right);
+    RobotMap.leftDriveSpark1.set(left);
+    RobotMap.rightDriveSpark1.set(right);
   }
 
   /**

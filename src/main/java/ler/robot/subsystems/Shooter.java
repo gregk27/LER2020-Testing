@@ -43,14 +43,14 @@ public class Shooter extends SubsystemBase{
 
   public void setSpecificShooterSpeed(double speed){
     //talonShooterTop.set(ControlMode.PercentOutput, speeds[currentSpeed]);
-    RobotMap.talonShooterTop.set(ControlMode.Velocity, speed);
+    RobotMap.shooterTopTalon.set(ControlMode.Velocity, speed);
     //talonShooterBottom.set(ControlMode.PercentOutput, -speeds[currentSpeed]);
-    RobotMap.talonShooterBottom.set(ControlMode.Velocity, -speed);
+    RobotMap.shooterBottomTalon.set(ControlMode.Velocity, -speed);
   }
 
   public void talonResetPos(){
-    RobotMap.talonShooterTop.setSelectedSensorPosition(0);
-    RobotMap.talonShooterBottom.setSelectedSensorPosition(0);
+    RobotMap.shooterTopTalon.setSelectedSensorPosition(0);
+    RobotMap.shooterBottomTalon.setSelectedSensorPosition(0);
   }
 
   public double getRevolutionsPerSecond(int rpsinput){

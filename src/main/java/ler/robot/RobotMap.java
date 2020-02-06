@@ -30,61 +30,63 @@ public final class RobotMap {
    * Subclass to hold all mapping constants (motors, DIO ports, etc)
    */
   public static final class Mappings {
-    public static final int LEFT_MOTOR_1 = 1;
-    public static final int LEFT_MOTOR_2 = 2;
-    public static final int LEFT_MOTOR_3 = 3;
-    public static final int RIGHT_MOTOR_1 = 4;
-    public static final int RIGHT_MOTOR_2 = 5;
-    public static final int RIGHT_MOTOR_3 = 6;
+    public static final int LEFT_DRIVE_SPARK_1 = 1;
+    public static final int LEFT_DRIVE_SPARK_2 = 2;
+    public static final int LEFT_DRIVE_SPARK_3 = 3;
+    public static final int RIGHT_DRIVE_SPARK_1 = 4;
+    public static final int RIGHT_DRIVE_SPARK_2 = 5;
+    public static final int RIGHT_DRIVE_SPARK_3 = 6;
     
-    public static final int talonShooterTop = 8;
-    public static final int talonShooterBottom = 9;
+    public static final int shooterTopTalon = 8;
+    public static final int shooterBottomTalon = 9;
     
     //TODO: Calibrate the fake values
-    public static final int talonConveyor = 2708;
+    public static final int conveyorTalon = 2708;
     //TODO: Calibrate the fake values
-   public static final int talonIntake = 2708;
+   public static final int intakeTalon = 2708;
   }
 
   // The motors on the left side of the drive.
-  public static final CANSparkMax leftMotor1 = new CANSparkMax(Mappings.LEFT_MOTOR_1, MotorType.kBrushless);
-  public static final CANSparkMax leftMotor2 = new CANSparkMax(Mappings.LEFT_MOTOR_2, MotorType.kBrushless);
-  public static final CANSparkMax leftMotor3 = new CANSparkMax(Mappings.LEFT_MOTOR_3, MotorType.kBrushless);
+  public static final CANSparkMax leftDriveSpark1 = new CANSparkMax(Mappings.LEFT_DRIVE_SPARK_1, MotorType.kBrushless);
+  public static final CANSparkMax leftDriveSpark2 = new CANSparkMax(Mappings.LEFT_DRIVE_SPARK_2, MotorType.kBrushless);
+  public static final CANSparkMax leftDriveSpark3 = new CANSparkMax(Mappings.LEFT_DRIVE_SPARK_3, MotorType.kBrushless);
   
 
   // The motors on the right side of the drive.
-  public static final CANSparkMax rightMotor1 = new CANSparkMax(Mappings.RIGHT_MOTOR_1, MotorType.kBrushless);
-  public static final CANSparkMax rightMotor2 = new CANSparkMax(Mappings.RIGHT_MOTOR_2, MotorType.kBrushless);
-  public static final CANSparkMax rightMotor3 = new CANSparkMax(Mappings.RIGHT_MOTOR_3, MotorType.kBrushless);
+  public static final CANSparkMax rightDriveSpark1 = new CANSparkMax(Mappings.RIGHT_DRIVE_SPARK_1, MotorType.kBrushless);
+  public static final CANSparkMax rightDriveSpark2 = new CANSparkMax(Mappings.RIGHT_DRIVE_SPARK_2, MotorType.kBrushless);
+  public static final CANSparkMax rightDriveSpark3 = new CANSparkMax(Mappings.RIGHT_DRIVE_SPARK_3, MotorType.kBrushless);
 
   // The robot's drive
-  public static final DifferentialDrive m_drive = new DifferentialDrive(leftMotor1, rightMotor1);
+  public static final DifferentialDrive m_drive = new DifferentialDrive(leftDriveSpark1, rightDriveSpark1);
 
   // The talons on the shooter
-  public static final TalonSRX talonShooterTop = new TalonSRX(Mappings.talonShooterTop);
-  public static final TalonSRX talonShooterBottom = new TalonSRX(Mappings.talonShooterBottom);
+  public static final TalonSRX shooterTopTalon = new TalonSRX(Mappings.shooterTopTalon);
+  public static final TalonSRX shooterBottomTalon = new TalonSRX(Mappings.shooterBottomTalon);
 
   //The conveyor 
-  public static final TalonSRX talonConveyor = new TalonSRX(Mappings.talonConveyor);
+  public static final TalonSRX conveyorMotor = new TalonSRX(Mappings.conveyorTalon);
   //The intake
-  public static final TalonSRX talonIntake = new TalonSRX(Mappings.talonIntake);
+  public static final TalonSRX intakeRoller = new TalonSRX(Mappings.intakeTalon);
+
+
   public static void init(){
-    leftMotor2.follow(leftMotor1);
-    leftMotor3.follow(leftMotor1);
+    leftDriveSpark2.follow(leftDriveSpark1);
+    leftDriveSpark3.follow(leftDriveSpark1);
 
-    leftMotor1.setInverted(true);
-    rightMotor1.setInverted(false);
+    leftDriveSpark1.setInverted(true);
+    rightDriveSpark1.setInverted(false);
 
-    rightMotor2.follow(rightMotor1);
-    rightMotor3.follow(rightMotor1);
+    rightDriveSpark2.follow(rightDriveSpark1);
+    rightDriveSpark3.follow(rightDriveSpark1);
 
     //shooter init
-    talonShooterTop.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+    shooterTopTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-    talonShooterTop.config_kF(0, Shooter.kF);
-    talonShooterTop.config_kP(0, Shooter.kP);
-    talonShooterTop.config_kI(0, Shooter.kI);
-    talonShooterTop.config_kD(0, Shooter.kD);
+    shooterTopTalon.config_kF(0, Shooter.kF);
+    shooterTopTalon.config_kP(0, Shooter.kP);
+    shooterTopTalon.config_kI(0, Shooter.kI);
+    shooterTopTalon.config_kD(0, Shooter.kD);
     
   }
 }

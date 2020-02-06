@@ -16,7 +16,7 @@ public class Intake extends SubsystemBase {
   
   
   public static final double intakeSpeed = 0.5;
-  
+
   /**
    * Creates a new Intake.
    */
@@ -25,11 +25,11 @@ public class Intake extends SubsystemBase {
   }
 
   public void StartIntake (double speed){
-    RobotMap.talonIntake.set(ControlMode.PercentOutput, speed );
+    RobotMap.intakeRoller.set(ControlMode.PercentOutput, speed );
 
   }
   public void StopIntake (){
-    RobotMap.talonIntake.set(ControlMode.PercentOutput, 0);
+    RobotMap.intakeRoller.set(ControlMode.PercentOutput, 0);
 
   }
   @Override
