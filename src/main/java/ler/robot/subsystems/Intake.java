@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Intake extends SubsystemBase {
+  
+  
+  public static final double intakeSpeed = 0.5;
+  
   /**
    * Creates a new Intake.
    */

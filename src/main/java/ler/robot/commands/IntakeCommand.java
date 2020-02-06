@@ -33,8 +33,8 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.StartIntake(RobotMap.IntakeConstants.intakeSpeed);
-    conveyor.SetConveyorSpeed(RobotMap.ConveyorConstants.ConveyorIntakeSpeed);
+    intake.StartIntake(Intake.intakeSpeed);
+    conveyor.SetConveyorSpeed(Conveyor.ConveyorIntakeSpeed);
     
   }
 

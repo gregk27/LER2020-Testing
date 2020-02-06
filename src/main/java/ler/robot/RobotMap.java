@@ -52,15 +52,12 @@ public final class RobotMap {
   public static final class ConveyorConstants {
     //TODO: Calibrate the fake values
     public static final int talonConveyor = 2708;
-    public static final double ConveyorIntakeSpeed = 0.25;
-    public static final double ConveyorShooterSpeed = 0.25;
 
 
   }
   public static final class IntakeConstants {
      //TODO: Calibrate the fake values
     public static final int talonIntake = 2708;
-    public static final double intakeSpeed = 0.5;
   }
 
   // The motors on the left side of the drive.
