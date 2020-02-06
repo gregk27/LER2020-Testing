@@ -7,16 +7,15 @@
 
 package ler.robot;
 
-import edu.wpi.first.hal.sim.DriverStationSim;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import ler.robot.commands.HalveDriveSpeed;
 import ler.robot.commands.IntakeCommand;
+import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Intake;
-import ler.robot.subsystems.Conveyor;
 
 /**
  * Operator Interface, used to map buttons with the controllers

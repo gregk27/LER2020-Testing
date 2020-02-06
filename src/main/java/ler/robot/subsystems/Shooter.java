@@ -7,14 +7,10 @@
 
 package ler.robot.subsystems;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj2.command.PIDSubsystem;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import ler.robot.RobotMap;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Shooter extends SubsystemBase{
   
@@ -39,6 +35,7 @@ public class Shooter extends SubsystemBase{
 
   public void setShooterSpeed(int speed){
     setSpecificShooterSpeed(SPEEDS[speed]);
+    currentSpeed = speed;
   }
 
   public void setSpecificShooterSpeed(double speed){

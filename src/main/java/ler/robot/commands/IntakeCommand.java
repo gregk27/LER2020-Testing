@@ -8,9 +8,8 @@
 package ler.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import ler.robot.subsystems.Intake;
-import ler.robot.RobotMap;
 import ler.robot.subsystems.Conveyor;
+import ler.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
   /**

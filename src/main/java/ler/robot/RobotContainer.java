@@ -8,24 +8,15 @@
 package ler.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
-import ler.robot.RobotMap;
-
 import ler.robot.commands.DefaultDrive;
-
 import ler.robot.commands.DefaultShooter;
-import ler.robot.commands.HalveDriveSpeed;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Drivetrain;
-import ler.robot.subsystems.Shooter;
 import ler.robot.subsystems.Intake;
-
-import static edu.wpi.first.wpilibj.XboxController.Button;
+import ler.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
