@@ -26,10 +26,10 @@ import ler.robot.subsystems.Shooter;
  */
 public class RobotContainer {
   // The robot's subsystems
-  private final Shooter shooter = new Shooter();
-  private final Intake intake = new Intake();
-  private final Conveyor conveyor = new Conveyor();
-  private final Drivetrain drivetrain = new Drivetrain();
+  final Shooter shooter = new Shooter();
+  final Intake intake = new Intake();
+  final Conveyor conveyor = new Conveyor();
+  final Drivetrain drivetrain = new Drivetrain();
 
 
   // The autonomous routines
@@ -52,7 +52,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    Robot.oi.init(drivetrain,intake,conveyor);
+    Robot.oi.init(this);
 
     // Configure default commands
     // Set the default drive command to split-stick arcade drive

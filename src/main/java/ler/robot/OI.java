@@ -13,9 +13,6 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import ler.robot.commands.HalveDriveSpeed;
 import ler.robot.commands.IntakeCommand;
-import ler.robot.subsystems.Conveyor;
-import ler.robot.subsystems.Drivetrain;
-import ler.robot.subsystems.Intake;
 
 /**
  * Operator Interface, used to map buttons with the controllers
@@ -43,7 +40,7 @@ public class OI {
      * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
      * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
-    public void init(Drivetrain drivetrain, Intake intake, Conveyor conveyor){
+    public void init(RobotContainer container){
         /*
          * // Grab the hatch when the 'A' button is pressed. new
          * JoystickButton(m_driverController, Button.kA.value) .whenPressed(new
@@ -52,8 +49,8 @@ public class OI {
          * .whenPressed(new ReleaseHatch(m_hatchSubsystem));
          */
         // While holding the shoulder button, drive at half speed
-        halfSpeedButton.whenHeld(new HalveDriveSpeed(drivetrain));
-        intakeButton.whileHeld(new IntakeCommand(intake,conveyor));
+        halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
+        intakeButton.whileHeld(new IntakeCommand(container.intake,container.conveyor));
 
     }
 
