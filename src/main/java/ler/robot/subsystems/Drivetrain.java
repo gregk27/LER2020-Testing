@@ -12,6 +12,7 @@ import ler.robot.RobotMap;
 
 public class Drivetrain extends SubsystemBase {
   
+  double maxOutput=1;
 
   /*
   // The left-side drive encoder
@@ -50,6 +51,12 @@ public class Drivetrain extends SubsystemBase {
     right *= 0.25;
     System.out.println(left);
     System.out.println(right);
+    
+    //Use Math.min to apply max speed rules, then
+    //Multiply      the magnitude              by the direction
+    left = Math.min(Math.abs(left), maxOutput)*Math.signum(left);
+    right = Math.min(Math.abs(right), maxOutput)*Math.signum(right);
+
     RobotMap.leftDriveSpark1.set(left);
     RobotMap.rightDriveSpark1.set(right);
   }
@@ -106,6 +113,6 @@ public class Drivetrain extends SubsystemBase {
    * @param maxOutput the maximum output to which the drive will be constrained
    */
   public void setMaxOutput(double maxOutput) {
-    RobotMap.m_drive.setMaxOutput(maxOutput);
+    this.maxOutput = maxOutput;
   }
 }

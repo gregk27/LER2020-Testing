@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import ler.robot.subsystems.Shooter;
 
 
@@ -55,9 +54,6 @@ public final class RobotMap {
   public static final CANSparkMax rightDriveSpark1 = new CANSparkMax(Mappings.RIGHT_DRIVE_SPARK_1, MotorType.kBrushless);
   public static final CANSparkMax rightDriveSpark2 = new CANSparkMax(Mappings.RIGHT_DRIVE_SPARK_2, MotorType.kBrushless);
   public static final CANSparkMax rightDriveSpark3 = new CANSparkMax(Mappings.RIGHT_DRIVE_SPARK_3, MotorType.kBrushless);
-
-  // The robot's drive
-  public static final DifferentialDrive m_drive = new DifferentialDrive(leftDriveSpark1, rightDriveSpark1);
 
   // The talons on the shooter
   public static final TalonSRX shooterTopTalon = new TalonSRX(Mappings.SHOOTER_TOP_TALON);
