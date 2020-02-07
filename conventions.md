@@ -10,7 +10,7 @@ This document serves to outline the programming conventions to be followed by pr
 Each motor controller should have a constant containing the CANID, and an object representing the controller. Constants should be defined in `RobotMap.Mappings`, while motor controllers should be defined in the main body.
 ``` java
 //Create a Talon with CANID 1
-public enum Mappings{
+public static final class Mappings{
     public static final int INTAKE_TALON=1;
 }
 ...
@@ -49,7 +49,7 @@ The operator interface is used to create and manage buttons.
 To create a button, define the number in `OI.ButtonMappings`, and create a `JoystickButton` object to represent it.
 
 ```java
-public enum ButtonMappings {
+public static final class ButtonMappings {
     public static final int SLOW_BUTTON = Button.kBumperRight.value,
     public static final int INTAKE_BUTTON = Button.kA.value
 }
