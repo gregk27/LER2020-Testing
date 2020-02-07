@@ -66,3 +66,41 @@ Once a button has been created, there are various ways to use it.
 4) Run a command while it remains held `button.whileHeld(new Command());` 
 
 The button can also be referenced from commands as `Robot.oi.slowButton`, however this should be avoided to for cleanliness.
+
+## Commands
+A key element of the robot's code are commands. While subsystems represent the physical hardware, commands are used to instruct them based on operator input.
+
+Commands should have a descriptive name, follwed by "command". Ex: `intakeCommand`, `driveCommand`, `setElevatorHeightCommand`.
+
+Command structure is as follows (simplified version of `IntakeCommand.java`):
+``` java
+public class IntakeCommand extends CommandBase {
+  // A local reference to the intake
+  private final Intake intake;
+
+  //Constructor used to pass data
+  public IntakeCommand(Intake intake) {
+    this.intake = intake;
+    //Stop all other commands requiring the intake (optional)
+    addRequirements(this.intake);
+  }
+  
+  //Called before the command runs
+  public void initialize() {
+      intake.extend(); //Extend the intake before spinning
+  }
+
+  //Called periodically (about 50 times/second)
+  public void execute() {
+    intake.StartIntake(Intake.ROLLER_SPEED); //Spin the intake
+  }
+  
+  //Called when the command ends
+  public void end(boolean interrupted) {
+      intake.retract(); //Bring the intake back in
+  }
+}
+```
+While commands work well for tasks that run over time, instant commands can be used to tasks that run onece. They are simmilar to a normal command, but onyl have the constructor and initialize() function.
+
+Commands can be used in two ways:
