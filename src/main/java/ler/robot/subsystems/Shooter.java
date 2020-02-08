@@ -19,8 +19,15 @@ public class Shooter extends SubsystemBase{
   public static final double kD = 20;
   public static final double kF = 1;
 
-  public static final int[] SPEEDS = {0, 300, 600, 900, 1200};
+  public static final int[] SPEEDS = {0, 900};
   public static final int ZEROSPEED = 0;
+
+  public final double BOTTOMSHOOTERTARGETVELOCITY = 12.2;
+  public final double TOPSHOOTERTARGETVELOCITY = 12.2;
+
+  public double bottomShooterCurrentVelocity = getRollerVelocity(RobotMap.shooterBottomTalon.getSelectedSensorVelocity());
+  public double topShooterCurrentVelocity = getRollerVelocity(RobotMap.shooterTopTalon.getSelectedSensorVelocity());
+
 
   //Cycles per revolution of encoders on shooter
   public static final int cPR = 64;
@@ -50,7 +57,7 @@ public class Shooter extends SubsystemBase{
     RobotMap.shooterBottomTalon.setSelectedSensorPosition(0);
   }
 
-  public static double getRollerVelocity(int sensorTicksPerHundredMillesecond){
-    return ((sensorTicksPerHundredMillesecond/cPR)*10)*0.314;
+  public double getRollerVelocity(int rpsinput){
+    return ((rpsinput/cPR)*10)*0.314;
   }
 }

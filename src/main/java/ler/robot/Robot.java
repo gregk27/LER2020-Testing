@@ -106,7 +106,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    System.out.println("Top: " + Shooter.getRollerVelocity(RobotMap.shooterTopTalon.getSelectedSensorVelocity()) + "Bottom: " + Shooter.getRollerVelocity(RobotMap.shooterBottomTalon.getSelectedSensorVelocity()));
+    
   }
 
   @Override

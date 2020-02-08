@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import ler.robot.commands.HalveDriveSpeed;
 import ler.robot.commands.IntakeCommand;
+import ler.robot.commands.ShooterCommand;
 
 /**
  * Operator Interface, used to map buttons with the controllers
@@ -26,6 +27,7 @@ public class OI {
     public static final class ButtonMappings {
         public static final int HALF_SPEED_BUTTON = Button.kBumperRight.value;
         public static final int INTAKE_BUTTON = Button.kA.value;
+        public static final int SHOOT_BUTTON = Button.kB.value;
     }
 
     // The driver's controller
@@ -36,6 +38,7 @@ public class OI {
 
     public JoystickButton halfSpeedButton = new JoystickButton(driverController, ButtonMappings.HALF_SPEED_BUTTON);
     public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
+    public JoystickButton shootButton= new JoystickButton(operatorController, ButtonMappings.SHOOT_BUTTON);
     /**
      * Use this method to define your button->command mappings. Buttons can be
      * created by instantiating a {@link GenericHID} or one of its subclasses
@@ -53,6 +56,7 @@ public class OI {
         // While holding the shoulder button, drive at half speed
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
         intakeButton.whileHeld(new IntakeCommand(container.intake,container.conveyor));
+        shootButton.whileHeld(new ShooterCommand(container.shooter, container.conveyor));
 
         
     }

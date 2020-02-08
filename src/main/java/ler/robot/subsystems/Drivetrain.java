@@ -57,7 +57,7 @@ public class Drivetrain extends SubsystemBase {
     // left = Math.min(Math.abs(left), maxOutput)*Math.signum(left);
     // right = Math.min(Math.abs(right), maxOutput)*Math.signum(right);
 
-    System.out.println("L:"+left+"\tR:"+right);
+    //System.out.println("L:"+left+"\tR:"+right);
 
     RobotMap.leftDriveSpark1.set(left);
     RobotMap.rightDriveSpark1.set(right);
