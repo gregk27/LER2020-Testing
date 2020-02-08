@@ -104,3 +104,6 @@ public class IntakeCommand extends CommandBase {
 While commands work well for tasks that run over time, instant commands can be used to tasks that run onece. They are simmilar to a normal command, but onyl have the constructor and initialize() function.
 
 Commands can be used in two ways:
+
+### Default Commands
+Each subsystem can have one default command. This command will be run when no others require the subsystem. These are useful for applications that are consistently listening for analog axes (like driving commands).
