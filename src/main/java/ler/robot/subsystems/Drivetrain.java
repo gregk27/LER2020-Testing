@@ -49,8 +49,8 @@ public class Drivetrain extends SubsystemBase {
     //slow it down
     left *= 0.25;
     right *= 0.25;
-    System.out.println(left);
-    System.out.println(right);
+    //System.out.println(left);
+    //System.out.println(right);
     
     //Use Math.min to apply max speed rules, then
     //Multiply      the magnitude              by the direction

@@ -50,7 +50,7 @@ public class Shooter extends SubsystemBase{
     RobotMap.shooterBottomTalon.setSelectedSensorPosition(0);
   }
 
-  public double getRevolutionsPerSecond(int rpsinput){
-    return ((rpsinput/cPR)*10)*0.314;
+  public static double getRollerVelocity(int sensorTicksPerHundredMillesecond){
+    return ((sensorTicksPerHundredMillesecond/cPR)*10)*0.314;
   }
 }

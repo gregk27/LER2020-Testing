@@ -10,6 +10,7 @@ package ler.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import ler.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -105,6 +106,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    System.out.println("Top: " + Shooter.getRollerVelocity(RobotMap.shooterTopTalon.getSelectedSensorVelocity()) + "Bottom: " + Shooter.getRollerVelocity(RobotMap.shooterBottomTalon.getSelectedSensorVelocity()));
   }
 
   @Override
