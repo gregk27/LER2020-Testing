@@ -32,6 +32,8 @@ public class OI {
     public XboxController driverController = new XboxController(DRIVER_CONTROLLER_PORT);
     public XboxController operatorController = new XboxController(OPERATOR_CONTROLLER_PORT);
 
+    
+
     public JoystickButton halfSpeedButton = new JoystickButton(driverController, ButtonMappings.HALF_SPEED_BUTTON);
     public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
     /**
@@ -52,6 +54,7 @@ public class OI {
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
         intakeButton.whileHeld(new IntakeCommand(container.intake,container.conveyor));
 
+        
     }
 
 }
