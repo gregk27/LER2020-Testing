@@ -39,6 +39,7 @@ public class DefaultDrive extends CommandBase {
 
   @Override
   public void execute() {
+    System.out.println("Driving");
     drivetrain.tankDrive(left.getAsDouble(), right.getAsDouble());
   }
 }
