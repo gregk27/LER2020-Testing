@@ -23,6 +23,7 @@ public class DefaultDrive extends CommandBase {
   private final DoubleSupplier left;
   private final DoubleSupplier right;
 
+
   /**
    * Creates a new DefaultDrive.
    *
@@ -35,6 +36,7 @@ public class DefaultDrive extends CommandBase {
     this.left = left;
     this.right = right;
     addRequirements(drivetrain);
+
   }
 
   @Override

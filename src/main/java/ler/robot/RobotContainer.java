@@ -61,9 +61,9 @@ public class RobotContainer {
     shooter.setDefaultCommand(
       new DefaultShooter(
           shooter,
-          () -> Robot.oi.driverController.getXButton(),
-          () -> Robot.oi.driverController.getAButtonReleased(),
-          () -> Robot.oi.driverController.getYButtonReleased()));
+          () -> Robot.oi.operatorController.getXButtonPressed(),
+          () -> Robot.oi.operatorController.getAButtonReleased(),
+          () -> Robot.oi.operatorController.getYButtonReleased()));
     drivetrain.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
         // hand, and turning controlled by the right.

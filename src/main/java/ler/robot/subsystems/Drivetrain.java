@@ -13,6 +13,7 @@ import ler.robot.RobotMap;
 public class Drivetrain extends SubsystemBase {
   
   double maxOutput=1;
+  private final  double DEADZONE = 0.15;
 
   /*
   // The left-side drive encoder
@@ -46,9 +47,22 @@ public class Drivetrain extends SubsystemBase {
    * @param right the commanded rotation
    */
   public void tankDrive(double left, double right) {
-    //slow it down
-    left *= 0.25;
-    right *= 0.25;
+    System.out.println("L Input: " + left + " R Input: " + right);
+
+    if (Math.abs(left)<DEADZONE){
+      left = 0;
+
+    }
+    if (Math.abs(right)<DEADZONE){
+      right = 0;
+    }
+    //Use to check Deadzone input/output
+    //System.out.println("L Deadzoned: " + left + " R Deadzoned: " + right);
+
+
+    //Slow it down
+    left *= 0.5;
+    right *= 0.5;
     //System.out.println(left);
     //System.out.println(right);
     
@@ -59,8 +73,8 @@ public class Drivetrain extends SubsystemBase {
 
     //System.out.println("L:"+left+"\tR:"+right);
 
-    RobotMap.leftDriveSpark1.set(left);
-    RobotMap.rightDriveSpark1.set(right);
+    //RobotMap.leftDriveSpark1.set(left);
+    //RobotMap.rightDriveSpark1.set(right);
   }
 
   /**
