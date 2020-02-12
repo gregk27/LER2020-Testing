@@ -81,6 +81,11 @@ public final class RobotMap {
     shooterTopTalon.config_kP(0, Shooter.kP);
     shooterTopTalon.config_kI(0, Shooter.kI);
     shooterTopTalon.config_kD(0, Shooter.kD);
+    shooterBottomTalon.config_kF(0, Shooter.kF);
+    shooterBottomTalon.config_kP(0, Shooter.kP);
+    shooterBottomTalon.config_kI(0, Shooter.kI);
+    shooterBottomTalon.config_kD(0, Shooter.kD);
+
 
     shooterBottomTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
   }

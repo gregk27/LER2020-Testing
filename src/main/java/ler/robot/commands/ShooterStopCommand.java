@@ -7,20 +7,17 @@
 
 package ler.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Shooter;
-import ler.robot.RobotMap;
 
-public class ShooterCommand extends CommandBase {
+public class ShooterStopCommand extends CommandBase {
   private Shooter shooter;
   private Conveyor conveyor;
   /**
-   * Creates a new ShooterCommand.
+   * Creates a new ShooterStopCommand.
    */
-  public ShooterCommand(Shooter shooter, Conveyor conveyor) {
+  public ShooterStopCommand(Shooter shooter, Conveyor conveyor) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooter = shooter;
     this.conveyor = conveyor;
@@ -36,8 +33,7 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setShooterSpeed(1);
-    System.out.println("t: " + RobotMap.shooterTopTalon.getSelectedSensorVelocity() + "\tb: " + RobotMap.shooterBottomTalon.getSelectedSensorVelocity());
+    shooter.setShooterSpeed(0);
   }
 
   // Called once the command ends or is interrupted.

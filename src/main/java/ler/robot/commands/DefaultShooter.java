@@ -28,6 +28,7 @@ public class DefaultShooter extends CommandBase {
   public DefaultShooter(Shooter subsystem, BooleanSupplier zero, BooleanSupplier faster, BooleanSupplier slower) {
     // Use addRequirements() here to declare subsystem dependencies.
     shooter = subsystem;
+    /*
     if (zero.getAsBoolean()){
       currentSpeed = 0;
       shooter.talonResetPos();
@@ -44,7 +45,7 @@ public class DefaultShooter extends CommandBase {
         currentSpeed++;
       }
     }
-
+*/
     addRequirements(shooter);
   }
 

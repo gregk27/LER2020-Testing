@@ -40,9 +40,9 @@ public class Shooter extends SubsystemBase{
 
   }
 
-  public void setShooterSpeed(int speed){
-    setSpecificShooterSpeed(SPEEDS[speed]);
-    currentSpeed = speed;
+  public void setShooterSpeed(int speedArrayPosition){
+    setSpecificShooterSpeed(SPEEDS[speedArrayPosition]);
+    currentSpeed = SPEEDS[speedArrayPosition];
   }
 
   public void setSpecificShooterSpeed(double speed){

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import ler.robot.commands.HalveDriveSpeed;
 import ler.robot.commands.IntakeCommand;
 import ler.robot.commands.ShooterCommand;
+import ler.robot.commands.ShooterStopCommand;
 
 /**
  * Operator Interface, used to map buttons with the controllers
@@ -58,7 +59,8 @@ public class OI {
         // While holding the shoulder button, drive at half speed
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
         intakeButton.whileHeld(new IntakeCommand(container.intake,container.conveyor));
-        shootStartButton.whenPressed(new ShooterCommand(container.shooter, container.conveyor));
+        shootStartButton.whenReleased(new ShooterCommand(container.shooter, container.conveyor));
+        shootStopButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
 
         
     }
