@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import ler.robot.commands.DefaultDrive;
-import ler.robot.commands.DefaultShooter;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Intake;
@@ -57,13 +56,6 @@ public class RobotContainer {
     // Configure default commands
     // Set the default drive command to split-stick arcade drive
 
-    //default shooter commands
-    shooter.setDefaultCommand(
-      new DefaultShooter(
-          shooter,
-          () -> Robot.oi.operatorController.getXButtonPressed(),
-          () -> Robot.oi.operatorController.getAButtonReleased(),
-          () -> Robot.oi.operatorController.getYButtonReleased()));
     drivetrain.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
         // hand, and turning controlled by the right.
