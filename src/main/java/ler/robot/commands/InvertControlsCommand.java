@@ -7,38 +7,28 @@
 
 package ler.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import ler.robot.subsystems.Conveyor;
-import ler.robot.subsystems.Shooter;
-import ler.robot.RobotMap;
+import ler.robot.subsystems.Drivetrain;
 
-public class ShooterCommand extends CommandBase {
-  private Shooter shooter;
-  private Conveyor conveyor;
+public class InvertControlsCommand extends CommandBase {
+  Drivetrain drivetrain;
   /**
-   * Creates a new ShooterCommand.
+   * Creates a new invertControlsCommand.
    */
-  public ShooterCommand(Shooter shooter, Conveyor conveyor) {
+  public InvertControlsCommand(Drivetrain drivetrain) {
+    this.drivetrain = drivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
-    this.shooter = shooter;
-    this.conveyor = conveyor;
-    addRequirements(shooter);
-    addRequirements(conveyor);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setShooterSpeed(1);
-    //System.out.println("t: " + RobotMap.shooterTopTalon.getSelectedSensorVelocity() + "\tb: " + RobotMap.shooterBottomTalon.getSelectedSensorVelocity());
+    drivetrain.invertControls();
   }
 
   // Called once the command ends or is interrupted.

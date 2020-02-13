@@ -47,6 +47,7 @@ public class Shooter extends SubsystemBase{
 
   public void setSpecificShooterSpeed(double speed){
     //talonShooterTop.set(ControlMode.PercentOutput, speeds[currentSpeed]);
+    //System.out.println(RobotMap.shooterTopTalon.contr);
     RobotMap.shooterTopTalon.set(ControlMode.Velocity, speed);
     //talonShooterBottom.set(ControlMode.PercentOutput, -speeds[currentSpeed]);
     RobotMap.shooterBottomTalon.set(ControlMode.Velocity, -speed);

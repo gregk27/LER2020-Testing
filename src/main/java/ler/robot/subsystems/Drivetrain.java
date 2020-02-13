@@ -14,6 +14,7 @@ public class Drivetrain extends SubsystemBase {
   
   double maxOutput=1;
   private final  double DEADZONE = 0.15;
+  private boolean isInverted = false;
 
   /*
   // The left-side drive encoder
@@ -47,7 +48,7 @@ public class Drivetrain extends SubsystemBase {
    * @param right the commanded rotation
    */
   public void tankDrive(double left, double right) {
-    System.out.println("L Input: " + left + " R Input: " + right);
+    //System.out.println("L Input: " + left + " R Input: " + right);
 
     if (Math.abs(left)<DEADZONE){
       left = 0;
@@ -61,8 +62,8 @@ public class Drivetrain extends SubsystemBase {
 
 
     //Slow it down
-    left *= 0.5;
-    right *= 0.5;
+    left *= 0.25;
+    right *= 0.25;
     //System.out.println(left);
     //System.out.println(right);
     
@@ -73,8 +74,17 @@ public class Drivetrain extends SubsystemBase {
 
     //System.out.println("L:"+left+"\tR:"+right);
 
-    //RobotMap.leftDriveSpark1.set(left);
-    //RobotMap.rightDriveSpark1.set(right);
+    if(isInverted){
+      double tempRight = left * -1;
+      left = right * -1;
+      right = tempRight;
+    }
+    RobotMap.leftDriveSpark1.set(left);
+    RobotMap.rightDriveSpark1.set(right);
+  }
+
+  public void invertControls(){
+    isInverted = !isInverted;
   }
 
   /**

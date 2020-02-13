@@ -75,17 +75,19 @@ public final class RobotMap {
     rightDriveSpark3.follow(rightDriveSpark1);
 
     //shooter init
-    shooterTopTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+    
 
     shooterTopTalon.config_kF(0, Shooter.kF);
     shooterTopTalon.config_kP(0, Shooter.kP);
     shooterTopTalon.config_kI(0, Shooter.kI);
     shooterTopTalon.config_kD(0, Shooter.kD);
+
+    shooterTopTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+
     shooterBottomTalon.config_kF(0, Shooter.kF);
     shooterBottomTalon.config_kP(0, Shooter.kP);
     shooterBottomTalon.config_kI(0, Shooter.kI);
     shooterBottomTalon.config_kD(0, Shooter.kD);
-
 
     shooterBottomTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
   }

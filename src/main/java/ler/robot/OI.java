@@ -15,6 +15,7 @@ import ler.robot.commands.HalveDriveSpeed;
 import ler.robot.commands.IntakeCommand;
 import ler.robot.commands.ShooterCommand;
 import ler.robot.commands.ShooterStopCommand;
+import ler.robot.commands.InvertControlsCommand;
 
 /**
  * Operator Interface, used to map buttons with the controllers
@@ -30,6 +31,7 @@ public class OI {
         public static final int INTAKE_BUTTON = Button.kA.value;
         public static final int SHOOT_START_BUTTON = Button.kBumperRight.value;
         public static final int SHOOT_STOP_BUTTON = Button.kBumperLeft.value; 
+        public static final int INVERT_CONTROLS_BUTTON = Button.kA.value;
     }
 
     // The driver's controller
@@ -42,6 +44,8 @@ public class OI {
     public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
     public JoystickButton shootStartButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_START_BUTTON);
     public JoystickButton shootStopButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_STOP_BUTTON);
+    public JoystickButton invertControlsButton = new JoystickButton(driverController, ButtonMappings.INVERT_CONTROLS_BUTTON);
+
     /**
      * Use this method to define your button->command mappings. Buttons can be
      * created by instantiating a {@link GenericHID} or one of its subclasses
@@ -58,6 +62,7 @@ public class OI {
          */
         // While holding the shoulder button, drive at half speed
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
+        invertControlsButton.whenPressed(new InvertControlsCommand(container.drivetrain));
 
         intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
         shootStartButton.whenReleased(new ShooterCommand(container.shooter, container.conveyor));
