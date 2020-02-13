@@ -33,7 +33,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     intake.StartIntake(Intake.ROLLER_SPEED);
-    conveyor.SetConveyorSpeed(Conveyor.INTAKE_SPEED);
+    conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
     
   }
 

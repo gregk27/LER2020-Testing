@@ -38,6 +38,11 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute() {
     shooter.setShooterSpeed(1);
+    conveyor.setConveyorSpeed(0.9);
+    /*
+    RobotMap.shooterTopTalon.set(ControlMode.PercentOutput, 0.1);
+    RobotMap.shooterBottomTalon.set(ControlMode.PercentOutput, 0.1);
+    */
     //System.out.println("t: " + RobotMap.shooterTopTalon.getSelectedSensorVelocity() + "\tb: " + RobotMap.shooterBottomTalon.getSelectedSensorVelocity());
   }
 

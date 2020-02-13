@@ -19,7 +19,7 @@ public class Shooter extends SubsystemBase{
   public static final double kD = 20;
   public static final double kF = 1;
 
-  public static final int[] SPEEDS = {0, 900};
+  public static final double[] SPEEDS = {0, 0.9};
   public static final int ZEROSPEED = 0;
 
   public final double BOTTOMSHOOTERTARGETVELOCITY = 12.2;
@@ -32,7 +32,7 @@ public class Shooter extends SubsystemBase{
   //Cycles per revolution of encoders on shooter
   public static final int cPR = 64;
 
-  private int currentSpeed = 0;
+  private double currentSpeed = 0;
   /**
    * Creates a new ShooterSubsystem.
    */
@@ -48,9 +48,9 @@ public class Shooter extends SubsystemBase{
   public void setSpecificShooterSpeed(double speed){
     //talonShooterTop.set(ControlMode.PercentOutput, speeds[currentSpeed]);
     //System.out.println(RobotMap.shooterTopTalon.contr);
-    RobotMap.shooterTopTalon.set(ControlMode.Velocity, speed);
+    RobotMap.shooterTopTalon.set(ControlMode.PercentOutput, -speed);
     //talonShooterBottom.set(ControlMode.PercentOutput, -speeds[currentSpeed]);
-    RobotMap.shooterBottomTalon.set(ControlMode.Velocity, -speed);
+    RobotMap.shooterBottomTalon.set(ControlMode.PercentOutput, -speed);
   }
 
   public void talonResetPos(){
