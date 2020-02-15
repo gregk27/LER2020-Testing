@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import ler.robot.commands.DefaultDrive;
+import ler.robot.commands.DefaultIntake;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Intake;
@@ -65,6 +66,12 @@ public class RobotContainer {
             drivetrain,
             () -> Robot.oi.driverController.getY(GenericHID.Hand.kLeft),
             () -> Robot.oi.driverController.getY(GenericHID.Hand.kRight)));
+
+    intake.setDefaultCommand(
+      new DefaultIntake(
+            intake,
+            conveyor,
+            () -> Robot.oi.operatorController.getTriggerAxis(GenericHID.Hand.kRight)));
 
     // Add commands to the autonomous command chooser
     //m_chooser.addOption("Simple Auto", m_simpleAuto);

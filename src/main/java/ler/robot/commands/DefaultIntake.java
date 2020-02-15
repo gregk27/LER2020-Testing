@@ -7,20 +7,28 @@
 
 package ler.robot.commands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Intake;
 
-public class IntakeCommand extends CommandBase {
+public class DefaultIntake extends CommandBase {
   /**
    * Creates a new IntakeCommand.
    */
   private final Intake intake;
   private final Conveyor conveyor;
-  public IntakeCommand(Intake sub1, Conveyor sub2) {
+  private double speed;
+
+  public DefaultIntake(Intake intake, Conveyor conveyor, DoubleSupplier speed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    intake = sub1;
-    conveyor = sub2;
+    this.intake = intake;
+    this.conveyor = conveyor;
+
+    this.speed = speed.getAsDouble();
+    addRequirements(intake);
+    addRequirements(conveyor);
 
   }
 
@@ -32,9 +40,12 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    /*
     intake.StartIntake(Intake.ROLLER_SPEED);
     conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
-    
+    */
+    intake.StartIntake(speed);
+    conveyor.setConveyorSpeed(speed);
   }
 
   // Called once the command ends or is interrupted.
