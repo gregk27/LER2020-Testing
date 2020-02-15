@@ -58,6 +58,18 @@ public class Shooter extends SubsystemBase{
     RobotMap.shooterBottomTalon.setSelectedSensorPosition(0);
   }
 
+  public double getTopTalonSpeed(){
+    return(RobotMap.shooterTopTalon.getSelectedSensorVelocity());
+  }
+
+  public double getBottomTalonSpeed(){
+    return(RobotMap.shooterBottomTalon.getSelectedSensorVelocity());
+  }
+
+  public double getAverageTalonSpeed(){
+    return((getTopTalonSpeed() + getBottomTalonSpeed()) / 2);
+  }
+
   public double getRollerVelocity(int rpsinput){
     return ((rpsinput/cPR)*10)*0.314;
   }

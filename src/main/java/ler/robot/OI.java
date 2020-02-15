@@ -11,12 +11,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import ler.robot.commands.HalveDriveSpeed;
-import ler.robot.commands.IntakeCommand;
-import ler.robot.commands.ShooterCommand;
-import ler.robot.commands.ShooterStopCommand;
-import ler.robot.commands.InvertControlsCommand;
-import ler.robot.commands.LimelightDriveCommand;
+import ler.robot.commands.*;
+
 
 /**
  * Operator Interface, used to map buttons with the controllers
@@ -29,11 +25,15 @@ public class OI {
     
     public static final class ButtonMappings {
         public static final int HALF_SPEED_BUTTON = Button.kBumperRight.value;
-        public static final int INTAKE_BUTTON = Button.kA.value;
-        public static final int SHOOT_START_BUTTON = Button.kBumperRight.value;
-        public static final int SHOOT_STOP_BUTTON = Button.kBumperLeft.value; 
         public static final int INVERT_CONTROLS_BUTTON = Button.kA.value;
-        public static final int LIMELIGHT_DRIVE_BUTTON = Button.kY.value;
+
+        public static final int INTAKE_BUTTON = Button.kA.value;
+
+        public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
+        public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
+        public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
+
+        public static final int LIMELIGHT_AIM_BUTTON = Button.kY.value;
     }
 
     // The driver's controller
@@ -41,14 +41,15 @@ public class OI {
     public XboxController operatorController = new XboxController(OPERATOR_CONTROLLER_PORT);
 
     
-
-    public JoystickButton halfSpeedButton = new JoystickButton(driverController, ButtonMappings.HALF_SPEED_BUTTON);
-    public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
-    public JoystickButton shootStartButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_START_BUTTON);
-    public JoystickButton shootStopButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_STOP_BUTTON);
     public JoystickButton invertControlsButton = new JoystickButton(driverController, ButtonMappings.INVERT_CONTROLS_BUTTON);
-    public JoystickButton limelightDriveButton = new JoystickButton(driverController, ButtonMappings.LIMELIGHT_DRIVE_BUTTON);
+    public JoystickButton limelightAimButton = new JoystickButton(driverController, ButtonMappings.LIMELIGHT_AIM_BUTTON);
+    public JoystickButton halfSpeedButton = new JoystickButton(driverController, ButtonMappings.HALF_SPEED_BUTTON);
 
+    public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
+    public JoystickButton shooterControlButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
+    public JoystickButton shootButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_BUTTON);
+    public JoystickButton shooterTiltButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_TILT_BUTTON);
+    
     /**
      * Use this method to define your button->command mappings. Buttons can be
      * created by instantiating a {@link GenericHID} or one of its subclasses
@@ -66,11 +67,13 @@ public class OI {
         // While holding the shoulder button, drive at half speed
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
         invertControlsButton.whenPressed(new InvertControlsCommand(container.drivetrain));
-        limelightDriveButton.whenPressed(new LimelightDriveCommand(container.drivetrain));
+        limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
 
         intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
-        shootStartButton.whenReleased(new ShooterCommand(container.shooter, container.conveyor));
-        shootStopButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
+        shooterControlButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
+        shooterControlButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
+        shootButton.whenHeld(new ShooterStopCommand(container.shooter, container.conveyor));
+        shooterTiltButton.whenPressed(new ShooterTiltCommand());
 
 
         

@@ -9,20 +9,20 @@ package ler.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Drivetrain;
-
+import ler.robot.subsystems.Limelight;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class LimelightDriveCommand extends CommandBase {
+public class LimelightAimCommand extends CommandBase {
   private Drivetrain drivetrain;
-
-  private double x;
+  private Limelight limelight;
   /**
-   * Creates a new LimelightDriveCommand.
+   * Creates a new LimelightAimCommand.
    */
-  public LimelightDriveCommand(Drivetrain drivetrain) {
+  public LimelightAimCommand(Drivetrain drivetrain, Limelight limelight) {
     this.drivetrain = drivetrain;
+    this.limelight = limelight;
     addRequirements(drivetrain);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -35,19 +35,10 @@ public class LimelightDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = table.getEntry("tx");
-    NetworkTableEntry ty = table.getEntry("ty");
-    NetworkTableEntry ta = table.getEntry("ta");
+    double x = limelight.getX();
 
-    //read values periodically
-    x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
-    double area = ta.getDouble(0.0);
-
+    //aim bot
     drivetrain.tankDrive(-x/15, x/15);
-
-    System.out.println(x);
   }
 
   // Called once the command ends or is interrupted.
@@ -58,7 +49,7 @@ public class LimelightDriveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(x) < 1){
+    if(Math.abs(limelight.getX()) < 1){
       return true;
     }
     return false;

@@ -16,6 +16,7 @@ import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Intake;
 import ler.robot.subsystems.Shooter;
+import ler.robot.subsystems.Limelight;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -29,6 +30,7 @@ public class RobotContainer {
   final Intake intake = new Intake();
   final Conveyor conveyor = new Conveyor();
   final Drivetrain drivetrain = new Drivetrain();
+  final Limelight limelight = new Limelight();
 
 
   // The autonomous routines

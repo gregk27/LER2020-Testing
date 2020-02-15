@@ -7,43 +7,45 @@
 
 package ler.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Conveyor;
+import ler.robot.subsystems.Limelight;
 import ler.robot.subsystems.Shooter;
-import ler.robot.RobotMap;
 
-public class ShooterCommand extends CommandBase {
+public class ShootCommand extends CommandBase {
   private Shooter shooter;
   private Conveyor conveyor;
+  private Limelight limelight;
   /**
-   * Creates a new ShooterCommand.
+   * Creates a new ShootCommand.
    */
-  public ShooterCommand(Shooter shooter, Conveyor conveyor) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public ShootCommand(Shooter shooter, Conveyor conveyor, Limelight limelight) {
     this.shooter = shooter;
     this.conveyor = conveyor;
+    this.limelight = limelight;
     addRequirements(shooter);
     addRequirements(conveyor);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setShooterSpeed(1);
-    conveyor.setConveyorSpeed(0.9);
-    /*
-    RobotMap.shooterTopTalon.set(ControlMode.PercentOutput, 0.1);
-    RobotMap.shooterBottomTalon.set(ControlMode.PercentOutput, 0.1);
-    */
-    //System.out.println("t: " + RobotMap.shooterTopTalon.getSelectedSensorVelocity() + "\tb: " + RobotMap.shooterBottomTalon.getSelectedSensorVelocity());
+    //configure, maybe add closeness to robotMap or something
+    double speed = limelight.getSpeed();
+    double closeness = 1;
+    double conveyorSpeed = 0.9;
+
+    if(Math.abs(shooter.getAverageTalonSpeed() - speed) < closeness){
+      conveyor.setConveyorSpeed(conveyorSpeed);
+    }else{
+      conveyor.setConveyorSpeed(0);
+    }
   }
 
   // Called once the command ends or is interrupted.
