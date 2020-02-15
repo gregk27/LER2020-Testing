@@ -21,6 +21,7 @@ public class Shooter extends SubsystemBase{
 
   public static final double[] SPEEDS = {0, 0.9};
   public static final int ZEROSPEED = 0;
+  public static final double limelightSpeedScaling = 0.01;
 
   public final double BOTTOMSHOOTERTARGETVELOCITY = 12.2;
   public final double TOPSHOOTERTARGETVELOCITY = 12.2;
@@ -31,8 +32,6 @@ public class Shooter extends SubsystemBase{
 
   //Cycles per revolution of encoders on shooter
   public static final int cPR = 64;
-
-  private double currentSpeed = 0;
   /**
    * Creates a new ShooterSubsystem.
    */
@@ -42,7 +41,7 @@ public class Shooter extends SubsystemBase{
 
   public void setShooterSpeed(int speedArrayPosition){
     setSpecificShooterSpeed(SPEEDS[speedArrayPosition]);
-    currentSpeed = SPEEDS[speedArrayPosition];
+    //currentSpeed = SPEEDS[speedArrayPosition];
   }
 
   public void setSpecificShooterSpeed(double speed){
@@ -72,5 +71,11 @@ public class Shooter extends SubsystemBase{
 
   public double getRollerVelocity(int rpsinput){
     return ((rpsinput/cPR)*10)*0.314;
+  }
+
+  //speed should be how far the bot can shoot straight up
+  //should be used with getSpeed() from limelight
+  public double getVelocityFromLimelight(double speed){
+    return(speed * limelightSpeedScaling);
   }
 }

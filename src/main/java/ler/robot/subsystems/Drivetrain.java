@@ -7,6 +7,7 @@
 
 package ler.robot.subsystems;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import ler.robot.RobotMap;
 
@@ -15,6 +16,8 @@ public class Drivetrain extends SubsystemBase {
   double maxOutput=1;
   private final  double DEADZONE = 0.15;
   private boolean isInverted = false;
+
+  public final PIDController pidController = new PIDController(7, 0.018, 1.5);
 
   /*
   // The left-side drive encoder

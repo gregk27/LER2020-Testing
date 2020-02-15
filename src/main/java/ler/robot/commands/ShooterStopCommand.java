@@ -10,9 +10,6 @@ package ler.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Shooter;
-import ler.robot.RobotMap;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class ShooterStopCommand extends CommandBase {
   private Shooter shooter;

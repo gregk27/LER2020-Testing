@@ -10,9 +10,6 @@ package ler.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Limelight;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class LimelightAimCommand extends CommandBase {
   private Drivetrain drivetrain;
@@ -30,15 +27,16 @@ public class LimelightAimCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    drivetrain.pidController.setSetpoint(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double x = limelight.getX();
+    double pidOutput = drivetrain.pidController.calculate(limelight.getX());
 
     //aim bot
-    drivetrain.tankDrive(-x/15, x/15);
+    drivetrain.tankDrive(-pidOutput/15, pidOutput/15);
   }
 
   // Called once the command ends or is interrupted.
