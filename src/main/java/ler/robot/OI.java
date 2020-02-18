@@ -27,6 +27,8 @@ public class OI {
         public static final int HALF_SPEED_BUTTON = Button.kBumperRight.value;
         public static final int INVERT_CONTROLS_BUTTON = Button.kA.value;
 
+        public static final int INTAKE_BUTTON = Button.kB.value;
+
         public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
         public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
         public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
@@ -43,7 +45,7 @@ public class OI {
     public JoystickButton limelightAimButton = new JoystickButton(driverController, ButtonMappings.LIMELIGHT_AIM_BUTTON);
     public JoystickButton halfSpeedButton = new JoystickButton(driverController, ButtonMappings.HALF_SPEED_BUTTON);
 
-    //public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
+    public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
     public JoystickButton shooterRevButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
     public JoystickButton shootButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_BUTTON);
     public JoystickButton shooterTiltButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_TILT_BUTTON);
@@ -67,7 +69,7 @@ public class OI {
         invertControlsButton.whenPressed(new InvertControlsCommand(container.drivetrain));
         limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
 
-        //intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
+        intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
         //shooterRevButton revs shooter, shootButton moves ball from conveyor into shooter
         shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
