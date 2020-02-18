@@ -67,12 +67,12 @@ public class RobotContainer {
             () -> Robot.oi.driverController.getY(GenericHID.Hand.kLeft),
             () -> Robot.oi.driverController.getY(GenericHID.Hand.kRight)));
 
-    intake.setDefaultCommand(
+    /*intake.setDefaultCommand(
       new DefaultIntake(
             intake,
             conveyor,
             () -> Robot.oi.operatorController.getTriggerAxis(GenericHID.Hand.kRight)));
-
+    */
     // Add commands to the autonomous command chooser
     //m_chooser.addOption("Simple Auto", m_simpleAuto);
     //m_chooser.addOption("Complex Auto", m_complexAuto);

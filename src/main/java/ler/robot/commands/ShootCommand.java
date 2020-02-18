@@ -41,11 +41,15 @@ public class ShootCommand extends CommandBase {
     double closeness = 1;
     double conveyorSpeed = 0.9;
 
-    if(Math.abs(shooter.getAverageTalonSpeed() - speed) < closeness){
+    conveyor.setConveyorSpeed(conveyorSpeed);
+    System.out.println("Commanding Conveyor");
+
+    /*if(Math.abs(shooter.getAverageTalonSpeed() - speed) < closeness){
       conveyor.setConveyorSpeed(conveyorSpeed);
     }else{
       conveyor.setConveyorSpeed(0);
     }
+    */
   }
 
   // Called once the command ends or is interrupted.

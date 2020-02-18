@@ -32,9 +32,9 @@ public class ShooterStartCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setSpecificShooterSpeed(shooter.getVelocityFromLimelight(limelight.getSpeed()));
+    //shooter.setSpecificShooterSpeed(shooter.getVelocityFromLimelight(limelight.getSpeed()));
+    shooter.setSpecificShooterSpeed(12000);
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {

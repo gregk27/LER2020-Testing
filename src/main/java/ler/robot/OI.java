@@ -44,7 +44,7 @@ public class OI {
     public JoystickButton halfSpeedButton = new JoystickButton(driverController, ButtonMappings.HALF_SPEED_BUTTON);
 
     //public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
-    public JoystickButton shooterControlButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
+    public JoystickButton shooterRevButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
     public JoystickButton shootButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_BUTTON);
     public JoystickButton shooterTiltButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_TILT_BUTTON);
     
@@ -68,8 +68,9 @@ public class OI {
         limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
 
         //intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
-        shooterControlButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
-        shooterControlButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
+        //shooterRevButton revs shooter, shootButton moves ball from conveyor into shooter
+        shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
+        shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
         shootButton.whenHeld(new ShooterStopCommand(container.shooter, container.conveyor));
         shooterTiltButton.whenPressed(new ShooterTiltCommand());
 

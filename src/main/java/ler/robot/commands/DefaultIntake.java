@@ -44,8 +44,10 @@ public class DefaultIntake extends CommandBase {
     intake.StartIntake(Intake.ROLLER_SPEED);
     conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
     */
-    intake.StartIntake(speed);
-    conveyor.setConveyorSpeed(speed);
+    
+    //intake.StartIntake(speed);
+    //conveyor.setConveyorSpeed(speed);
+    //System.out.println("Defaulting Conveyor");
   }
 
   // Called once the command ends or is interrupted.

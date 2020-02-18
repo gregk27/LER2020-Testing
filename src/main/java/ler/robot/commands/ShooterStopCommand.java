@@ -35,7 +35,7 @@ public class ShooterStopCommand extends CommandBase {
   @Override
   public void execute() {
     shooter.setShooterSpeed(0);
-    conveyor.setConveyorSpeed(0);
+    //conveyor.setConveyorSpeed(0);
     /*
     RobotMap.shooterTopTalon.set(ControlMode.PercentOutput, 0);
     RobotMap.shooterBottomTalon.set(ControlMode.PercentOutput, 0);
