@@ -35,7 +35,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     //Drive the intake and conveyor
-    intake.StartIntake(Intake.ROLLER_SPEED);
+    intake.StartIntake(-Intake.ROLLER_SPEED);
     conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
   }
 

@@ -7,7 +7,7 @@
 
 package ler.robot;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+//import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -38,9 +38,9 @@ public final class RobotMap {
     public static final int SHOOTER_TOP_SPARK = 9;
     public static final int SHOOTER_BOTTOM_SPARK = 8;
 
-    public static final int CONVEYOR_TALON = 11;
+    public static final int CONVEYOR_TALON = 12;
 
-   public static final int INTAKE_TALON = 12;
+   public static final int INTAKE_TALON = 11;
   }
 
   // The motors on the left side of the drive.
@@ -70,6 +70,9 @@ public final class RobotMap {
 
     leftDriveSpark1.setInverted(true);
     rightDriveSpark1.setInverted(false);
+
+    leftDriveSpark1.setOpenLoopRampRate(0.5);
+    rightDriveSpark1.setOpenLoopRampRate(0.5);
 
     rightDriveSpark2.follow(rightDriveSpark1);
     rightDriveSpark3.follow(rightDriveSpark1);

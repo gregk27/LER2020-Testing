@@ -65,8 +65,8 @@ public class Drivetrain extends SubsystemBase {
 
 
     //Slow it down
-    left *= 0.25;
-    right *= 0.25;
+    left *= 0.6;
+    right *= 0.6;
     //System.out.println(left);
     //System.out.println(right);
     

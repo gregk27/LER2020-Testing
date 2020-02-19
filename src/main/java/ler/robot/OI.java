@@ -73,7 +73,7 @@ public class OI {
         //shooterRevButton revs shooter, shootButton moves ball from conveyor into shooter
         shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
-        shootButton.whenHeld(new ShootCommand(container.shooter, container.conveyor));
+        shootButton.whenHeld(new ShootCommand(container.shooter, container.conveyor, container.limelight));
         shooterTiltButton.whenPressed(new ShooterTiltCommand());
 
 

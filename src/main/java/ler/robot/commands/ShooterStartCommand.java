@@ -33,7 +33,7 @@ public class ShooterStartCommand extends CommandBase {
   @Override
   public void execute() {
     //shooter.setSpecificShooterSpeed(shooter.getVelocityFromLimelight(limelight.getSpeed()));
-    shooter.setSpecificShooterSpeed(12000);
+    shooter.setSpecificShooterSpeed(6000);
   }
   // Called once the command ends or is interrupted.
   @Override
