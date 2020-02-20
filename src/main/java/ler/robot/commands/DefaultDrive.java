@@ -23,6 +23,7 @@ public class DefaultDrive extends CommandBase {
   private final DoubleSupplier left;
   private final DoubleSupplier right;
 
+
   /**
    * Creates a new DefaultDrive.
    *
@@ -35,11 +36,12 @@ public class DefaultDrive extends CommandBase {
     this.left = left;
     this.right = right;
     addRequirements(drivetrain);
+
   }
 
   @Override
   public void execute() {
-    System.out.println("Driving");
+    //System.out.println("Driving");
     drivetrain.tankDrive(left.getAsDouble(), right.getAsDouble());
   }
 }

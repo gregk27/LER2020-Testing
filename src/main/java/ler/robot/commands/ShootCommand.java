@@ -9,21 +9,23 @@ package ler.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Conveyor;
-import ler.robot.subsystems.Intake;
+import ler.robot.subsystems.Limelight;
+import ler.robot.subsystems.Shooter;
 
-public class IntakeCommand extends CommandBase {
-  Intake intake;
-  Conveyor conveyor;
-
+public class ShootCommand extends CommandBase {
+  private Shooter shooter;
+  private Conveyor conveyor;
+  private Limelight limelight;
   /**
-   * Creates a new IntakeCommand.
+   * Creates a new ShootCommand.
    */
-  public IntakeCommand(Intake intake, Conveyor conveyor) {
-    this.intake = intake;
+  public ShootCommand(Shooter shooter, Conveyor conveyor, Limelight limelight) {
+    this.shooter = shooter;
     this.conveyor = conveyor;
-    
-    addRequirements(intake);
+    this.limelight = limelight;
+    addRequirements(shooter);
     addRequirements(conveyor);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -34,9 +36,20 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Drive the intake and conveyor
-    intake.StartIntake(-Intake.ROLLER_SPEED);
-    conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
+    //configure, maybe add closeness to robotMap or something
+    double speed = limelight.getSpeed();
+    double closeness = 1;
+    double conveyorSpeed = 0.9;
+
+    conveyor.setConveyorSpeed(conveyorSpeed);
+    System.out.println("Commanding Conveyor");
+
+    /*if(Math.abs(shooter.getAverageTalonSpeed() - speed) < closeness){
+      conveyor.setConveyorSpeed(conveyorSpeed);
+    }else{
+      conveyor.setConveyorSpeed(0);
+    }
+    */
   }
 
   // Called once the command ends or is interrupted.

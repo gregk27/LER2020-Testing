@@ -7,7 +7,7 @@
 
 package ler.robot;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+//import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -35,12 +35,12 @@ public final class RobotMap {
     public static final int RIGHT_DRIVE_SPARK_2 = 6;
     public static final int RIGHT_DRIVE_SPARK_3 = 7;
     
-    public static final int SHOOTER_TOP_TALON = 10;
-    public static final int SHOOTER_BOTTOM_TALON = 9;
-    
-    //TODO: Calibrate the fake values
-    public static final int CONVEYOR_TALON = 8;
-    //TODO: Calibrate the fake values
+
+    public static final int SHOOTER_TOP_SPARK = 9;
+    public static final int SHOOTER_BOTTOM_SPARK = 8;
+
+    public static final int CONVEYOR_TALON = 12;
+
    public static final int INTAKE_TALON = 11;
   }
 
@@ -56,8 +56,8 @@ public final class RobotMap {
   public static final CANSparkMax rightDriveSpark3 = new CANSparkMax(Mappings.RIGHT_DRIVE_SPARK_3, MotorType.kBrushless);
 
   // The talons on the shooter
-  public static final TalonSRX shooterTopTalon = new TalonSRX(Mappings.SHOOTER_TOP_TALON);
-  public static final TalonSRX shooterBottomTalon = new TalonSRX(Mappings.SHOOTER_BOTTOM_TALON);
+  public static final CANSparkMax shooterTopSpark = new CANSparkMax(Mappings.SHOOTER_TOP_SPARK, MotorType.kBrushless);
+  public static final CANSparkMax shooterBottomSpark = new CANSparkMax(Mappings.SHOOTER_BOTTOM_SPARK, MotorType.kBrushless);
 
   //The conveyor 
   public static final TalonSRX conveyorMotor = new TalonSRX(Mappings.CONVEYOR_TALON);
@@ -72,16 +72,28 @@ public final class RobotMap {
     leftDriveSpark1.setInverted(true);
     rightDriveSpark1.setInverted(false);
 
+    leftDriveSpark1.setOpenLoopRampRate(0.5);
+    rightDriveSpark1.setOpenLoopRampRate(0.5);
+
     rightDriveSpark2.follow(rightDriveSpark1);
     rightDriveSpark3.follow(rightDriveSpark1);
 
     //shooter init
-    shooterTopTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-
-    shooterTopTalon.config_kF(0, Shooter.kF);
-    shooterTopTalon.config_kP(0, Shooter.kP);
-    shooterTopTalon.config_kI(0, Shooter.kI);
-    shooterTopTalon.config_kD(0, Shooter.kD);
     
+
+    shooterTopSpark.getPIDController().setP(Shooter.kP);
+    shooterTopSpark.getPIDController().setI(Shooter.kI);
+    shooterTopSpark.getPIDController().setD(Shooter.kD);
+    shooterTopSpark.getPIDController().setFF(Shooter.kF);
+
+    
+
+    shooterBottomSpark.getPIDController().setP(Shooter.kP);
+    shooterBottomSpark.getPIDController().setI(Shooter.kI);
+    shooterBottomSpark.getPIDController().setD(Shooter.kD);
+    shooterBottomSpark.getPIDController().setFF(Shooter.kF);
+
+  
+
   }
 }

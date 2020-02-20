@@ -12,11 +12,12 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import ler.robot.commands.DefaultDrive;
-import ler.robot.commands.DefaultShooter;
+//import ler.robot.commands.IntakeCommand;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Intake;
 import ler.robot.subsystems.Shooter;
+import ler.robot.subsystems.Limelight;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -30,6 +31,7 @@ public class RobotContainer {
   final Intake intake = new Intake();
   final Conveyor conveyor = new Conveyor();
   final Drivetrain drivetrain = new Drivetrain();
+  final Limelight limelight = new Limelight();
 
 
   // The autonomous routines
@@ -57,13 +59,6 @@ public class RobotContainer {
     // Configure default commands
     // Set the default drive command to split-stick arcade drive
 
-    //default shooter commands
-    shooter.setDefaultCommand(
-      new DefaultShooter(
-          shooter,
-          () -> Robot.oi.driverController.getXButton(),
-          () -> Robot.oi.driverController.getAButtonReleased(),
-          () -> Robot.oi.driverController.getYButtonReleased()));
     drivetrain.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
         // hand, and turning controlled by the right.
@@ -72,6 +67,12 @@ public class RobotContainer {
             () -> Robot.oi.driverController.getY(GenericHID.Hand.kLeft),
             () -> Robot.oi.driverController.getY(GenericHID.Hand.kRight)));
 
+    /*intake.setDefaultCommand(
+      new DefaultIntake(
+            intake,
+            conveyor,
+            () -> Robot.oi.operatorController.getTriggerAxis(GenericHID.Hand.kRight)));
+    */
     // Add commands to the autonomous command chooser
     //m_chooser.addOption("Simple Auto", m_simpleAuto);
     //m_chooser.addOption("Complex Auto", m_complexAuto);

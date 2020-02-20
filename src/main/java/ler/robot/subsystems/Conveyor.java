@@ -23,8 +23,9 @@ public class Conveyor extends SubsystemBase {
 
   }
 
-  public void SetConveyorSpeed (double speed){
-    RobotMap.conveyorMotor.set(ControlMode.PercentOutput, speed);
+  public void setConveyorSpeed (double speed){
+    //System.out.println("Driving Conveyor");
+    RobotMap.conveyorMotor.set(ControlMode.PercentOutput, -speed);
 
   }
   @Override
