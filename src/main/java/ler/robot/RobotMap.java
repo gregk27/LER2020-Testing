@@ -35,6 +35,7 @@ public final class RobotMap {
     public static final int RIGHT_DRIVE_SPARK_2 = 6;
     public static final int RIGHT_DRIVE_SPARK_3 = 7;
     
+
     public static final int SHOOTER_TOP_SPARK = 9;
     public static final int SHOOTER_BOTTOM_SPARK = 8;
 
