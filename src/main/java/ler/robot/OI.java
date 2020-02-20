@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import ler.robot.commands.HalveDriveSpeed;
-import ler.robot.commands.IntakeCommand;
+import ler.robot.commands.*;
+
 
 /**
  * Operator Interface, used to map buttons with the controllers
@@ -26,8 +26,19 @@ public class OI {
     //public static final int DRIVER_CONTROLLER_PORT = 1;
     
     public static final class ButtonMappings {
+
         public static final int HALF_SPEED_BUTTON = 2;
-        public static final int INTAKE_BUTTON = Button.kA.value;
+     
+        public static final int INVERT_CONTROLS_BUTTON = Button.kA.value;
+
+        public static final int INTAKE_BUTTON = Button.kB.value;
+
+        public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
+        public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
+        public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
+
+        public static final int LIMELIGHT_AIM_BUTTON = Button.kY.value;
+
     }
 
     // The driver's controller
@@ -36,8 +47,18 @@ public class OI {
     public Joystick rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK);
     public XboxController operatorController = new XboxController(OPERATOR_CONTROLLER_PORT);
 
+
     public JoystickButton halfSpeedButton = new JoystickButton(leftDriverJoystick, ButtonMappings.HALF_SPEED_BUTTON);
+    
+    //  @todo map these to whatever buttons drive team wants
+    public JoystickButton invertControlsButton = new JoystickButton(leftDriverJoystick, ButtonMappings.INVERT_CONTROLS_BUTTON);
+    public JoystickButton limelightAimButton = new JoystickButton(leftDriverJoystick, ButtonMappings.LIMELIGHT_AIM_BUTTON);
+  
     public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
+    public JoystickButton shooterRevButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
+    public JoystickButton shootButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_BUTTON);
+    public JoystickButton shooterTiltButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_TILT_BUTTON);
+    
     /**
      * Use this method to define your button->command mappings. Buttons can be
      * created by instantiating a {@link GenericHID} or one of its subclasses
@@ -54,8 +75,18 @@ public class OI {
          */
         // While holding the shoulder button, drive at half speed
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
-        intakeButton.whileHeld(new IntakeCommand(container.intake,container.conveyor));
+        invertControlsButton.whenPressed(new InvertControlsCommand(container.drivetrain));
+        limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
 
+        intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
+        //shooterRevButton revs shooter, shootButton moves ball from conveyor into shooter
+        shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
+        shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
+        shootButton.whenHeld(new ShootCommand(container.shooter, container.conveyor, container.limelight));
+        shooterTiltButton.whenPressed(new ShooterTiltCommand());
+
+
+        
     }
 
 }

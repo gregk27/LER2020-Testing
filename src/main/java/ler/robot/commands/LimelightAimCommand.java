@@ -8,35 +8,35 @@
 package ler.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import ler.robot.subsystems.Conveyor;
-import ler.robot.subsystems.Intake;
+import ler.robot.subsystems.Drivetrain;
+import ler.robot.subsystems.Limelight;
 
-public class IntakeCommand extends CommandBase {
-  Intake intake;
-  Conveyor conveyor;
-
+public class LimelightAimCommand extends CommandBase {
+  private Drivetrain drivetrain;
+  private Limelight limelight;
   /**
-   * Creates a new IntakeCommand.
+   * Creates a new LimelightAimCommand.
    */
-  public IntakeCommand(Intake intake, Conveyor conveyor) {
-    this.intake = intake;
-    this.conveyor = conveyor;
-    
-    addRequirements(intake);
-    addRequirements(conveyor);
+  public LimelightAimCommand(Drivetrain drivetrain, Limelight limelight) {
+    this.drivetrain = drivetrain;
+    this.limelight = limelight;
+    addRequirements(drivetrain);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    drivetrain.pidController.setSetpoint(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Drive the intake and conveyor
-    intake.StartIntake(-Intake.ROLLER_SPEED);
-    conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
+    double pidOutput = drivetrain.pidController.calculate(limelight.getX());
+
+    //aim bot
+    drivetrain.tankDrive(-pidOutput/15, pidOutput/15);
   }
 
   // Called once the command ends or is interrupted.
@@ -47,6 +47,9 @@ public class IntakeCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(Math.abs(limelight.getX()) < 1){
+      return true;
+    }
     return false;
   }
 }

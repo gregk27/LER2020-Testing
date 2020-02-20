@@ -7,12 +7,17 @@
 
 package ler.robot.subsystems;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import ler.robot.RobotMap;
 
 public class Drivetrain extends SubsystemBase {
   
   double maxOutput=1;
+  private final  double DEADZONE = 0.15;
+  private boolean isInverted = false;
+
+  public final PIDController pidController = new PIDController(7, 0.018, 1.5);
 
   /*
   // The left-side drive encoder
@@ -46,21 +51,43 @@ public class Drivetrain extends SubsystemBase {
    * @param right the commanded rotation
    */
   public void tankDrive(double left, double right) {
-    //slow it down
-    left *= 0.25;
-    right *= 0.25;
-    System.out.println(left);
-    System.out.println(right);
+    //System.out.println("L Input: " + left + " R Input: " + right);
+
+    if (Math.abs(left)<DEADZONE){
+      left = 0;
+
+    }
+    if (Math.abs(right)<DEADZONE){
+      right = 0;
+    }
+    //Use to check Deadzone input/output
+    //System.out.println("L Deadzoned: " + left + " R Deadzoned: " + right);
+
+
+    //Slow it down
+    left *= 0.6;
+    right *= 0.6;
+    //System.out.println(left);
+    //System.out.println(right);
     
     //Use Math.min to apply max speed rules, then
     //Multiply      the magnitude              by the direction
     // left = Math.min(Math.abs(left), maxOutput)*Math.signum(left);
     // right = Math.min(Math.abs(right), maxOutput)*Math.signum(right);
 
-    System.out.println("L:"+left+"\tR:"+right);
+    //System.out.println("L:"+left+"\tR:"+right);
 
+    if(isInverted){
+      double tempRight = left * -1;
+      left = right * -1;
+      right = tempRight;
+    }
     RobotMap.leftDriveSpark1.set(left);
     RobotMap.rightDriveSpark1.set(right);
+  }
+
+  public void invertControls(){
+    isInverted = !isInverted;
   }
 
   /**

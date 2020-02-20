@@ -7,41 +7,44 @@
 
 package ler.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Conveyor;
-import ler.robot.subsystems.Intake;
+import ler.robot.subsystems.Shooter;
+import ler.robot.RobotMap;
 
-public class IntakeCommand extends CommandBase {
-  Intake intake;
-  Conveyor conveyor;
-
+public class ShooterCommand extends CommandBase {
+  private Shooter shooter;
+  private Conveyor conveyor;
   /**
-   * Creates a new IntakeCommand.
+   * Creates a new ShooterCommand.
    */
-  public IntakeCommand(Intake intake, Conveyor conveyor) {
-    this.intake = intake;
+  public ShooterCommand(Shooter shooter, Conveyor conveyor) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.shooter = shooter;
     this.conveyor = conveyor;
-    
-    addRequirements(intake);
+    addRequirements(shooter);
     addRequirements(conveyor);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Drive the intake and conveyor
-    intake.StartIntake(-Intake.ROLLER_SPEED);
-    conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
+    shooter.setShooterSpeed(1);
+    //System.out.println("t: " + RobotMap.shooterTopTalon.getSelectedSensorVelocity() + "\tb: " + RobotMap.shooterBottomTalon.getSelectedSensorVelocity());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    //blah
   }
 
   // Returns true when the command should end.
