@@ -39,12 +39,12 @@ public class ShootCommand extends CommandBase {
     //configure, maybe add closeness to robotMap or something
     double speed = limelight.getSpeed();
     double closeness = 1;
-    double conveyorSpeed = 0.9;
+    double conveyorSpeed = 0.6;
 
     conveyor.setConveyorSpeed(conveyorSpeed);
-    System.out.println("Commanding Conveyor");
-
-    /*if(Math.abs(shooter.getAverageTalonSpeed() - speed) < closeness){
+  
+    /*
+    if(Math.abs(shooter.getAverageSparkSpeed() - speed) < closeness){
       conveyor.setConveyorSpeed(conveyorSpeed);
     }else{
       conveyor.setConveyorSpeed(0);
@@ -55,6 +55,7 @@ public class ShootCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    conveyor.setConveyorSpeed(0);
   }
 
   // Returns true when the command should end.
