@@ -7,7 +7,6 @@
 
 package ler.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -61,16 +60,16 @@ public class RobotContainer {
     shooter.setDefaultCommand(
       new DefaultShooter(
           shooter,
-          () -> Robot.oi.driverController.getXButton(),
-          () -> Robot.oi.driverController.getAButtonReleased(),
-          () -> Robot.oi.driverController.getYButtonReleased()));
+          () -> Robot.oi.operatorController.getXButton(),
+          () -> Robot.oi.operatorController.getAButtonReleased(),
+          () -> Robot.oi.operatorController.getYButtonReleased()));
     drivetrain.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
         // hand, and turning controlled by the right.
         new DefaultDrive(
             drivetrain,
-            () -> Robot.oi.driverController.getY(GenericHID.Hand.kLeft),
-            () -> Robot.oi.driverController.getY(GenericHID.Hand.kRight)));
+            () -> Robot.oi.leftDriverJoystick.getY(),
+            () -> Robot.oi.rightDriverJoystick.getY()));
 
     // Add commands to the autonomous command chooser
     //m_chooser.addOption("Simple Auto", m_simpleAuto);
