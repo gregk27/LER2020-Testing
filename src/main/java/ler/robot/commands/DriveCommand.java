@@ -21,8 +21,6 @@ import ler.robot.subsystems.Drivetrain;
  */
 public class DriveCommand extends CommandBase {
   private final Drivetrain drivetrain;
-  private final DoubleSupplier left;
-  private final DoubleSupplier right;
 
 
   /**
@@ -32,10 +30,8 @@ public class DriveCommand extends CommandBase {
    * @param forward The control input for driving forwards/backwards
    * @param rotation The control input for turning
    */
-  public DriveCommand(Drivetrain subsystem, DoubleSupplier left, DoubleSupplier right) {
+  public DriveCommand(Drivetrain subsystem) {
     drivetrain = subsystem;
-    this.left = left;
-    this.right = right;
     addRequirements(drivetrain);
 
   }
