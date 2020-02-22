@@ -7,26 +7,31 @@
 
 package ler.robot.subsystems;
 
-//import com.ctre.phoenix.motorcontrol.ControlMode;
-//import com.revrobotics.CANPIDController;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import ler.robot.RobotMap;
 
 public class Shooter extends SubsystemBase{
   
-  public static final double kP = 0.000002;
+  public static final double kP = 0.000065;
   public static final double kI = 0.0;
-  public static final double kD = 0.000001;
-  public static final double kF = 0.000086;
+  public static final double kD = 0.000002;
+  public static final double kF = 0.000090;
 
-  private static final double SPIN_CONSTANT = 0.85;
+  private static final double SPIN_CONSTANT = 0.8;
 
   public static final double[] SPEEDS = {0, 0.9};
   public static final int ZEROSPEED = 0;
   public static final double limelightSpeedScaling = 0.01;
+  public static final double SHOOTER_TARGET_SPEED = 7900;
+  public static final double SHOOTER_TOP_TARGET_SPEED = SHOOTER_TARGET_SPEED;
+  public static final double SHOOTER_BOTTOM_TARGET_SPEED = -SHOOTER_TARGET_SPEED*SPIN_CONSTANT;
 
+  public long spoolTime = System.currentTimeMillis();
 
   //Cycles per revolution of encoders on shooter
   public static final int cPR = 64;
@@ -43,28 +48,26 @@ public class Shooter extends SubsystemBase{
   }
 
   public void setSpecificShooterSpeed(double speed){
-    //talonShooterTop.set(ControlMode.PercentOutput, speeds[currentSpeed]);
-    //System.out.println(RobotMap.shooterTopTalon.contr);
-    RobotMap.shooterTopSpark.getPIDController().setReference((speed*SPIN_CONSTANT), ControlType.kVelocity);
-    //talonShooterBottom.set(ControlMode.PercentOutput, -speeds[currentSpeed]);
-    RobotMap.shooterBottomSpark.getPIDController().setReference(-speed, ControlType.kVelocity);
+    spoolTime = System.currentTimeMillis()+100;
+    if(speed == 0) {
+      RobotMap.shooterTopSpark.set(0);
+      RobotMap.shooterBottomSpark.set(0);
+    }
+    else {
+      
+      //TODO: Debbuging, change to constant when tuned
+    RobotMap.shooterTopSpark.getPIDController().setReference((speed), ControlType.kVelocity);
+
+    RobotMap.shooterBottomSpark.getPIDController().setReference(-speed*SPIN_CONSTANT, ControlType.kVelocity);
+    }
   }
 
-  public void talonResetPos(){
-    RobotMap.shooterTopSpark.getEncoder().getPosition();
-    RobotMap.shooterTopSpark.getEncoder().getPosition();
-  }
-
-  public double getTopTalonSpeed(){
+  public double getTopSparkSpeed(){
     return(RobotMap.shooterTopSpark.getEncoder().getVelocity());
   }
 
-  public double getBottomTalonSpeed(){
-    return(RobotMap.shooterTopSpark.getEncoder().getPosition());
-  }
-
-  public double getAverageTalonSpeed(){
-    return((getTopTalonSpeed() + getBottomTalonSpeed()) / 2);
+  public double getBottomSparkSpeed(){
+    return(RobotMap.shooterBottomSpark.getEncoder().getVelocity());
   }
 
   //speed should be how far the bot can shoot straight up
@@ -72,4 +75,5 @@ public class Shooter extends SubsystemBase{
   public double getVelocityFromLimelight(double speed){
     return(speed * limelightSpeedScaling);
   }
+
 }

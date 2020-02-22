@@ -7,6 +7,7 @@
 
 package ler.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Limelight;
 import ler.robot.subsystems.Shooter;
@@ -14,13 +15,16 @@ import ler.robot.subsystems.Shooter;
 public class ShooterStartCommand extends CommandBase {
   private Shooter shooter;
   private Limelight limelight;
-  /**
+
+
+  /*
    * Creates a new ShooterStartCommand.
    */
   public ShooterStartCommand(Shooter shooter, Limelight limelight) {
     this.shooter = shooter;
     this.limelight = limelight;
     addRequirements(shooter);
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -32,8 +36,9 @@ public class ShooterStartCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     //shooter.setSpecificShooterSpeed(shooter.getVelocityFromLimelight(limelight.getSpeed()));
-    shooter.setSpecificShooterSpeed(6000);
+    shooter.setSpecificShooterSpeed(Shooter.SHOOTER_TARGET_SPEED);
   }
   // Called once the command ends or is interrupted.
   @Override
