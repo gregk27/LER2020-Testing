@@ -7,7 +7,10 @@
 
 package ler.robot.commands;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import ler.robot.RobotMap;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Shooter;
 
@@ -34,7 +37,8 @@ public class ShooterStopCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setShooterSpeed(0);
+    shooter.setSpecificShooterSpeed(0);
+
     //conveyor.setConveyorSpeed(0);
     /*
     RobotMap.shooterTopTalon.set(ControlMode.PercentOutput, 0);
