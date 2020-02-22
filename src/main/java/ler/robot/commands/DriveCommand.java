@@ -19,7 +19,7 @@ import ler.robot.subsystems.Drivetrain;
  * explicitly for pedagogical purposes - actual code should inline a command this simple with {@link
  * edu.wpi.first.wpilibj2.command.RunCommand}.
  */
-public class DefaultDrive extends CommandBase {
+public class DriveCommand extends CommandBase {
   private final Drivetrain drivetrain;
   private final DoubleSupplier left;
   private final DoubleSupplier right;
@@ -32,7 +32,7 @@ public class DefaultDrive extends CommandBase {
    * @param forward The control input for driving forwards/backwards
    * @param rotation The control input for turning
    */
-  public DefaultDrive(Drivetrain subsystem, DoubleSupplier left, DoubleSupplier right) {
+  public DriveCommand(Drivetrain subsystem, DoubleSupplier left, DoubleSupplier right) {
     drivetrain = subsystem;
     this.left = left;
     this.right = right;
