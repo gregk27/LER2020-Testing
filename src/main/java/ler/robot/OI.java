@@ -28,8 +28,8 @@ public class OI {
     public static final class ButtonMappings {
 
         public static final int HALF_SPEED_BUTTON = 2;
-     
-        public static final int INVERT_CONTROLS_BUTTON = Button.kA.value;
+        public static final int INVERT_CONTROLS_BUTTON = 1;
+        public static final int LIMELIGHT_AIM_BUTTON = 2;
 
         public static final int INTAKE_BUTTON = Button.kB.value;
 
@@ -37,7 +37,7 @@ public class OI {
         public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
         public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
 
-        public static final int LIMELIGHT_AIM_BUTTON = Button.kY.value;
+        
 
     }
 
@@ -51,8 +51,8 @@ public class OI {
     public JoystickButton halfSpeedButton = new JoystickButton(leftDriverJoystick, ButtonMappings.HALF_SPEED_BUTTON);
     
     //  @todo map these to whatever buttons drive team wants
-    public JoystickButton invertControlsButton = new JoystickButton(leftDriverJoystick, ButtonMappings.INVERT_CONTROLS_BUTTON);
-    public JoystickButton limelightAimButton = new JoystickButton(leftDriverJoystick, ButtonMappings.LIMELIGHT_AIM_BUTTON);
+    public JoystickButton invertControlsButton = new JoystickButton(rightDriverJoystick, ButtonMappings.INVERT_CONTROLS_BUTTON);
+    public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, ButtonMappings.LIMELIGHT_AIM_BUTTON);
   
     public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
     public JoystickButton shooterRevButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
