@@ -28,12 +28,12 @@ public final class RobotMap {
    * Subclass to hold all mapping constants (motors, DIO ports, etc)
    */
   public static final class Mappings {
-    public static final int LEFT_DRIVE_SPARK_1 = 2;
-    public static final int LEFT_DRIVE_SPARK_2 = 3;
-    public static final int LEFT_DRIVE_SPARK_3 = 4;
-    public static final int RIGHT_DRIVE_SPARK_1 = 5;
-    public static final int RIGHT_DRIVE_SPARK_2 = 6;
-    public static final int RIGHT_DRIVE_SPARK_3 = 7;
+    public static final int LEFT_DRIVE_SPARK_1 = 5;
+    public static final int LEFT_DRIVE_SPARK_2 = 6;
+    public static final int LEFT_DRIVE_SPARK_3 = 7;
+    public static final int RIGHT_DRIVE_SPARK_1 = 2;
+    public static final int RIGHT_DRIVE_SPARK_2 = 3;
+    public static final int RIGHT_DRIVE_SPARK_3 = 4;
     
 
     public static final int SHOOTER_TOP_SPARK = 9;

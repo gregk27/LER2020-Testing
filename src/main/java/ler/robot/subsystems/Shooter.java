@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase{
 
   private static final double SPIN_CONSTANT = 0.8;
 
-  public static final double[] SPEEDS = {0, 0.9};
+  public static final double[] SPEEDS = {0, 0.8};
   public static final int ZEROSPEED = 0;
   public static final double limelightSpeedScaling = 0.01;
   public static final double SHOOTER_TARGET_SPEED = 7900;

@@ -7,7 +7,6 @@
 
 package ler.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -64,8 +63,8 @@ public class RobotContainer {
         // hand, and turning controlled by the right.
         new DefaultDrive(
             drivetrain,
-            () -> Robot.oi.driverController.getY(GenericHID.Hand.kLeft),
-            () -> Robot.oi.driverController.getY(GenericHID.Hand.kRight)));
+            () -> Robot.oi.leftDriverJoystick.getY(),
+            () -> Robot.oi.rightDriverJoystick.getY()));
 
     /*intake.setDefaultCommand(
       new DefaultIntake(
