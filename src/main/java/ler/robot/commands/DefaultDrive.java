@@ -10,7 +10,8 @@ package ler.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
+import ler.robot.Robot;
+import ler.robot.Tools;
 import ler.robot.subsystems.Drivetrain;
 
 /**
@@ -42,6 +43,19 @@ public class DefaultDrive extends CommandBase {
   @Override
   public void execute() {
     //System.out.println("Driving");
-    drivetrain.tankDrive(left.getAsDouble(), right.getAsDouble());
-  }
+    
+    //Using the logistic function for adapted speed
+    double leftSpeed = Tools.getAdaptedSpeed(Robot.oi.leftDriverJoystick.getY());
+    double rightSpeed = Tools.getAdaptedSpeed(Robot.oi.rightDriverJoystick.getY());
+    double average = (leftSpeed + rightSpeed)/2;
+
+    // if sticks are close and speed reasonable, go straight
+    if (Math.abs(leftSpeed - rightSpeed) < 0.05 && Math.abs(average) > 0.25) {
+      leftSpeed = average;
+      rightSpeed = average;
+    }
+
+    //drivetrain.tankDrive(left.getAsDouble(), rightSpeed.getAsDouble());
+    drivetrain.tankDrive(leftSpeed*0.6, rightSpeed*0.6);
+    }
 }
