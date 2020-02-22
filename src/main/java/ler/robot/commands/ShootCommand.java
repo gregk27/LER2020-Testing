@@ -25,6 +25,7 @@ public class ShootCommand extends CommandBase {
     this.limelight = limelight;
     addRequirements(shooter);
     addRequirements(conveyor);
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -38,10 +39,24 @@ public class ShootCommand extends CommandBase {
   public void execute() {
     //configure, maybe add closeness to robotMap or something
     double speed = limelight.getSpeed();
-    double closeness = 1;
+    double closeness = 250;
     double conveyorSpeed = 0.6;
 
-    conveyor.setConveyorSpeed(conveyorSpeed);
+    System.out.println("Top: " + shooter.getTopSparkSpeed() + "\t" + Shooter.SHOOTER_TOP_TARGET_SPEED + "\t" + (shooter.getTopSparkSpeed()-Shooter.SHOOTER_TOP_TARGET_SPEED));
+    System.out.println("Bottom: " + shooter.getBottomSparkSpeed() + "\t" + Shooter.SHOOTER_BOTTOM_TARGET_SPEED + "\t" + (shooter.getBottomSparkSpeed()-Shooter.SHOOTER_BOTTOM_TARGET_SPEED));
+
+
+    if(Math.abs(shooter.getTopSparkSpeed() - Shooter.SHOOTER_TOP_TARGET_SPEED)< closeness && 
+       Math.abs(shooter.getBottomSparkSpeed()- Shooter.SHOOTER_BOTTOM_TARGET_SPEED)< closeness &&
+       System.currentTimeMillis()>= shooter.spoolTime) {
+      
+      conveyor.setConveyorSpeed(conveyorSpeed);
+
+    } 
+    else {
+      conveyor.setConveyorSpeed(0);
+    
+    }
   
     /*
     if(Math.abs(shooter.getAverageSparkSpeed() - speed) < closeness){
@@ -55,6 +70,7 @@ public class ShootCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
     conveyor.setConveyorSpeed(0);
   }
 
