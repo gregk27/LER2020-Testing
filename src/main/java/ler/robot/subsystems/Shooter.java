@@ -7,11 +7,7 @@
 
 package ler.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import ler.robot.RobotMap;
 
@@ -44,7 +40,6 @@ public class Shooter extends SubsystemBase{
 
   public void setShooterSpeed(int speedArrayPosition){
     setSpecificShooterSpeed(SPEEDS[speedArrayPosition]);
-    //currentSpeed = SPEEDS[speedArrayPosition];
   }
 
   public void setSpecificShooterSpeed(double speed){
@@ -54,7 +49,6 @@ public class Shooter extends SubsystemBase{
       RobotMap.shooterBottomSpark.set(0);
     }
     else {
-      
       //TODO: Debbuging, change to constant when tuned
     RobotMap.shooterTopSpark.getPIDController().setReference((speed), ControlType.kVelocity);
 
