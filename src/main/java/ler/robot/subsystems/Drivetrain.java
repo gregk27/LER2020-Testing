@@ -23,14 +23,8 @@ public class Drivetrain extends SubsystemBase {
    * Creates a new DriveSubsystem.
    */
   public Drivetrain() {
-    // Sets the distance per pulse for the encoders
-    /*
-    m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    m_rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    */
-  }
 
-  
+  }
 
   /**
    * Drives the robot using arcade controls.
@@ -60,7 +54,7 @@ public class Drivetrain extends SubsystemBase {
     RobotMap.leftDriveSpark1.set(left);
     RobotMap.rightDriveSpark1.set(right);
   }
-
+  //@todo currently not mapped to anything
   public void invertControls(){
     isInverted = !isInverted;
   }
