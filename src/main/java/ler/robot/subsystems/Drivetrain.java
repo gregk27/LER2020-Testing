@@ -19,18 +19,6 @@ public class Drivetrain extends SubsystemBase {
 
   public final PIDController pidController = new PIDController(7, 0.018, 1.5);
 
-  /*
-  // The left-side drive encoder
-  private final Encoder m_leftEncoder =
-      new Encoder(DriveConstants.kLeftEncoderPorts[0], DriveConstants.kLeftEncoderPorts[1],
-                  DriveConstants.kLeftEncoderReversed);
-
-  // The right-side drive encoder
-  private final Encoder m_rightEncoder =
-      new Encoder(DriveConstants.kRightEncoderPorts[0], DriveConstants.kRightEncoderPorts[1],
-                  DriveConstants.kRightEncoderReversed);
-  */
-
   /**
    * Creates a new DriveSubsystem.
    */
@@ -51,7 +39,6 @@ public class Drivetrain extends SubsystemBase {
    * @param right the commanded rotation
    */
   public void tankDrive(double left, double right) {
-    //System.out.println("L Input: " + left + " R Input: " + right);
 
     if (Math.abs(left)<DEADZONE){
       left = 0;
@@ -60,23 +47,11 @@ public class Drivetrain extends SubsystemBase {
     if (Math.abs(right)<DEADZONE){
       right = 0;
     }
-    //Use to check Deadzone input/output
-    //System.out.println("L Deadzoned: " + left + " R Deadzoned: " + right);
-
 
     //Slow it down
     left *= 0.6;
     right *= 0.6;
-    //System.out.println(left);
-    //System.out.println(right);
     
-    //Use Math.min to apply max speed rules, then
-    //Multiply      the magnitude              by the direction
-    // left = Math.min(Math.abs(left), maxOutput)*Math.signum(left);
-    // right = Math.min(Math.abs(right), maxOutput)*Math.signum(right);
-
-    //System.out.println("L:"+left+"\tR:"+right);
-
     if(isInverted){
       double tempRight = left * -1;
       left = right * -1;
@@ -89,52 +64,6 @@ public class Drivetrain extends SubsystemBase {
   public void invertControls(){
     isInverted = !isInverted;
   }
-
-  /**
-   * Resets the drive encoders to currently read a position of 0.
-   */
-  /*
-  public void resetEncoders() {
-    m_leftEncoder.reset();
-    m_rightEncoder.reset();
-  }
-  */
-
-  /**
-   * Gets the average distance of the TWO encoders.
-   *
-   * @return the average of the TWO encoder readings
-   */
-
-   /*
-  public double getAverageEncoderDistance() {
-    return (m_leftEncoder.getDistance() + m_rightEncoder.getDistance()) / 2.0;
-  }
-  */
-
-  /**
-   * Gets the left drive encoder.
-   *
-   * @return the left drive encoder
-   */
-
-   /*
-  public Encoder getLeftEncoder() {
-    return m_leftEncoder;
-  }
-  */
-
-  /**
-   * Gets the right drive encoder.
-   *
-   * @return the right drive encoder
-   */
-
-   /*
-  public Encoder getRightEncoder() {
-    return m_rightEncoder;
-  }
-  */
 
   /**
    * Sets the max output of the drive.  Useful for scaling the drive to drive more slowly.
