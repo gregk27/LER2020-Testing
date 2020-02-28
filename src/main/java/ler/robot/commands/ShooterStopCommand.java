@@ -39,7 +39,7 @@ public class ShooterStopCommand extends CommandBase {
   public void execute() {
     shooter.setSpecificShooterSpeed(0);
 
-    //conveyor.setConveyorSpeed(0);
+    conveyor.setConveyorSpeed(0);
     /*
     RobotMap.shooterTopTalon.set(ControlMode.PercentOutput, 0);
     RobotMap.shooterBottomTalon.set(ControlMode.PercentOutput, 0);
