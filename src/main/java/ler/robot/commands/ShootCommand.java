@@ -42,10 +42,10 @@ public class ShootCommand extends CommandBase {
     double closeness = 250;
     double conveyorSpeed = 0.6;
 
-    System.out.println("Top: " + shooter.getTopSparkSpeed() + "\t" + Shooter.SHOOTER_TOP_TARGET_SPEED + "\t" + (shooter.getTopSparkSpeed()-Shooter.SHOOTER_TOP_TARGET_SPEED));
-    System.out.println("Bottom: " + shooter.getBottomSparkSpeed() + "\t" + Shooter.SHOOTER_BOTTOM_TARGET_SPEED + "\t" + (shooter.getBottomSparkSpeed()-Shooter.SHOOTER_BOTTOM_TARGET_SPEED));
+    System.out.println("Top: " + shooter.getTopLeftSparkSpeed() + "\t" + Shooter.SHOOTER_TOP_TARGET_SPEED + "\t" + (shooter.getTopSparkSpeed()-Shooter.SHOOTER_TOP_TARGET_SPEED));
+    System.out.println("Bottom: " + shooter.getBottomLeftSparkSpeed() + "\t" + Shooter.SHOOTER_BOTTOM_TARGET_SPEED + "\t" + (shooter.getBottomSparkSpeed()-Shooter.SHOOTER_BOTTOM_TARGET_SPEED));
 
-
+    // TODO determine how to calculate if it is fast enough to run
     if(Math.abs(shooter.getTopSparkSpeed() - Shooter.SHOOTER_TOP_TARGET_SPEED)< closeness && 
        Math.abs(shooter.getBottomSparkSpeed()- Shooter.SHOOTER_BOTTOM_TARGET_SPEED)< closeness &&
        System.currentTimeMillis()>= shooter.spoolTime) {

@@ -100,8 +100,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("ShooterTopVel", RobotMap.shooterTopSpark.getEncoder().getVelocity());
-    SmartDashboard.putNumber("ShooterBottomVel", RobotMap.shooterBottomSpark.getEncoder().getVelocity());
+    SmartDashboard.putNumber("ShooterTopRightVel", RobotMap.shooterTopRightSpark.getEncoder().getVelocity());
+    SmartDashboard.putNumber("ShooterBottomRightVel", RobotMap.shooterBottomRightSpark.getEncoder().getVelocity());
+    SmartDashboard.putNumber("ShooterTopLeftVel", RobotMap.shooterTopLeftSpark.getEncoder().getVelocity());
+    SmartDashboard.putNumber("ShooterBottomLeftVel", RobotMap.shooterBottomLeftSpark.getEncoder().getVelocity());
   }
 
   @Override

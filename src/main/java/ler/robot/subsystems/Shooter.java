@@ -45,23 +45,33 @@ public class Shooter extends SubsystemBase{
   public void setSpecificShooterSpeed(double speed){
     spoolTime = System.currentTimeMillis()+100;
     if(speed == 0) {
-      RobotMap.shooterTopSpark.set(0);
-      RobotMap.shooterBottomSpark.set(0);
+      RobotMap.shooterTopLeftSpark.set(0);
+      RobotMap.shooterBottomLeftSpark.set(0);
+      RobotMap.shooterTopRightSpark.set(0);
+      RobotMap.shooterBottomRightSpark.set(0);
     }
     else {
-      //TODO: Debbuging, change to constant when tuned
-    RobotMap.shooterTopSpark.getPIDController().setReference((speed), ControlType.kVelocity);
-
-    RobotMap.shooterBottomSpark.getPIDController().setReference(-speed*SPIN_CONSTANT, ControlType.kVelocity);
+      RobotMap.shooterTopLeftSpark.getPIDController().setReference((speed), ControlType.kVelocity);
+      RobotMap.shooterTopLeftSpark.getPIDController().setReference((speed), ControlType.kVelocity);
+      RobotMap.shooterBottomLeftSpark.getPIDController().setReference(-speed*SPIN_CONSTANT, ControlType.kVelocity);
+      RobotMap.shooterBottomRightSpark.getPIDController().setReference(-speed*SPIN_CONSTANT, ControlType.kVelocity);
     }
   }
 
-  public double getTopSparkSpeed(){
-    return(RobotMap.shooterTopSpark.getEncoder().getVelocity());
+  public double getTopLeftSparkSpeed(){
+    return(RobotMap.shooterTopLeftSpark.getEncoder().getVelocity());
+  }
+  
+  public double getTopRightSparkSpeed(){
+    return(RobotMap.shooterTopRightSpark.getEncoder().getVelocity());
   }
 
-  public double getBottomSparkSpeed(){
-    return(RobotMap.shooterBottomSpark.getEncoder().getVelocity());
+  public double getBottomLeftSparkSpeed(){
+    return(RobotMap.shooterBottomLeftSpark.getEncoder().getVelocity());
+  }
+  
+  public double getBottomRightSparkSpeed(){
+    return(RobotMap.shooterBottomRightSpark.getEncoder().getVelocity());
   }
 
   //speed should be how far the bot can shoot straight up
