@@ -10,7 +10,6 @@ package ler.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import ler.robot.commands.*;
 import ler.robot.commands.instant.InvertControlsCommand;
@@ -20,45 +19,21 @@ import ler.robot.commands.instant.InvertControlsCommand;
  * Operator Interface, used to map buttons with the controllers
  */
 public class OI {
-
-    public static final int LEFT_DRIVER_JOYSTICK = 0;
-    public static final int RIGHT_DRIVER_JOYSTICK = 1;
-    public static final int OPERATOR_CONTROLLER_PORT = 2;
-    //public static final int DRIVER_CONTROLLER_PORT = 1;
     
-    public static final class ButtonMappings {
-
-        public static final int HALF_SPEED_BUTTON = 2;
-        public static final int INVERT_CONTROLS_BUTTON = 1;
-        public static final int LIMELIGHT_AIM_BUTTON = 2;
-
-        public static final int INTAKE_BUTTON = Button.kB.value;
-
-        public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
-        public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
-        public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
-
-        
-
-    }
-
-    // The driver's controller
-    //public XboxController driverController = new XboxController(DRIVER_CONTROLLER_PORT);
-    public Joystick leftDriverJoystick = new Joystick(LEFT_DRIVER_JOYSTICK);
-    public Joystick rightDriverJoystick = new Joystick(RIGHT_DRIVER_JOYSTICK);
-    public XboxController operatorController = new XboxController(OPERATOR_CONTROLLER_PORT);
+    // The driver uses two joysticks, operator uses one controller
+    public Joystick leftDriverJoystick = new Joystick(RobotMap.OIConstants.LEFT_DRIVER_JOYSTICK);
+    public Joystick rightDriverJoystick = new Joystick(RobotMap.OIConstants.RIGHT_DRIVER_JOYSTICK);
+    public XboxController operatorController = new XboxController(RobotMap.OIConstants.OPERATOR_CONTROLLER_PORT);
 
 
-    public JoystickButton halfSpeedButton = new JoystickButton(leftDriverJoystick, ButtonMappings.HALF_SPEED_BUTTON);
-    
-    //  @todo map these to whatever buttons drive team wants
-    public JoystickButton invertControlsButton = new JoystickButton(rightDriverJoystick, ButtonMappings.INVERT_CONTROLS_BUTTON);
-    public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, ButtonMappings.LIMELIGHT_AIM_BUTTON);
+    public JoystickButton halfSpeedButton = new JoystickButton(leftDriverJoystick, RobotMap.OIConstants.HALF_SPEED_BUTTON);
+    public JoystickButton invertControlsButton = new JoystickButton(rightDriverJoystick, RobotMap.OIConstants.INVERT_CONTROLS_BUTTON);
+    public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, RobotMap.OIConstants.LIMELIGHT_AIM_BUTTON);
   
-    public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
-    public JoystickButton shooterRevButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
-    public JoystickButton shootButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_BUTTON);
-    public JoystickButton shooterTiltButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_TILT_BUTTON);
+    public JoystickButton intakeButton = new JoystickButton(operatorController, RobotMap.OIConstants.INTAKE_BUTTON);
+    public JoystickButton shooterRevButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOTER_CONTROL_BUTTON);
+    public JoystickButton shootButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOT_BUTTON);
+    public JoystickButton shooterTiltButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOTER_TILT_BUTTON);
     
     /**
      * Use this method to define your button->command mappings. Buttons can be
@@ -80,7 +55,7 @@ public class OI {
         limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
 
         intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
-        //shooterRevButton revs shooter, shootButton moves ball from conveyor into shooter
+        //shooterRevButton revs shooter, shootButton feeds ball from conveyor to shooter
         shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
         shootButton.whenHeld(new ShootCommand(container.shooter, container.conveyor, container.limelight));
