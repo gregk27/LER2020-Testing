@@ -53,6 +53,8 @@ public final class RobotMap {
     
     public static final int ANGLE_ELEVATION_DOWN = 0;
     public static final int ANGLE_ELEVATION_UP = 1;
+    public static final int INTAKE_DOWN = 2;
+    public static final int INTAKE_UP = 3;
   }
 
   public static final class OIConstants {
@@ -93,8 +95,9 @@ public final class RobotMap {
   //The conveyor talon
   public static final TalonSRX conveyorMotor = new TalonSRX(CANConstants.CONVEYOR_TALON);
 
-  //The intake talon
+  //The intake (talon + piston)
   public static final TalonSRX intakeRoller = new TalonSRX(CANConstants.INTAKE_TALON);
+  public static DoubleSolenoid intakeArm = new DoubleSolenoid(SOLENOIDConstants.INTAKE_DOWN, SOLENOIDConstants.INTAKE_UP);
 
   //The angle elevation talon
   public static final TalonFX angleElevation = new TalonFX(CANConstants.ANGLE_ELEVATION);
