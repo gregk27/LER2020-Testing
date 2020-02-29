@@ -22,14 +22,15 @@ public class InvertControlsCommand extends CommandBase{
   }
 
   // Called when the command is initially scheduled.
-  //@Override
-  public void Initialize() {
+  @Override
+  public void initialize() {
     drivetrain.invertControls();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    drivetrain.invertControls();
   }
 
 }
