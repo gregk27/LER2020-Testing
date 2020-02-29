@@ -13,7 +13,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import ler.robot.subsystems.Shooter;
-
+import edu.wpi.first.wpilibj.XboxController.Button;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -44,6 +44,21 @@ public final class RobotMap {
    public static final int INTAKE_TALON = 11;
   }
 
+  public static final class OIConstant{
+
+    public static final int HALF_SPEED_BUTTON = 2;
+    public static final int INVERT_CONTROLS_BUTTON = 1;
+    public static final int LIMELIGHT_AIM_BUTTON = 2;
+
+    public static final int INTAKE_BUTTON = Button.kB.value;
+    public static final int REVERSE_BOTH_BUTTON = Button.kX.value;
+    public static final int REVERSE_INTAKE_BUTTON = Button.kY.value;
+    public static final int CONVEYOR_BUTTON = Button.kA.value;
+
+    public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
+    public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
+    public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
+  }
   // The motors on the left side of the drive.
   public static final CANSparkMax leftDriveSpark1 = new CANSparkMax(Mappings.LEFT_DRIVE_SPARK_1, MotorType.kBrushless);
   public static final CANSparkMax leftDriveSpark2 = new CANSparkMax(Mappings.LEFT_DRIVE_SPARK_2, MotorType.kBrushless);

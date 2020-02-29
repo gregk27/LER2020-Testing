@@ -25,25 +25,6 @@ public class OI {
     public static final int RIGHT_DRIVER_JOYSTICK = 1;
     public static final int OPERATOR_CONTROLLER_PORT = 2;
     //public static final int DRIVER_CONTROLLER_PORT = 1;
-    
-    public static final class ButtonMappings {
-
-        public static final int HALF_SPEED_BUTTON = 2;
-        public static final int INVERT_CONTROLS_BUTTON = 1;
-        public static final int LIMELIGHT_AIM_BUTTON = 2;
-
-        public static final int INTAKE_BUTTON = Button.kB.value;
-        public static final int REVERSE_BOTH_BUTTON = Button.kX.value;
-        public static final int REVERSE_INTAKE_BUTTON = Button.kY.value;
-        public static final int CONVEYOR_BUTTON = Button.kA.value;
-
-        public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
-        public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
-        public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
-
-        
-
-    }
 
     // The driver's controller
     //public XboxController driverController = new XboxController(DRIVER_CONTROLLER_PORT);
@@ -52,19 +33,19 @@ public class OI {
     public XboxController operatorController = new XboxController(OPERATOR_CONTROLLER_PORT);
 
 
-    public JoystickButton halfSpeedButton = new JoystickButton(leftDriverJoystick, ButtonMappings.HALF_SPEED_BUTTON);
+    public JoystickButton halfSpeedButton = new JoystickButton(leftDriverJoystick, RobotMap.OIConstant.HALF_SPEED_BUTTON);
     
     //  @todo map these to whatever buttons drive team wants
-    public JoystickButton invertControlsButton = new JoystickButton(rightDriverJoystick, ButtonMappings.INVERT_CONTROLS_BUTTON);
-    public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, ButtonMappings.LIMELIGHT_AIM_BUTTON);
+    public JoystickButton invertControlsButton = new JoystickButton(rightDriverJoystick, RobotMap.OIConstant.INVERT_CONTROLS_BUTTON);
+    public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, RobotMap.OIConstant.LIMELIGHT_AIM_BUTTON);
   
-    public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
-    public JoystickButton reverseBothButton = new JoystickButton(operatorController, ButtonMappings.REVERSE_BOTH_BUTTON);
-    public JoystickButton reverseIntakeButton = new JoystickButton(operatorController, ButtonMappings.REVERSE_INTAKE_BUTTON);
-    public JoystickButton conveyorButton = new JoystickButton(operatorController, ButtonMappings.CONVEYOR_BUTTON);
-    public JoystickButton shooterRevButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
-    public JoystickButton shootButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_BUTTON);
-    public JoystickButton shooterTiltButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_TILT_BUTTON);
+    public JoystickButton intakeButton = new JoystickButton(operatorController, RobotMap.OIConstant.INTAKE_BUTTON);
+    public JoystickButton reverseBothButton = new JoystickButton(operatorController, RobotMap.OIConstant.REVERSE_BOTH_BUTTON);
+    public JoystickButton reverseIntakeButton = new JoystickButton(operatorController, RobotMap.OIConstant.REVERSE_INTAKE_BUTTON);
+    public JoystickButton conveyorButton = new JoystickButton(operatorController, RobotMap.OIConstant.CONVEYOR_BUTTON);
+    public JoystickButton shooterRevButton = new JoystickButton(operatorController, RobotMap.OIConstant.SHOOTER_CONTROL_BUTTON);
+    public JoystickButton shootButton = new JoystickButton(operatorController, RobotMap.OIConstant.SHOOT_BUTTON);
+    public JoystickButton shooterTiltButton = new JoystickButton(operatorController, RobotMap.OIConstant.SHOOTER_TILT_BUTTON);
     
     /**
      * Use this method to define your button->command mappings. Buttons can be
