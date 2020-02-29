@@ -31,6 +31,7 @@ public class RobotContainer {
   final Conveyor conveyor = new Conveyor();
   final Drivetrain drivetrain = new Drivetrain();
   final Limelight limelight = new Limelight();
+  final Climber climber = new Climber();
 
 
   // The autonomous routines
