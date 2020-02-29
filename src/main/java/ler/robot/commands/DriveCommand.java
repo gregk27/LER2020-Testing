@@ -54,7 +54,7 @@ public class DriveCommand extends CommandBase {
     double average = (leftSpeed + rightSpeed)/2;
 
     // if sticks are close and speed reasonable, go straight
-    if (Math.abs(leftSpeed - rightSpeed) < 0.05 && Math.abs(average) > 0.25) {
+    if (Math.abs(leftSpeed - rightSpeed) < 0.025 && Math.abs(average) > 0.25) {
       leftSpeed = average;
       rightSpeed = average;
     }
