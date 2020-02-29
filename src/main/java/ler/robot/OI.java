@@ -33,6 +33,7 @@ public class OI {
         public static final int LIMELIGHT_AIM_BUTTON = 2;
 
         public static final int INTAKE_BUTTON = Button.kB.value;
+        public static final int REVERSE_INTAKE_BUTTON = Button.kX.value;
 
         public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
         public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
@@ -56,6 +57,7 @@ public class OI {
     public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, ButtonMappings.LIMELIGHT_AIM_BUTTON);
   
     public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
+    public JoystickButton reverseIntakeButton = new JoystickButton(operatorController, ButtonMappings.REVERSE_INTAKE_BUTTON);
     public JoystickButton shooterRevButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
     public JoystickButton shootButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_BUTTON);
     public JoystickButton shooterTiltButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_TILT_BUTTON);
@@ -80,6 +82,7 @@ public class OI {
         limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
 
         intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
+        reverseIntakeButton.whenHeld(new InverseIntakeCommand(container.intake, container.conveyor));
         //shooterRevButton revs shooter, shootButton moves ball from conveyor into shooter
         shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));

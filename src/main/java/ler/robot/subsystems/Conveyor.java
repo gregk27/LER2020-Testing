@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Conveyor extends SubsystemBase {
   
-  public static final double INTAKE_SPEED = 0.25;
+  public static final double INTAKE_SPEED = 0.30;
   public static final double SHOOTER_SPEED = 0.25;
 
   /**
@@ -28,6 +28,11 @@ public class Conveyor extends SubsystemBase {
     RobotMap.conveyorMotor.set(ControlMode.PercentOutput, -speed);
 
   }
+
+  public void StopConveyor (){
+    RobotMap.conveyorMotor.set(ControlMode.PercentOutput, 0);
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

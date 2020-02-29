@@ -41,8 +41,13 @@ public class DriveCommand extends CommandBase {
     //System.out.println("Driving");
     
     //Using the logistic function for adapted speed
-    double leftSpeed = Tools.getAdaptedSpeed(Robot.oi.leftDriverJoystick.getY());
-    double rightSpeed = Tools.getAdaptedSpeed(Robot.oi.rightDriverJoystick.getY());
+    // double leftSpeed = Tools.getAdaptedSpeed(Robot.oi.leftDriverJoystick.getY());
+    // double rightSpeed = Tools.getAdaptedSpeed(Robot.oi.rightDriverJoystick.getY());
+
+    double leftSpeed = Robot.oi.leftDriverJoystick.getY();
+    double rightSpeed = Robot.oi.rightDriverJoystick.getY();
+    
+    System.out.println("Speeds:"+leftSpeed+"  "+rightSpeed);
     double average = (leftSpeed + rightSpeed)/2;
 
     // if sticks are close and speed reasonable, go straight

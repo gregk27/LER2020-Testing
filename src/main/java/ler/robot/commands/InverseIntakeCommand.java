@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Intake;
 
-public class IntakeCommand extends CommandBase {
+public class InverseIntakeCommand extends CommandBase {
   Intake intake;
   Conveyor conveyor;
 
   /**
    * Creates a new IntakeCommand.
    */
-  public IntakeCommand(Intake intake, Conveyor conveyor) {
+  public InverseIntakeCommand(Intake intake, Conveyor conveyor) {
     this.intake = intake;
     this.conveyor = conveyor;
     
@@ -35,8 +35,8 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     //Drive the intake and conveyor
-    intake.StartIntake(Intake.ROLLER_SPEED);
-    conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
+    intake.StartIntake(-Intake.ROLLER_SPEED);
+    conveyor.setConveyorSpeed(-Conveyor.INTAKE_SPEED);
   }
 
   // Called once the command ends or is interrupted.
