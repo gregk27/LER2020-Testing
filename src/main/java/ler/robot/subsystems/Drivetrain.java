@@ -53,7 +53,7 @@ public class Drivetrain extends SubsystemBase {
     }
     RobotMap.leftDriveSpark1.set(left);
     RobotMap.rightDriveSpark1.set(right);
-    System.out.println(left+"\t"+right);
+    //System.out.println(left+"\t"+right);
   }
   //@todo currently not mapped to anything
   public void invertControls(){
