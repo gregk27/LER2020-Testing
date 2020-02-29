@@ -63,7 +63,7 @@ public class OI {
          */
         // While holding the shoulder button, drive at half speed
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
-        invertControlsButton.whenPressed(new InvertControlsCommand(container.drivetrain));
+        invertControlsButton.whenHeld(new InvertControlsCommand(container.drivetrain));
         limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
 
         intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
