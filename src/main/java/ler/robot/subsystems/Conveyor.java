@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Conveyor extends SubsystemBase {
   
   public static final double INTAKE_SPEED = 0.30;
+  public static final double NORMAL_SPEED = 0.80;
   public static final double SHOOTER_SPEED = 0.25;
 
   /**
@@ -24,7 +25,6 @@ public class Conveyor extends SubsystemBase {
   }
 
   public void setConveyorSpeed (double speed){
-    //System.out.println("Driving Conveyor");
     RobotMap.conveyorMotor.set(ControlMode.PercentOutput, -speed);
 
   }
