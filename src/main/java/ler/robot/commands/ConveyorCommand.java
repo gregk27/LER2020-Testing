@@ -5,32 +5,45 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package ler.robot.commands.instant;
+package ler.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import ler.robot.subsystems.Drivetrain;
+import ler.robot.subsystems.Conveyor;
+import ler.robot.subsystems.Intake;
 
-public class InvertControlsCommand extends CommandBase{
-  Drivetrain drivetrain;
+public class ConveyorCommand extends CommandBase {
+  Intake intake;
+  Conveyor conveyor;
+
   /**
-   * Creates a new invertControlsCommand.
+   * Creates a new IntakeCommand.
    */
-  public InvertControlsCommand(Drivetrain drivetrain) {
-    this.drivetrain = drivetrain;
-    // Use addRequirements() here to declare subsystem dependencies.
+  public ConveyorCommand(Conveyor conveyor) {
+    this.conveyor = conveyor;
+
+    addRequirements(conveyor);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drivetrain.invertControls();
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    conveyor.setConveyorSpeed(Conveyor.NORMAL_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drivetrain.invertControls();
+    conveyor.StopConveyor();
   }
 
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
 }

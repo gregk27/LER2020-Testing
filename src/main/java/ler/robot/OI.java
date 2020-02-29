@@ -27,20 +27,19 @@ public class OI {
     //public static final int DRIVER_CONTROLLER_PORT = 1;
     
     public static final class ButtonMappings {
-
         public static final int HALF_SPEED_BUTTON = 2;
         public static final int INVERT_CONTROLS_BUTTON = 1;
         public static final int LIMELIGHT_AIM_BUTTON = 2;
+        public static final int GYRO_DRIVE_BUTTON = 1;
 
         public static final int INTAKE_BUTTON = Button.kB.value;
-        public static final int REVERSE_INTAKE_BUTTON = Button.kX.value;
+        public static final int REVERSE_BOTH_BUTTON = Button.kX.value;
+        public static final int REVERSE_INTAKE_BUTTON = Button.kY.value;
+        public static final int CONVEYOR_BUTTON = Button.kA.value;
 
         public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
         public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
         public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
-
-        public static final int GYRO_DRIVE_BUTTON = 1;
-        
 
     }
 
@@ -60,7 +59,9 @@ public class OI {
     public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, ButtonMappings.LIMELIGHT_AIM_BUTTON);
   
     public JoystickButton intakeButton = new JoystickButton(operatorController, ButtonMappings.INTAKE_BUTTON);
+    public JoystickButton reverseBothButton = new JoystickButton(operatorController, ButtonMappings.REVERSE_BOTH_BUTTON);
     public JoystickButton reverseIntakeButton = new JoystickButton(operatorController, ButtonMappings.REVERSE_INTAKE_BUTTON);
+    public JoystickButton conveyorButton = new JoystickButton(operatorController, ButtonMappings.CONVEYOR_BUTTON);
     public JoystickButton shooterRevButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_CONTROL_BUTTON);
     public JoystickButton shootButton = new JoystickButton(operatorController, ButtonMappings.SHOOT_BUTTON);
     public JoystickButton shooterTiltButton = new JoystickButton(operatorController, ButtonMappings.SHOOTER_TILT_BUTTON);
@@ -81,11 +82,13 @@ public class OI {
          */
         // While holding the shoulder button, drive at half speed
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
-        invertControlsButton.whenPressed(new InvertControlsCommand(container.drivetrain));
+        invertControlsButton.whenHeld(new InvertControlsCommand(container.drivetrain));
         limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
 
         intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
-        reverseIntakeButton.whenHeld(new InverseIntakeCommand(container.intake, container.conveyor));
+        reverseBothButton.whenHeld(new InverseBothCommand(container.intake, container.conveyor));
+        reverseIntakeButton.whenHeld(new InverseIntakeCommand(container.intake));
+        conveyorButton.whenHeld(new ConveyorCommand(container.conveyor));
         //shooterRevButton revs shooter, shootButton moves ball from conveyor into shooter
         shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));

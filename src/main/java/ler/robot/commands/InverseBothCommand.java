@@ -11,17 +11,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Intake;
 
-public class InverseIntakeCommand extends CommandBase {
+public class InverseBothCommand extends CommandBase {
   Intake intake;
   Conveyor conveyor;
 
   /**
    * Creates a new IntakeCommand.
    */
-  public InverseIntakeCommand(Intake intake) {
+  public InverseBothCommand(Intake intake, Conveyor conveyor) {
     this.intake = intake;
+    this.conveyor = conveyor;
     
     addRequirements(intake);
+    addRequirements(conveyor);
   }
 
   // Called when the command is initially scheduled.
@@ -32,14 +34,16 @@ public class InverseIntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Drive the intake and conveyor
+    //Drive the intake and conveyor (INVERSE)
     intake.StartIntake(-Intake.ROLLER_SPEED);
+    conveyor.setConveyorSpeed(-Conveyor.INTAKE_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     intake.StopIntake();
+    conveyor.StopConveyor();
   }
 
   // Returns true when the command should end.
