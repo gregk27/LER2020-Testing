@@ -30,7 +30,7 @@ public class Gyro extends SubsystemBase {
   }
   public double[] getStraightOutput(double l, double r) {
     final double ANGLE_TOLERANCE = 1;
-    double k_p = 0.015;
+    double k_p = 0.02;
     double l_out = l;
     double r_out = r;
     double current_angle = getAngle();
