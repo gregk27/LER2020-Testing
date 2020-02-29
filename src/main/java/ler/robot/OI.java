@@ -39,6 +39,7 @@ public class OI {
         public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
         public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
 
+        public static final int GYRO_DRIVE_BUTTON = 1;
         
 
     }
@@ -51,7 +52,9 @@ public class OI {
 
 
     public JoystickButton halfSpeedButton = new JoystickButton(leftDriverJoystick, ButtonMappings.HALF_SPEED_BUTTON);
-    
+    public JoystickButton gyroButton = new JoystickButton(leftDriverJoystick, ButtonMappings.GYRO_DRIVE_BUTTON);
+
+
     //  @todo map these to whatever buttons drive team wants
     public JoystickButton invertControlsButton = new JoystickButton(rightDriverJoystick, ButtonMappings.INVERT_CONTROLS_BUTTON);
     public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, ButtonMappings.LIMELIGHT_AIM_BUTTON);
@@ -88,6 +91,7 @@ public class OI {
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
         shootButton.whenHeld(new ShootCommand(container.shooter, container.conveyor, container.limelight));
         shooterTiltButton.whenPressed(new ShooterTiltCommand());
+        gyroButton.whenHeld(new GyroDriveCommand(container.drivetrain, container.gyro));
 
 
         

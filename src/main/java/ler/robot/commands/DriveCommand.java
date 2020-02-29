@@ -11,8 +11,10 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.Robot;
+import ler.robot.RobotMap;
 import ler.robot.Tools;
 import ler.robot.subsystems.Drivetrain;
+//import ler.robot.subsystems.Gyro;
 
 /**
  * A command to drive the robot with joystick input (passed in as {@link DoubleSupplier}s). Written
@@ -21,6 +23,7 @@ import ler.robot.subsystems.Drivetrain;
  */
 public class DriveCommand extends CommandBase {
   private final Drivetrain drivetrain;
+  //private final Gyro gyro;
 
 
   /**

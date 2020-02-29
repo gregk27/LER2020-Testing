@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import ler.robot.subsystems.Shooter;
 
 
@@ -64,8 +65,13 @@ public final class RobotMap {
   //The intake
   public static final TalonSRX intakeRoller = new TalonSRX(Mappings.INTAKE_TALON);
 
+  // Gyro
+  public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+
 
   public static void init(){
+    gyro.calibrate();
+
     leftDriveSpark2.follow(leftDriveSpark1);
     leftDriveSpark3.follow(leftDriveSpark1);
 

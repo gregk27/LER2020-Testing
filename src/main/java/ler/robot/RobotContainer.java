@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import ler.robot.commands.DriveCommand;
 //import ler.robot.commands.IntakeCommand;
 import ler.robot.subsystems.Conveyor;
+import ler.robot.subsystems.Gyro;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Intake;
 import ler.robot.subsystems.Shooter;
@@ -27,6 +28,7 @@ import ler.robot.subsystems.Limelight;
 public class RobotContainer {
   // The robot's subsystems
   final Shooter shooter = new Shooter();
+  final Gyro gyro = new Gyro();
   final Intake intake = new Intake();
   final Conveyor conveyor = new Conveyor();
   final Drivetrain drivetrain = new Drivetrain();
