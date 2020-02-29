@@ -57,6 +57,6 @@ public class DriveCommand extends CommandBase {
     }
 
     //drivetrain.tankDrive(left.getAsDouble(), rightSpeed.getAsDouble());
-    drivetrain.tankDrive(leftSpeed*0.6, rightSpeed*0.6);
+    drivetrain.tankDrive(leftSpeed, rightSpeed);
     }
 }

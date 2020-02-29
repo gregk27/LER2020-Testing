@@ -43,8 +43,8 @@ public class Drivetrain extends SubsystemBase {
     }
 
     //Slow it down
-    left *= 0.6;
-    right *= 0.6;
+    left *= 0.9;
+    right *= 0.9;
     
     if(isInverted){
       double tempRight = left * -1;
