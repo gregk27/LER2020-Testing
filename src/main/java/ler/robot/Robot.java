@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import ler.robot.commands.AutonomousCommands.AutonomousDriveCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -72,7 +73,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    autonomousCommand = robotContainer.getAutonomousCommand();
+    //autonomousCommand = robotContainer.getAutonomousCommand();
+    AutonomousDriveCommand(container.drivetrain, 3000);
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand

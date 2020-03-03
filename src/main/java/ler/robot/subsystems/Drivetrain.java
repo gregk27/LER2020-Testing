@@ -19,6 +19,17 @@ public class Drivetrain extends SubsystemBase {
 
   public final PIDController pidController = new PIDController(7, 0.018, 1.5);
 
+
+  public int getLeftEncoder() {
+    return((int) ((RobotMap.leftDriveSpark1.getEncoder().getPosition()) + (RobotMap.leftDriveSpark2.getEncoder().getPosition()) + (RobotMap.leftDriveSpark3.getEncoder().getPosition())/3.00));
+  }
+  public int getRightEncoder() {
+    return((int) ((RobotMap.rightDriveSpark1.getEncoder().getPosition()) + (RobotMap.rightDriveSpark2.getEncoder().getPosition()) + (RobotMap.rightDriveSpark3.getEncoder().getPosition())/3.00));
+  }
+
+
+
+
   /**
    * Creates a new DriveSubsystem.
    */
@@ -55,6 +66,12 @@ public class Drivetrain extends SubsystemBase {
     RobotMap.rightDriveSpark1.set(right);
     System.out.println("Actual Left" + left+"\t"+ "Actual Right" + right);
   }
+
+  public void tankStop() {
+    RobotMap.leftDriveSpark1.set(0);
+    RobotMap.rightDriveSpark1.set(0);
+  }
+
   //@todo currently not mapped to anything
   public void invertControls(){
     isInverted = !isInverted;
