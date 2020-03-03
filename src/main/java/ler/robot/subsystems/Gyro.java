@@ -12,22 +12,23 @@ import ler.robot.RobotMap;
 
 public class Gyro extends SubsystemBase {
 
+  double setpoint = 0;
+
   /**
    * Creates a new Gyro.
    */
-
-
   public Gyro() {
 
   }
   
-  public void calibrate(){
-    RobotMap.gyro.reset();
+  public void init(){
+    RobotMap.gyro.calibrate();
   }
 
-  public void resetAngle(){
-
+  public void zero(){
+    setpoint = RobotMap.gyro.getAngle();
   }
+
   public double[] getStraightOutput(double l, double r) {
     final double ANGLE_TOLERANCE = 1;
     double k_p = 0.02;
@@ -51,7 +52,10 @@ public class Gyro extends SubsystemBase {
   }
 
   public double getAngle(){
-    return RobotMap.gyro.getAngle();
+    return setpoint - RobotMap.gyro.getAngle();
   }
 
+  public double getAbsoluteAngle(){
+    return RobotMap.gyro.getAngle();
+  }
 }
