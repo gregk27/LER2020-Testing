@@ -9,9 +9,11 @@ package ler.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Drivetrain;
+import ler.robot.subsystems.Gyro;
 
-public class AutonomousDriveCommand extends CommandBase {
+public class AutoDriveStraightCommand extends CommandBase {
   Drivetrain drivetrain;
+  Gyro gyro;
 
   public long startAutoTime = System.currentTimeMillis();
   public long timeOut;
@@ -24,11 +26,12 @@ public class AutonomousDriveCommand extends CommandBase {
   /**
    * Creates a new IntakeCommand.
    */
-  public AutonomousDriveCommand(Drivetrain d, int timeOut, double speed, int target) {
+  public AutoDriveStraightCommand(Drivetrain d, Gyro g, int timeOut, double speed, int target) {
     this.drivetrain = d;
     this.timeOut = timeOut;
     this.speed = speed;
     this.target = target;
+    this.gyro = g;
     
 
     addRequirements(drivetrain);
@@ -46,8 +49,10 @@ public class AutonomousDriveCommand extends CommandBase {
     int leftError = drivetrain.getLeftEncoder()-target;
     int rightError = drivetrain.getRightEncoder()-target;
 
+    double error = (leftError+rightError)/2.00;
 
-    drivetrain.tankDrive(leftError*kP, rightError*kP);
+    double[] gyroOutput = gyro.getStraightOutput(error*kP, error*kP);
+    drivetrain.tankDrive(gyroOutput[0], gyroOutput[1]);
   }
 
   // Called once the command ends or is interrupted.
