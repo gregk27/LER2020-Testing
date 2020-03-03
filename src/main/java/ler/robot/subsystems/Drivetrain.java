@@ -17,7 +17,7 @@ public class Drivetrain extends SubsystemBase {
   private final  double DEADZONE = 0.15;
   private boolean isInverted = false;
 
-  public final PIDController pidController = new PIDController(7, 0.018, 1.5);
+  
 
   /**
    * Creates a new DriveSubsystem.
