@@ -15,14 +15,20 @@ public class AutonomousDriveCommand extends CommandBase {
 
   public long startAutoTime = System.currentTimeMillis();
   public long timeOut;
-
+  double speed;
+  int target;
+  
+  final double kP=1/70.0;
+  
 
   /**
    * Creates a new IntakeCommand.
    */
-  public AutonomousDriveCommand(Drivetrain d, int t, double l, double r) {
+  public AutonomousDriveCommand(Drivetrain d, int timeOut, double speed, int target) {
     this.drivetrain = d;
-    this.timeOut = t;
+    this.timeOut = timeOut;
+    this.speed = speed;
+    this.target = target;
     
 
     addRequirements(drivetrain);
@@ -31,14 +37,17 @@ public class AutonomousDriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-      drivetrain.tankStop();
-
+      drivetrain.resetPosition();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.tankDrive(50, 50);
+    int leftError = drivetrain.getLeftEncoder()-target;
+    int rightError = drivetrain.getRightEncoder()-target;
+
+
+    drivetrain.tankDrive(leftError*kP, rightError*kP);
   }
 
   // Called once the command ends or is interrupted.

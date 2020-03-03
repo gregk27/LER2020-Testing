@@ -26,6 +26,14 @@ public class Drivetrain extends SubsystemBase {
   public int getRightEncoder() {
     return((int) ((RobotMap.rightDriveSpark1.getEncoder().getPosition()) + (RobotMap.rightDriveSpark2.getEncoder().getPosition()) + (RobotMap.rightDriveSpark3.getEncoder().getPosition())/3.00));
   }
+  public void resetPosition(){
+    RobotMap.leftDriveSpark1.getEncoder().setPosition(0);
+    RobotMap.leftDriveSpark2.getEncoder().setPosition(0);
+    RobotMap.leftDriveSpark3.getEncoder().setPosition(0);
+    RobotMap.rightDriveSpark1.getEncoder().setPosition(0);
+    RobotMap.rightDriveSpark2.getEncoder().setPosition(0);
+    RobotMap.rightDriveSpark3.getEncoder().setPosition(0);
+  }
 
 
 
