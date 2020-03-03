@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package ler.robot.commands.AutonomousCommands;
+package ler.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Drivetrain;
