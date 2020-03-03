@@ -29,12 +29,12 @@ import ler.robot.subsystems.Limelight;
  */
 public class RobotContainer {
   // The robot's subsystems
-  final Shooter shooter = new Shooter();
-  final Gyro gyro = new Gyro();
-  final Intake intake = new Intake();
-  final Conveyor conveyor = new Conveyor();
-  final Drivetrain drivetrain = new Drivetrain();
-  final Limelight limelight = new Limelight();
+  public final Shooter shooter = new Shooter();
+  public final Gyro gyro = new Gyro();
+  public final Intake intake = new Intake();
+  public final Conveyor conveyor = new Conveyor();
+  public final Drivetrain drivetrain = new Drivetrain();
+  public final Limelight limelight = new Limelight();
 
   final UsbCamera webcam;
 

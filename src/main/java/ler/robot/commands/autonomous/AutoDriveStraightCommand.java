@@ -51,7 +51,7 @@ public class AutoDriveStraightCommand extends CommandBase {
 
     double error = (leftError+rightError)/2.00;
 
-    double[] gyroOutput = gyro.getStraightOutput(error*kP, error*kP);
+    double[] gyroOutput = gyro.getStraightOutput(error*kP*speed, error*kP*speed);
     drivetrain.tankDrive(gyroOutput[0], gyroOutput[1]);
   }
 
