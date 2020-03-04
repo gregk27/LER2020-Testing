@@ -7,6 +7,8 @@
 
 package ler.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -34,6 +36,7 @@ public class RobotContainer {
   final Drivetrain drivetrain = new Drivetrain();
   final Limelight limelight = new Limelight();
 
+  final UsbCamera webcam;
 
   // The autonomous routines
 
@@ -56,6 +59,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     Robot.oi.init(this);
+
+    webcam = CameraServer.getInstance().startAutomaticCapture(0);
+    webcam.setResolution(320, 240);
+    webcam.setFPS(20);
 
     // Configure default commands
     // Set the default drive command to split-stick arcade drive

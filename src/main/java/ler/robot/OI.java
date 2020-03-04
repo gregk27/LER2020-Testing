@@ -29,7 +29,7 @@ public class OI {
     public static final class ButtonMappings {
         public static final int HALF_SPEED_BUTTON = 2;
         public static final int INVERT_CONTROLS_BUTTON = 1;
-        public static final int LIMELIGHT_AIM_BUTTON = 2;
+        public static final int LIMELIGHT_AIM_BUTTON = 6;
         public static final int GYRO_DRIVE_BUTTON = 1;
 
         public static final int INTAKE_BUTTON = Button.kB.value;
@@ -83,7 +83,7 @@ public class OI {
         // While holding the shoulder button, drive at half speed
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
         invertControlsButton.whenHeld(new InvertControlsCommand(container.drivetrain));
-        limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
+        limelightAimButton.whenHeld(new LimelightAimCommand(container.drivetrain, container.limelight));
 
         intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
         reverseBothButton.whenHeld(new InverseBothCommand(container.intake, container.conveyor));

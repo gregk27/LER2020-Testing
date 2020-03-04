@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import ler.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -67,6 +69,7 @@ public final class RobotMap {
 
   // Gyro
   public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+
 
 
   public static void init(){
