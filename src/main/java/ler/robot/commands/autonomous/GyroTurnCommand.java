@@ -1,12 +1,8 @@
-package frc.robot.commands.autonomous;
+package ler.robot.commands.autonomous;
 
-import frc.robot.Robot;
-import frc.robot.Tools;
-
-import edu.wpi.first.wpilibj.command.Command;
-
-
-public class GyroTurnCommand extends Command {
+import edu.wpi.first.wpilibj2.command.CommandBase;
+				
+public class GyroTurnCommand extends CommandBase {
 	private double target_angle;
 	private boolean finished = false;
 	private boolean absolute;
