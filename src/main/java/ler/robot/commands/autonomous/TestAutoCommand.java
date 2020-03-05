@@ -23,7 +23,7 @@ public class TestAutoCommand extends SequentialCommandGroup {
 
     super();
     // System.out.println("Initialising");
-    addCommands(new AutoDriveStraightCommand(container.drivetrain, container.gyro, 3000, 0.25, 12*8));
+    addCommands(new AutoDriveStraightCommand(container.drivetrain, container.gyro, 3000, 0.30, -12*15));
     //Add command to drive 60 inches at 25% power
     //addCommands();
   }
