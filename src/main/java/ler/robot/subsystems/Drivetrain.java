@@ -20,11 +20,11 @@ public class Drivetrain extends SubsystemBase {
   public final PIDController pidController = new PIDController(7, 0.018, 1.5);
 
 
-  public int getLeftEncoder() {
-    return((int) ((RobotMap.leftDriveSpark1.getEncoder().getPosition()) + (RobotMap.leftDriveSpark2.getEncoder().getPosition()) + (RobotMap.leftDriveSpark3.getEncoder().getPosition())/3.00));
+  public double getLeftEncoder() {
+    return(((RobotMap.leftDriveSpark1.getEncoder().getPosition())));// + (RobotMap.leftDriveSpark2.getEncoder().getPosition()) + (RobotMap.leftDriveSpark3.getEncoder().getPosition())/3.00));
   }
-  public int getRightEncoder() {
-    return((int) ((RobotMap.rightDriveSpark1.getEncoder().getPosition()) + (RobotMap.rightDriveSpark2.getEncoder().getPosition()) + (RobotMap.rightDriveSpark3.getEncoder().getPosition())/3.00));
+  public double getRightEncoder() {
+    return(((RobotMap.rightDriveSpark1.getEncoder().getPosition())));// + (RobotMap.rightDriveSpark2.getEncoder().getPosition()) + (RobotMap.rightDriveSpark3.getEncoder().getPosition())/3.00));
   }
   public void resetPosition(){
     RobotMap.leftDriveSpark1.getEncoder().setPosition(0);
@@ -72,7 +72,7 @@ public class Drivetrain extends SubsystemBase {
     }
     RobotMap.leftDriveSpark1.set(left);
     RobotMap.rightDriveSpark1.set(right);
-    System.out.println("Actual Left" + left+"\t"+ "Actual Right" + right);
+    //System.out.println("Actual Left" + left+"\t"+ "Actual Right" + right);
   }
 
   public void tankStop() {

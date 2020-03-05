@@ -8,6 +8,7 @@
 package ler.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import ler.robot.Tools;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Gyro;
 
@@ -20,7 +21,7 @@ public class AutoDriveStraightCommand extends CommandBase {
   double speed;
   int target;
   
-  final double kP=1/70.0;
+  final double kP=1/60.0;
   
 
   /**
@@ -32,7 +33,7 @@ public class AutoDriveStraightCommand extends CommandBase {
     this.speed = speed;
     this.target = target;
     this.gyro = g;
-    
+    // System.out.println("Command starting");
 
     addRequirements(drivetrain);
   }
@@ -40,34 +41,40 @@ public class AutoDriveStraightCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+      
+      // System.out.println("isInitializing");
       drivetrain.resetPosition();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int leftError = drivetrain.getLeftEncoder()-target;
-    int rightError = drivetrain.getRightEncoder()-target;
+    double leftError = target-drivetrain.getLeftEncoder();
+    double rightError = target-drivetrain.getRightEncoder();
 
     double error = (leftError+rightError)/2.00;
+    
+    System.out.println("error: "+error+", output:"+error*kP);
 
-    double[] gyroOutput = gyro.getStraightOutput(error*kP*speed, error*kP*speed);
-    drivetrain.tankDrive(gyroOutput[0], gyroOutput[1]);
+    // double[] gyroOutput = gyro.getStraightOutput(error*kP*speed, error*kP*speed);
+    double speed = Tools.fitToRange(error*kP,-0.2, 0.2);
+    drivetrain.tankDrive(speed, speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // System.out.println("DEAD");
     drivetrain.tankStop();
 }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(System.currentTimeMillis() >= startAutoTime+timeOut) {
-        return true;
-    }
+    // if(System.currentTimeMillis() >= startAutoTime+timeOut) {
+    //     return true;
+    // }
 
-    return true;
+    return false;
   }
 }
