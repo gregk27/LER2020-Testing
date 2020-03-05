@@ -1,7 +1,8 @@
 package ler.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-				
+import ler.robot.Robot;
+
 public class GyroTurnCommand extends CommandBase {
 	private double target_angle;
 	private boolean finished = false;
@@ -18,7 +19,7 @@ public class GyroTurnCommand extends CommandBase {
 	 *@author Tim
 	 */
     public GyroTurnCommand(double target_angle, boolean absolute) {
-    	requires(Robot.drivetrain);
+    	requires(Robot.Drivetrain);
     	setTimeout(Robot.AUTO_TIMEOUT);
     	this.absolute = absolute;
     	this.target_angle = target_angle;
