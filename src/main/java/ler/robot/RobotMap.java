@@ -81,8 +81,8 @@ public final class RobotMap {
     leftDriveSpark1.setInverted(true);
     rightDriveSpark1.setInverted(false);
 
-    leftDriveSpark1.setOpenLoopRampRate(0.5);
-    rightDriveSpark1.setOpenLoopRampRate(0.5);
+    leftDriveSpark1.setOpenLoopRampRate(0.2);
+    rightDriveSpark1.setOpenLoopRampRate(0.2);
 
     rightDriveSpark2.follow(rightDriveSpark1);
     rightDriveSpark3.follow(rightDriveSpark1);
