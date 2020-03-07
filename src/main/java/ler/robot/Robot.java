@@ -38,13 +38,6 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  private static final int IMG_WIDTH = 320;
-  private static final int IMG_HEIGHT = 240;
-
-  private VisionThread visionThread;
-  private double centerX = 0.0;
-
-  private final Object imgLock = new Object();
 
   @Override
   public void robotInit() {
@@ -53,19 +46,6 @@ public class Robot extends TimedRobot {
     RobotMap.init();
 
     robotContainer = new RobotContainer();
-
-    //start vision
-    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
-    visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
-        if (!pipeline.filterContoursOutput().isEmpty()) {
-            Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-            synchronized (imgLock) {
-              centerX = r.x + (r.width / 2);
-            }
-        }
-    });
-    visionThread.start();
   }
 
   /**
@@ -81,12 +61,6 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
-    //vision
-    double centerX;
-    synchronized (imgLock) {
-        centerX = this.centerX;
-    }
-    double turn = centerX - (IMG_WIDTH / 2);
 
     CommandScheduler.getInstance().run();
   
