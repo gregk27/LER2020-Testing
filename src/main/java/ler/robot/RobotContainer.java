@@ -19,6 +19,7 @@ import ler.robot.subsystems.Gyro;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Intake;
 import ler.robot.subsystems.Shooter;
+import ler.robot.subsystems.Webcam;
 import ler.robot.subsystems.Limelight;
 
 /**
@@ -35,8 +36,7 @@ public class RobotContainer {
   final Conveyor conveyor = new Conveyor();
   final Drivetrain drivetrain = new Drivetrain();
   final Limelight limelight = new Limelight();
-
-  final UsbCamera webcam;
+  final Webcam webcam = new Webcam();
 
   // The autonomous routines
 
@@ -59,10 +59,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     Robot.oi.init(this);
-
-    webcam = CameraServer.getInstance().startAutomaticCapture(0);
-    webcam.setResolution(320, 240);
-    webcam.setFPS(20);
 
     // Configure default commands
     // Set the default drive command to split-stick arcade drive
