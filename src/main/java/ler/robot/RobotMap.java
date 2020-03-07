@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
  * constants are needed, to reduce verbosity.
  */
 public final class RobotMap {
+  public static final boolean XBOX_DRIVE = false;
   public static final class CANConstants {
 
     public static final int LEFT_DRIVE_SPARK_1 = 2;
@@ -62,7 +63,8 @@ public final class RobotMap {
   }
 
   public static final class OIConstants {
-    
+    public static final int DRIVER_XBOX_CONTROLLER = 0;
+
     public static final int LEFT_DRIVER_JOYSTICK = 0;
     public static final int RIGHT_DRIVER_JOYSTICK = 1;
     public static final int OPERATOR_CONTROLLER_PORT = 2;
@@ -70,6 +72,11 @@ public final class RobotMap {
     public static final int HALF_SPEED_BUTTON = 2;
     public static final int INVERT_CONTROLS_BUTTON = 1;
     public static final int LIMELIGHT_AIM_BUTTON = 2;
+
+    //TODO: change these button mappings as well
+    public static final int XBOX_HALF_SPEED_BUTTON = Button.kX.value;
+    public static final int XBOX_INVERT_CONTROLS_BUTTON = Button.kX.value;
+    public static final int XBOX_LIMELIGHT_AIM_BUTTON = Button.kX.value;
 
     public static final int INTAKE_BUTTON = Button.kB.value;
     //TODO: change buttons to correct buttons

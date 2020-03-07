@@ -21,14 +21,23 @@ import ler.robot.commands.instant.*;
 public class OI {
     
     // The driver uses two joysticks, operator uses one controller
+    
+    public XboxController driverXboxController = new XboxController(RobotMap.OIConstants.DRIVER_XBOX_CONTROLLER);
+    
     public Joystick leftDriverJoystick = new Joystick(RobotMap.OIConstants.LEFT_DRIVER_JOYSTICK);
     public Joystick rightDriverJoystick = new Joystick(RobotMap.OIConstants.RIGHT_DRIVER_JOYSTICK);
+    
+
     public XboxController operatorController = new XboxController(RobotMap.OIConstants.OPERATOR_CONTROLLER_PORT);
 
 
     public JoystickButton halfSpeedButton = new JoystickButton(leftDriverJoystick, RobotMap.OIConstants.HALF_SPEED_BUTTON);
     public JoystickButton invertControlsButton = new JoystickButton(rightDriverJoystick, RobotMap.OIConstants.INVERT_CONTROLS_BUTTON);
     public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, RobotMap.OIConstants.LIMELIGHT_AIM_BUTTON);
+
+    public JoystickButton xboxHalfSpeedButton = new JoystickButton(driverXboxController, RobotMap.OIConstants.HALF_SPEED_BUTTON);
+    public JoystickButton xboxInvertControlsButton = new JoystickButton(driverXboxController, RobotMap.OIConstants.INVERT_CONTROLS_BUTTON);
+    public JoystickButton xboxLimelightAimButton = new JoystickButton(driverXboxController, RobotMap.OIConstants.LIMELIGHT_AIM_BUTTON);
   
     
     public JoystickButton shooterRevButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOTER_CONTROL_BUTTON);
@@ -60,6 +69,12 @@ public class OI {
          * .whenPressed(new ReleaseHatch(m_hatchSubsystem));
          */
         // While holding the shoulder button, drive at half speed
+        if(RobotMap.XBOX_DRIVE){
+            halfSpeedButton = xboxHalfSpeedButton;
+            invertControlsButton = xboxInvertControlsButton;
+            limelightAimButton = xboxLimelightAimButton;
+        }
+        
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
         invertControlsButton.whenPressed(new InvertControlsCommand(container.drivetrain));
         limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
