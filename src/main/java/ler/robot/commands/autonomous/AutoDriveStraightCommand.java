@@ -8,6 +8,7 @@
 package ler.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import ler.robot.Tools;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Gyro;
 
@@ -32,7 +33,7 @@ public class AutoDriveStraightCommand extends CommandBase {
     this.speed = speed;
     this.target = target;
     this.gyro = g;
-    
+    // System.out.println("Command starting");
 
     addRequirements(drivetrain);
   }
@@ -40,33 +41,41 @@ public class AutoDriveStraightCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+      
+      // System.out.println("isInitializing");
       drivetrain.resetPosition();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int leftError = drivetrain.getLeftEncoder()-target;
-    int rightError = drivetrain.getRightEncoder()-target;
+    double leftError = target-drivetrain.getLeftEncoder();
+    double rightError = target-drivetrain.getRightEncoder();
 
     double error = (leftError+rightError)/2.00;
 
-    double[] gyroOutput = gyro.getStraightOutput(error*kP*speed, error*kP*speed);
+    double[] gyroOutput = gyro.getStraightOutput(error*kP, error*kP);
+    gyroOutput[0] = Tools.fitToRange(gyroOutput[0],-speed, speed);
+    gyroOutput[1] = Tools.fitToRange(gyroOutput[1],-speed, speed);
+        
+    System.out.println("error: "+error+", output:"+gyroOutput[0]+","+gyroOutput[1]);
+
     drivetrain.tankDrive(gyroOutput[0], gyroOutput[1]);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // System.out.println("DEAD");
     drivetrain.tankStop();
 }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(System.currentTimeMillis() >= startAutoTime+timeOut) {
-        return true;
-    }
+    // if(System.currentTimeMillis() >= startAutoTime+timeOut) {
+    //     return true;
+    // }
 
     return false;
   }
