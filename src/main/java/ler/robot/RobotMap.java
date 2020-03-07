@@ -51,10 +51,14 @@ public final class RobotMap {
 
   public static final class SOLENOIDConstants {
     
-    public static final int ANGLE_ELEVATION_DOWN = 0;
-    public static final int ANGLE_ELEVATION_UP = 1;
+    public static final int CONVEYOR_DOWN = 0;
+    public static final int CONVEYOR_UP = 1;
+
     public static final int INTAKE_DOWN = 2;
     public static final int INTAKE_UP = 3;
+
+    public static final int CLIMBER_DOWN = 4;
+    public static final int CLIMBER_UP = 5;
   }
 
   public static final class OIConstants {
@@ -68,10 +72,18 @@ public final class RobotMap {
     public static final int LIMELIGHT_AIM_BUTTON = 2;
 
     public static final int INTAKE_BUTTON = Button.kB.value;
+    //TODO: change buttons to correct buttons
+    public static final int INTAKE_EXTEND_BUTTON = Button.kX.value;
+
+    public static final int CONVEYOR_PISTON_BUTTON = Button.kX.value;
 
     public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
     public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
     public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
+
+    //TODO: change these as well
+    public static final int CLIMBER_EXTEND_BUTTON = Button.kX.value;
+    public static final int CLIMBER_WINCH_BUTTON = Button.kX.value;
 
   }
 
@@ -92,18 +104,20 @@ public final class RobotMap {
   public static final CANSparkMax shooterTopRightSpark = new CANSparkMax(CANConstants.SHOOTER_TOP_RIGHT_SPARK, MotorType.kBrushless);
   public static final CANSparkMax shooterBottomRightSpark = new CANSparkMax(CANConstants.SHOOTER_BOTTOM_RIGHT_SPARK, MotorType.kBrushless);
 
-  //The conveyor talon
+  //The conveyor (conveyor + angle + piston)
   public static final TalonSRX conveyorMotor = new TalonSRX(CANConstants.CONVEYOR_TALON);
+  public static final TalonSRX angleElevation = new TalonSRX(CANConstants.ANGLE_ELEVATION);
+  public static final DoubleSolenoid conveyorValve = new DoubleSolenoid(SOLENOIDConstants.CONVEYOR_DOWN, SOLENOIDConstants.CONVEYOR_UP);
 
   //The intake (talon + piston)
   public static final TalonSRX intakeRoller = new TalonSRX(CANConstants.INTAKE_TALON);
-  public static DoubleSolenoid intakeArm = new DoubleSolenoid(SOLENOIDConstants.INTAKE_DOWN, SOLENOIDConstants.INTAKE_UP);
+  public static final DoubleSolenoid intakeArm = new DoubleSolenoid(SOLENOIDConstants.INTAKE_DOWN, SOLENOIDConstants.INTAKE_UP);
 
-  //The angle elevation talon
-  public static final TalonFX angleElevation = new TalonFX(CANConstants.ANGLE_ELEVATION);
+  
 
   // Climber control
   public static final TalonFX climbingMech = new TalonFX(CANConstants.CLIMBER_TALON);
+  public static final DoubleSolenoid climberPiston = new DoubleSolenoid(SOLENOIDConstants.CLIMBER_DOWN, SOLENOIDConstants.CLIMBER_UP);
 
 
   public static void init(){

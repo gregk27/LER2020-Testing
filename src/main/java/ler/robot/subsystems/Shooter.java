@@ -7,6 +7,7 @@
 
 package ler.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import ler.robot.RobotMap;
@@ -27,6 +28,9 @@ public class Shooter extends SubsystemBase{
   public static final double SHOOTER_TOP_TARGET_SPEED = SHOOTER_TARGET_SPEED;
   public static final double SHOOTER_BOTTOM_TARGET_SPEED = -SHOOTER_TARGET_SPEED*SPIN_CONSTANT;
 
+  public static final int LEFT_SHOOTER = 0;
+  public static final int RIGHT_SHOOTER = 1;
+
   public long spoolTime = System.currentTimeMillis();
 
   //Cycles per revolution of encoders on shooter
@@ -38,24 +42,36 @@ public class Shooter extends SubsystemBase{
 
   }
 
-  public void setShooterSpeed(int speedArrayPosition){
-    setSpecificShooterSpeed(SPEEDS[speedArrayPosition]);
+  public void setShootersSpeed(int speedArrayPosition){
+    setSpecificShootersSpeed(SPEEDS[speedArrayPosition]);
   }
 
-  public void setSpecificShooterSpeed(double speed){
+  public void setSpecificShootersSpeed(double speed){
     spoolTime = System.currentTimeMillis()+100;
-    if(speed == 0) {
-      RobotMap.shooterTopLeftSpark.set(0);
-      RobotMap.shooterBottomLeftSpark.set(0);
-      RobotMap.shooterTopRightSpark.set(0);
-      RobotMap.shooterBottomRightSpark.set(0);
+    setSpecificShooterSpeed(speed, LEFT_SHOOTER);
+    setSpecificShooterSpeed(-speed * SPIN_CONSTANT, RIGHT_SHOOTER);
+  }
+
+  public void setSpecificShooterSpeed(double speed, int shooter){
+    CANSparkMax topShooter;
+    CANSparkMax bottomShooter;
+    if(shooter == LEFT_SHOOTER){
+      topShooter = RobotMap.shooterTopLeftSpark;
+      bottomShooter = RobotMap.shooterBottomLeftSpark;
+    }else{
+      topShooter = RobotMap.shooterTopRightSpark;
+      bottomShooter = RobotMap.shooterTopRightSpark;
     }
-    else {
-      RobotMap.shooterTopLeftSpark.getPIDController().setReference((speed), ControlType.kVelocity);
-      RobotMap.shooterTopLeftSpark.getPIDController().setReference((speed), ControlType.kVelocity);
-      RobotMap.shooterBottomLeftSpark.getPIDController().setReference(-speed*SPIN_CONSTANT, ControlType.kVelocity);
-      RobotMap.shooterBottomRightSpark.getPIDController().setReference(-speed*SPIN_CONSTANT, ControlType.kVelocity);
+
+    if(speed == 0){
+      //slow down shooter gently instead of breaking
+      topShooter.set(0);
+      bottomShooter.set(0);
+    }else{
+      topShooter.getPIDController().setReference((speed), ControlType.kVelocity);
+      bottomShooter.getPIDController().setReference((-speed * SPIN_CONSTANT), ControlType.kVelocity);
     }
+    
   }
 
   public double getTopLeftSparkSpeed(){
@@ -72,6 +88,10 @@ public class Shooter extends SubsystemBase{
   
   public double getBottomRightSparkSpeed(){
     return(RobotMap.shooterBottomRightSpark.getEncoder().getVelocity());
+  }
+
+  public double getAverageSparksSpeed(){
+    return (getTopLeftSparkSpeed() + getTopRightSparkSpeed() + getBottomLeftSparkSpeed() + getBottomRightSparkSpeed()) / 4;
   }
 
   //speed should be how far the bot can shoot straight up

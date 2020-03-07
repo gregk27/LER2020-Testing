@@ -16,14 +16,21 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 public class Climber extends SubsystemBase{
     
     public void raiseElevator() {
-        RobotMap.climber_position_solenoid.set(Value.kForward);
+        RobotMap.climberPiston.set(Value.kForward);
     }
 
     public void lowerElevator() {
-        RobotMap.climber_position_solenoid.set(Value.kReverse);
+        RobotMap.climberPiston.set(Value.kReverse);
     }
 
     public void driveWinch(double speed) {
-        RobotMap.winchFalcon.set(ControlMode.PercentOutput, speed);
+        RobotMap.climbingMech.set(ControlMode.PercentOutput, speed);
+    }
+
+    public boolean isElevatorExtended(){
+        if(RobotMap.climberPiston.get() == Value.kForward){
+            return true;
+        }
+        return false;
     }
 }

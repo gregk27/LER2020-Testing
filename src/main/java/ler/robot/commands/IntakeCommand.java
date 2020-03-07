@@ -35,14 +35,14 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     //Drive the intake and conveyor
-    intake.StartIntake(-Intake.ROLLER_SPEED);
+    intake.startIntake(-Intake.ROLLER_SPEED);
     conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.StopIntake();
+    intake.stopIntake();
   }
 
   // Returns true when the command should end.

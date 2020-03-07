@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import ler.robot.commands.*;
-import ler.robot.commands.instant.InvertControlsCommand;
+import ler.robot.commands.instant.*;
 
 
 /**
@@ -30,11 +30,21 @@ public class OI {
     public JoystickButton invertControlsButton = new JoystickButton(rightDriverJoystick, RobotMap.OIConstants.INVERT_CONTROLS_BUTTON);
     public JoystickButton limelightAimButton = new JoystickButton(rightDriverJoystick, RobotMap.OIConstants.LIMELIGHT_AIM_BUTTON);
   
-    public JoystickButton intakeButton = new JoystickButton(operatorController, RobotMap.OIConstants.INTAKE_BUTTON);
+    
     public JoystickButton shooterRevButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOTER_CONTROL_BUTTON);
     public JoystickButton shootButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOT_BUTTON);
     public JoystickButton shooterTiltButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOTER_TILT_BUTTON);
+
+    public JoystickButton conveyorPistonButton = new JoystickButton(operatorController, RobotMap.OIConstants.CONVEYOR_PISTON_BUTTON);
     
+    public JoystickButton intakeButton = new JoystickButton(operatorController, RobotMap.OIConstants.INTAKE_BUTTON);
+    public JoystickButton intakeExtendButton = new JoystickButton(operatorController, RobotMap.OIConstants.INTAKE_EXTEND_BUTTON);
+
+    public JoystickButton climberExtendButton = new JoystickButton(operatorController, RobotMap.OIConstants.CLIMBER_EXTEND_BUTTON);
+    public JoystickButton climberWinchButton = new JoystickButton(operatorController, RobotMap.OIConstants.CLIMBER_WINCH_BUTTON);
+
+    
+
     /**
      * Use this method to define your button->command mappings. Buttons can be
      * created by instantiating a {@link GenericHID} or one of its subclasses
@@ -55,13 +65,19 @@ public class OI {
         limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
 
         intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
+        intakeExtendButton.whenPressed(new IntakeExtendCommand(container.intake));
+
         //shooterRevButton revs shooter, shootButton feeds ball from conveyor to shooter
+        //should use whenHeld, oh well
         shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
         shootButton.whenHeld(new ShootCommand(container.shooter, container.conveyor, container.limelight));
         shooterTiltButton.whenPressed(new ShooterTiltCommand());
 
+        conveyorPistonButton.whenPressed(new ConveyorExtendCommand(container.conveyor));
 
+        climberExtendButton.whenPressed(new ClimberExtendCommand(container.climber));
+        climberWinchButton.whenHeld(new ClimberUpCommand(container.climber));
         
     }
 

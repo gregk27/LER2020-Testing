@@ -5,30 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package ler.robot.commands;
+package ler.robot.commands.instant;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.subsystems.Climber;
 
-public class ClimberUpCommand extends CommandBase {
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+public class ClimberExtendCommand extends InstantCommand {
   Climber climber;
-  /**
-   * Creates a new invertControlsCommand.
-   */
-  public ClimberUpCommand(Climber climber) {
+  public ClimberExtendCommand(Climber climber) {
     this.climber = climber;
+    addRequirements(climber);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.raiseElevator();
+    if(climber.isElevatorExtended()){
+      climber.lowerElevator();
+    }else{
+      climber.raiseElevator();
+    }
   }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
 }
