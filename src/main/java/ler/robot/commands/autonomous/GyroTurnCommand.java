@@ -10,6 +10,8 @@ public class GyroTurnCommand extends CommandBase {
 	private double target_angle;
 	private boolean finished = false;
 	private boolean absolute;
+	private Drivetrain drivetrain;
+	private Gyro gyro;
 	final double HIGH_SPEED = 0.4;
 	final double LOW_SPEED = 0.20;
 	final double LOW_SPEED_LIMIT = 0.3;
@@ -18,36 +20,39 @@ public class GyroTurnCommand extends CommandBase {
 	final double GYRO_MULTIPLIER = 5.475d / 360d;
 	boolean clockwise = false;
 
-	Drivetrain drivetrain;
-	Gyro gyro;
 	/**
-	 * Turns to an angle in degrees. Positive is CCW. If absolute is true, it turns to the angle relative to the angle it was at when enabled.
-	 *@author Tim
+	 * Turns to an angle in degrees. Positive is CCW. If absolute is true, it turns
+	 * to the angle relative to the angle it was at when enabled.
+	 * 
+	 * @author Tim
 	 */
-    public GyroTurnCommand(Drivetrain d, Gyro g, double target_angle, boolean absolute) {
-    	addRequirements(d);
-    	// setTimeout(Robot.AUTO_TIMEOUT);
-    	this.absolute = absolute;
-		this.target_angle = target_angle;
-		drivetrain = d;
-		gyro = g;
-    }
+	public GyroTurnCommand(Drivetrain drivetrain, Gyro gyro, double target_angle, boolean absolute) {
+		this.drivetrain = drivetrain;
+		this.gyro = gyro;
+		addRequirements(this.drivetrain);
+		addRequirements(this.gyro);
 
-    // Called just before this Command runs the first time
-    public void initialize() {
-    	if (!absolute) {
-    		gyro.zero();
-//        	target_angle -= target_angle * GYRO_MULTIPLIER; // gyro tends to increase in error as it turns, this compensates (somewhat)
-    		clockwise = target_angle < 0; // gyro tends to increase in error as it turns, this compensates (somewhat)
-    	}
-    	else {
-    		target_angle = target_angle;//Tools.closestEquivalentAngle(target_angle);
+		this.absolute = absolute;
+		this.target_angle = target_angle;
+	}
+
+	// Called just before this Command runs the first time
+	@Override
+	public void initialize() {
+		if (!absolute) {
+			gyro.zero();
+			// target_angle -= target_angle * GYRO_MULTIPLIER; // gyro tends to increase in
+			// error as it turns, this compensates (somewhat)
+			clockwise = target_angle < 0; // gyro tends to increase in error as it turns, this compensates (somewhat)
+		} else {
+			target_angle = Tools.closestEquivalentAngle(gyro, target_angle);
 //    		target_angle += (target_angle - Robot.gyro.getAbsoluteAngle()) * GYRO_MULTIPLIER; // gyro tends to increase in error as it turns, this compensates (somewhat)	
     		clockwise = gyro.getAbsoluteAngle() > target_angle;
     	}
     }
 
-    // Called repeatedly when this Command is scheduled to run
+	// Called repeatedly when this Command is scheduled to run
+	@Override
     public void execute() {
     	double l = 0;
     	double r = 0;
@@ -90,7 +95,8 @@ public class GyroTurnCommand extends CommandBase {
     public boolean isFinished() {
     	// if (isTimedOut()) {
     		// Robot.autonomous_command_group.cancel();
-    	// }
+		// }
+		//TODO: re-add finished condition
         return false;// finished || isTimedOut();
     }
 

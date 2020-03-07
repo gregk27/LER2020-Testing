@@ -16,7 +16,7 @@ public class Drivetrain extends SubsystemBase {
   double maxOutput=1;
   private boolean isInverted = false;
 
-  public final PIDController pidController = new PIDController(7, 0.018, 1.5);
+  
 
 
   public double getLeftEncoder() {
@@ -84,4 +84,9 @@ public class Drivetrain extends SubsystemBase {
   public void setMaxOutput(double maxOutput) {
     this.maxOutput = maxOutput;
   }
+
+  public void setPercentVoltage(double l, double r) {
+		RobotMap.leftDriveSpark1.set(l);	// because talons 2 and 3 follow 1, we only need to set 1
+		RobotMap.rightDriveSpark1.set( -r);
+	}
 }
