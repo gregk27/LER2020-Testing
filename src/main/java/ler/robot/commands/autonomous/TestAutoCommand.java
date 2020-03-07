@@ -23,6 +23,7 @@ public class TestAutoCommand extends SequentialCommandGroup {
     super();
 
     //Add command to drive 60 inches at 25% power
-    addCommands(new AutoDriveStraightCommand(container.drivetrain, container.gyro, 3000, 0.25, 60));
+    addCommands(new AutoDriveStraightCommand(container.drivetrain, container.gyro, 3000, 0.25, 10));
+    // addCommands(new GyroTurnCommand(container.drivetrain, container.gyro, 90, false));
   }
 }

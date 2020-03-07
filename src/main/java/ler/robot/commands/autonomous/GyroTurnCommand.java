@@ -24,11 +24,13 @@ public class GyroTurnCommand extends CommandBase {
 	 * Turns to an angle in degrees. Positive is CCW. If absolute is true, it turns to the angle relative to the angle it was at when enabled.
 	 *@author Tim
 	 */
-    public GyroTurnCommand(Drivetrain d, double target_angle, boolean absolute) {
-    	addRequirements(drivetrain);
+    public GyroTurnCommand(Drivetrain d, Gyro g, double target_angle, boolean absolute) {
+    	addRequirements(d);
     	// setTimeout(Robot.AUTO_TIMEOUT);
     	this.absolute = absolute;
-    	this.target_angle = target_angle;
+		this.target_angle = target_angle;
+		drivetrain = d;
+		gyro = g;
     }
 
     // Called just before this Command runs the first time

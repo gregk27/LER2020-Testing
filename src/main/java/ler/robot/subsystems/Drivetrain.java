@@ -14,7 +14,6 @@ import ler.robot.RobotMap;
 public class Drivetrain extends SubsystemBase {
   
   double maxOutput=1;
-  private final  double DEADZONE = 0.15;
   private boolean isInverted = false;
 
   public final PIDController pidController = new PIDController(7, 0.018, 1.5);
@@ -52,14 +51,6 @@ public class Drivetrain extends SubsystemBase {
    * @param right the commanded rotation
    */
   public void tankDrive(double left, double right) {
-
-    if (Math.abs(left)<DEADZONE){
-      left = 0;
-
-    }
-    if (Math.abs(right)<DEADZONE){
-      right = 0;
-    }
 
     //Slow it down
     left *= 0.9;

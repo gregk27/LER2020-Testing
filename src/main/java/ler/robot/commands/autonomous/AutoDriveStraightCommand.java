@@ -68,6 +68,6 @@ public class AutoDriveStraightCommand extends CommandBase {
         return true;
     }
 
-    return true;
+    return false;
   }
 }

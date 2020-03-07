@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     //autonomousCommand = robotContainer.getAutonomousCommand();
     //Create a new auto commandGroup
-    new TestAutoCommand(robotContainer);
+    autonomousCommand = new TestAutoCommand(robotContainer);
     // new AutoDriveStraightCommand(robotContainer.drivetrain, robotContainer.gyro, 3000, 0.5, 5);
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
