@@ -7,6 +7,15 @@
 
 package ler.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.vision.VisionRunner;
+import edu.wpi.first.vision.VisionThread;
+import edu.wpi.first.cameraserver.CameraServer;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.core.Rect;
+
+import ler.robot.vision.GripPipeline;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,6 +38,7 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
+
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
@@ -51,6 +61,7 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+
     CommandScheduler.getInstance().run();
   
     SmartDashboard.putNumber("Gyro Angle", RobotMap.gyro.getAngle());
