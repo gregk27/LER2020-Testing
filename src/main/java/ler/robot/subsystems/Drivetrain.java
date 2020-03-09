@@ -34,6 +34,7 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double left, double right) {
 
+     //@todo MOVE TO DRIVECOMMAND
     if (Math.abs(left)<DEADZONE){
       left = 0;
 
@@ -68,4 +69,9 @@ public class Drivetrain extends SubsystemBase {
   public void setMaxOutput(double maxOutput) {
     this.maxOutput = maxOutput;
   }
+
+  public void setPercentVoltage(double l, double r) {
+		RobotMap.leftDriveSpark1.set(l);	// because talons 2 and 3 follow 1, we only need to set 1
+		RobotMap.rightDriveSpark1.set( -r);
+	}
 }

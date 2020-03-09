@@ -54,4 +54,7 @@ public class Gyro extends SubsystemBase {
     return RobotMap.gyro.getAngle();
   }
 
+  public double getAbsoluteAngle() {
+    return -RobotMap.gyro.getAngle();
+  }
 }

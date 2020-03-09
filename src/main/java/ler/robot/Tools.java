@@ -1,5 +1,7 @@
 package ler.robot;
 
+import ler.robot.subsystems.Gyro;
+
 public class Tools {
     //vvv Halil Drive vvv
     public static double getAdaptedSpeed(double speed) {
@@ -21,5 +23,24 @@ public class Tools {
 		value = (value < min && value > 0) ? min : value;
 		value = (value > -min && value < 0) ? -min : value;
 		return value;
+    }
+    
+    // helper for auto gyro
+    public static double closestEquivalentAngle(Gyro gyro, double target_angle) {
+		double t = target_angle;
+		double c = gyro.getAbsoluteAngle();
+		boolean b = true;
+		while (b) {
+			if (Math.abs(c - t) > Math.abs(c - (t + 360))) {
+	    		t += 360;
+	    	}
+			else if (Math.abs(c - t) > Math.abs(c - (t - 360))) {
+				t -= 360;
+			}
+			else {
+				b = false;
+			}
+		}
+		return t;
 	}
 }
