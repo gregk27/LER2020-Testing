@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import ler.robot.commands.DriveCommand;
+import ler.robot.commands.ConveyorTiltCommand;
 //import ler.robot.commands.IntakeCommand;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Drivetrain;
@@ -61,6 +62,8 @@ public class RobotContainer {
     // Set the default drive command to split-stick arcade drive
 
     drivetrain.setDefaultCommand(new DriveCommand(drivetrain));
+
+    conveyor.setDefaultCommand(new ConveyorTiltCommand(conveyor));
 
     /*intake.setDefaultCommand(
       new DefaultIntake(

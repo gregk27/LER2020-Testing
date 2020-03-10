@@ -42,7 +42,9 @@ public class OI {
     
     public JoystickButton shooterRevButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOTER_CONTROL_BUTTON);
     public JoystickButton shootButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOT_BUTTON);
-    public JoystickButton shooterTiltButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOTER_TILT_BUTTON);
+
+    public JoystickButton shooterLongTiltButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOTER_LONGBOMB_ANGLE_BUTTON);
+    public JoystickButton shooterLimelightTiltButton = new JoystickButton(operatorController, RobotMap.OIConstants.SHOOTER_LIMELIGHT_ANGLE_BUTTON);
 
     public JoystickButton conveyorPistonButton = new JoystickButton(operatorController, RobotMap.OIConstants.CONVEYOR_PISTON_BUTTON);
     
@@ -87,7 +89,9 @@ public class OI {
         shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
         shootButton.whenHeld(new ShootCommand(container.shooter, container.conveyor, container.limelight));
-        shooterTiltButton.whenPressed(new ShooterTiltCommand());
+
+        shooterLongTiltButton.whenPressed(new ConveyorLongTiltCommand(container.conveyor));
+        shooterLimelightTiltButton.whenPressed(new ConveyorLimelightTiltCommand(container.conveyor, container.limelight));
 
         conveyorPistonButton.whenPressed(new ConveyorExtendCommand(container.conveyor));
 

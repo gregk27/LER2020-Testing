@@ -86,7 +86,10 @@ public final class RobotMap {
 
     public static final int SHOOTER_CONTROL_BUTTON = Button.kBumperRight.value;
     public static final int SHOOT_BUTTON = Button.kBumperLeft.value; 
-    public static final int SHOOTER_TILT_BUTTON = Button.kBumperLeft.value; 
+    //needs to be changed
+    //we should think about how this one works
+    public static final int SHOOTER_LONGBOMB_ANGLE_BUTTON = Button.kX.value; 
+    public static final int SHOOTER_LIMELIGHT_ANGLE_BUTTON = Button.kX.value;
 
     //TODO: change these as well
     public static final int CLIMBER_EXTEND_BUTTON = Button.kX.value;
@@ -113,7 +116,7 @@ public final class RobotMap {
 
   //The conveyor (conveyor + angle + piston)
   public static final TalonSRX conveyorMotor = new TalonSRX(CANConstants.CONVEYOR_TALON);
-  public static final TalonSRX angleElevation = new TalonSRX(CANConstants.ANGLE_ELEVATION);
+  public static final CANSparkMax angleElevation = new CANSparkMax(CANConstants.ANGLE_ELEVATION, MotorType.kBrushless);
   public static final DoubleSolenoid conveyorValve = new DoubleSolenoid(SOLENOIDConstants.CONVEYOR_DOWN, SOLENOIDConstants.CONVEYOR_UP);
 
   //The intake (talon + piston)
