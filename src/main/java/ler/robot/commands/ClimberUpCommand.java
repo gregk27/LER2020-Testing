@@ -8,42 +8,27 @@
 package ler.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import ler.robot.subsystems.Conveyor;
-import ler.robot.subsystems.Intake;
+import ler.robot.subsystems.Climber;
 
-public class ConveyorCommand extends CommandBase {
-  Intake intake;
-  Conveyor conveyor;
-
+public class ClimberUpCommand extends CommandBase {
+  Climber climber;
   /**
-   * Creates a new IntakeCommand.
+   * Creates a new invertControlsCommand.
    */
-  public ConveyorCommand(Conveyor conveyor) {
-    this.conveyor = conveyor;
-
-    addRequirements(conveyor);
+  public ClimberUpCommand(Climber climber) {
+    this.climber = climber;
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    conveyor.setConveyorSpeed(Conveyor.NORMAL_SPEED);
+    climber.raiseElevator();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    conveyor.stopConveyor();
   }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
 }

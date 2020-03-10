@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import ler.robot.commands.DriveCommand;
+import ler.robot.commands.ConveyorTiltCommand;
 //import ler.robot.commands.IntakeCommand;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Gyro;
@@ -21,6 +22,7 @@ import ler.robot.subsystems.Intake;
 import ler.robot.subsystems.Shooter;
 import ler.robot.subsystems.Webcam;
 import ler.robot.subsystems.Limelight;
+import ler.robot.subsystems.Climber;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -30,12 +32,14 @@ import ler.robot.subsystems.Limelight;
  */
 public class RobotContainer {
   // The robot's subsystems
-  final Shooter shooter = new Shooter();
-  final Gyro gyro = new Gyro();
-  final Intake intake = new Intake();
-  final Conveyor conveyor = new Conveyor();
-  final Drivetrain drivetrain = new Drivetrain();
-  final Limelight limelight = new Limelight();
+  public final Gyro gyro = new Gyro();
+  public final Shooter shooter = new Shooter();
+  public final Intake intake = new Intake();
+  public final Conveyor conveyor = new Conveyor();
+  public final Drivetrain drivetrain = new Drivetrain();
+  public final Limelight limelight = new Limelight();
+  public final Climber climber = new Climber();
+
   final Webcam webcam = new Webcam();
 
   // The autonomous routines
@@ -64,6 +68,8 @@ public class RobotContainer {
     // Set the default drive command to split-stick arcade drive
 
     drivetrain.setDefaultCommand(new DriveCommand(drivetrain));
+
+    conveyor.setDefaultCommand(new ConveyorTiltCommand(conveyor));
 
     /*intake.setDefaultCommand(
       new DefaultIntake(
