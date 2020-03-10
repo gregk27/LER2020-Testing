@@ -11,11 +11,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Talon;
+
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import ler.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.XboxController.Button;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Talon;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -129,16 +132,31 @@ public final class RobotMap {
   public static final TalonFX climbingMech = new TalonFX(CANConstants.CLIMBER_TALON);
   public static final DoubleSolenoid climberPiston = new DoubleSolenoid(SOLENOIDConstants.CLIMBER_DOWN, SOLENOIDConstants.CLIMBER_UP);
 
+  // Gyro
+  public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+
+
 
   public static void init(){
+    gyro.calibrate();
+
+    leftDriveSpark1.getEncoder().setPositionConversionFactor(0.6*Math.PI);
+    leftDriveSpark2.getEncoder().setPositionConversionFactor(0.6*Math.PI);
+    leftDriveSpark3.getEncoder().setPositionConversionFactor(0.6*Math.PI);
+    rightDriveSpark1.getEncoder().setPositionConversionFactor(0.6*Math.PI);
+    rightDriveSpark2.getEncoder().setPositionConversionFactor(0.6*Math.PI);
+    rightDriveSpark3.getEncoder().setPositionConversionFactor(0.6*Math.PI);
+
+    // leftDriveSpark1.getEncoder().
+
     leftDriveSpark2.follow(leftDriveSpark1);
     leftDriveSpark3.follow(leftDriveSpark1);
 
-    leftDriveSpark1.setInverted(true);
-    rightDriveSpark1.setInverted(false);
+    leftDriveSpark1.setInverted(false);
+    rightDriveSpark1.setInverted(true);
 
-    leftDriveSpark1.setOpenLoopRampRate(0.5);
-    rightDriveSpark1.setOpenLoopRampRate(0.5);
+    leftDriveSpark1.setOpenLoopRampRate(0.2);
+    rightDriveSpark1.setOpenLoopRampRate(0.2);
 
     rightDriveSpark2.follow(rightDriveSpark1);
     rightDriveSpark3.follow(rightDriveSpark1);

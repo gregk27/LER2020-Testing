@@ -16,7 +16,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 public class Intake extends SubsystemBase {
   
   
-  public static final double ROLLER_SPEED = 0.5;
+  public static final double ROLLER_SPEED = 0.80;
 
   /**
    * Creates a new Intake.

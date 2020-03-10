@@ -7,6 +7,8 @@
 
 package ler.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,6 +16,7 @@ import ler.robot.commands.DriveCommand;
 import ler.robot.commands.ConveyorTiltCommand;
 //import ler.robot.commands.IntakeCommand;
 import ler.robot.subsystems.Conveyor;
+import ler.robot.subsystems.Gyro;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Intake;
 import ler.robot.subsystems.Shooter;
@@ -28,6 +31,7 @@ import ler.robot.subsystems.Climber;
  */
 public class RobotContainer {
   // The robot's subsystems
+  public final Gyro gyro = new Gyro();
   final Shooter shooter = new Shooter();
   final Intake intake = new Intake();
   final Conveyor conveyor = new Conveyor();
@@ -35,6 +39,7 @@ public class RobotContainer {
   final Limelight limelight = new Limelight();
   final Climber climber = new Climber();
 
+  final UsbCamera webcam;
 
   // The autonomous routines
 
@@ -57,6 +62,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     Robot.oi.init(this);
+
+    webcam = CameraServer.getInstance().startAutomaticCapture(0);
+    webcam.setResolution(320, 240);
+    webcam.setFPS(20);
 
     // Configure default commands
     // Set the default drive command to split-stick arcade drive

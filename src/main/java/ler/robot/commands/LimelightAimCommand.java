@@ -8,12 +8,16 @@
 package ler.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Limelight;
 
 public class LimelightAimCommand extends CommandBase {
   private Drivetrain drivetrain;
   private Limelight limelight;
+
+  //with these values, it gets close to center then quickly jolts back and forth around the midlle
+  private PIDController pidController = new PIDController(0.04, 0.05, 0.02);
   /**
    * Creates a new LimelightAimCommand.
    */
@@ -27,16 +31,16 @@ public class LimelightAimCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drivetrain.pidController.setSetpoint(0);
+    pidController.setSetpoint(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double pidOutput = drivetrain.pidController.calculate(limelight.getX());
+    double pidOutput = pidController.calculate(limelight.getX());
 
     //aim bot
-    drivetrain.tankDrive(-pidOutput/15, pidOutput/15);
+    drivetrain.tankDrive(pidOutput, -pidOutput);
   }
 
   // Called once the command ends or is interrupted.
@@ -47,9 +51,6 @@ public class LimelightAimCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(limelight.getX()) < 1){
-      return true;
-    }
     return false;
   }
 }

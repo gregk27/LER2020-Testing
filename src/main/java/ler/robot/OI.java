@@ -19,7 +19,6 @@ import ler.robot.commands.instant.*;
  * Operator Interface, used to map buttons with the controllers
  */
 public class OI {
-    
     // The driver uses two joysticks, operator uses one controller
     
     public XboxController driverXboxController = new XboxController(RobotMap.OIConstants.DRIVER_XBOX_CONTROLLER);
@@ -29,7 +28,6 @@ public class OI {
     
 
     public XboxController operatorController = new XboxController(RobotMap.OIConstants.OPERATOR_CONTROLLER_PORT);
-
 
     public JoystickButton halfSpeedButton = new JoystickButton(leftDriverJoystick, RobotMap.OIConstants.HALF_SPEED_BUTTON);
     public JoystickButton invertControlsButton = new JoystickButton(rightDriverJoystick, RobotMap.OIConstants.INVERT_CONTROLS_BUTTON);
@@ -53,7 +51,12 @@ public class OI {
 
     public JoystickButton climberExtendButton = new JoystickButton(operatorController, RobotMap.OIConstants.CLIMBER_EXTEND_BUTTON);
     public JoystickButton climberWinchButton = new JoystickButton(operatorController, RobotMap.OIConstants.CLIMBER_WINCH_BUTTON);
+    //also add xbox support
+    public JoystickButton gyroButton = new JoystickButton(leftDriverJoystick, RobotMap.OIConstants.GYRO_DRIVE_BUTTON);
 
+    public JoystickButton reverseBothButton = new JoystickButton(operatorController, RobotMap.OIConstants.REVERSE_BOTH_BUTTON);
+    public JoystickButton reverseIntakeButton = new JoystickButton(operatorController, RobotMap.OIConstants.REVERSE_INTAKE_BUTTON);
+    public JoystickButton conveyorButton = new JoystickButton(operatorController, RobotMap.OIConstants.CONVEYOR_BUTTON);
     
 
     /**
@@ -78,17 +81,22 @@ public class OI {
         }
         
         halfSpeedButton.whenHeld(new HalveDriveSpeed(container.drivetrain));
-        invertControlsButton.whenPressed(new InvertControlsCommand(container.drivetrain));
-        limelightAimButton.whenPressed(new LimelightAimCommand(container.drivetrain, container.limelight));
+        invertControlsButton.whenHeld(new InvertControlsCommand(container.drivetrain));
+        limelightAimButton.whenHeld(new LimelightAimCommand(container.drivetrain, container.limelight));
 
         intakeButton.whenHeld(new IntakeCommand(container.intake,container.conveyor));
-        intakeExtendButton.whenPressed(new IntakeExtendCommand(container.intake));
-
-        //shooterRevButton revs shooter, shootButton feeds ball from conveyor to shooter
-        //should use whenHeld, oh well
+        reverseBothButton.whenHeld(new InverseBothCommand(container.intake, container.conveyor));
+        reverseIntakeButton.whenHeld(new InverseIntakeCommand(container.intake));
+  
+        conveyorButton.whenHeld(new ConveyorCommand(container.conveyor));
+        //shooterRevButton revs shooter, shootButton moves ball from conveyor into shooter
         shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
         shootButton.whenHeld(new ShootCommand(container.shooter, container.conveyor, container.limelight));
+        shooterTiltButton.whenPressed(new ShooterTiltCommand());
+  
+        gyroButton.whenHeld(new GyroDriveCommand(container.drivetrain, container.gyro));
+        intakeExtendButton.whenPressed(new IntakeExtendCommand(container.intake));
 
         shooterLongTiltButton.whenPressed(new ConveyorLongTiltCommand(container.conveyor));
         shooterLimelightTiltButton.whenPressed(new ConveyorLimelightTiltCommand(container.conveyor, container.limelight));

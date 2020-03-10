@@ -7,26 +7,23 @@
 
 package ler.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import ler.robot.RobotMap;
-import ler.robot.subsystems.Limelight;
-import ler.robot.subsystems.Shooter;
+import ler.robot.subsystems.Conveyor;
+import ler.robot.subsystems.Intake;
 
-public class ShooterStartCommand extends CommandBase {
-  private Shooter shooter;
-  private Limelight limelight;
+public class InverseBothCommand extends CommandBase {
+  Intake intake;
+  Conveyor conveyor;
 
-
-  /*
-   * Creates a new ShooterStartCommand.
+  /**
+   * Creates a new IntakeCommand.
    */
-  public ShooterStartCommand(Shooter shooter, Limelight limelight) {
-    this.shooter = shooter;
-    this.limelight = limelight;
-    addRequirements(shooter);
-
-    // Use addRequirements() here to declare subsystem dependencies.
+  public InverseBothCommand(Intake intake, Conveyor conveyor) {
+    this.intake = intake;
+    this.conveyor = conveyor;
+    
+    addRequirements(intake);
+    addRequirements(conveyor);
   }
 
   // Called when the command is initially scheduled.
@@ -37,13 +34,16 @@ public class ShooterStartCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    //shooter.setSpecificShootersSpeed(shooter.getVelocityFromLimelight(limelight.getSpeed()));
-    shooter.setSpecificShootersSpeed(Shooter.SHOOTER_TARGET_SPEED);
+    //Drive the intake and conveyor (INVERSE)
+    intake.StartIntake(-Intake.ROLLER_SPEED);
+    conveyor.setConveyorSpeed(-Conveyor.INTAKE_SPEED);
   }
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intake.StopIntake();
+    conveyor.StopConveyor();
   }
 
   // Returns true when the command should end.

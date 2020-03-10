@@ -7,10 +7,11 @@
 
 package ler.robot.commands.instant;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import ler.robot.subsystems.Drivetrain;
 
-public class InvertControlsCommand extends InstantCommand {
+public class InvertControlsCommand extends CommandBase{
   Drivetrain drivetrain;
   /**
    * Creates a new invertControlsCommand.
@@ -29,6 +30,7 @@ public class InvertControlsCommand extends InstantCommand {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    drivetrain.invertControls();
   }
 
 }

@@ -15,6 +15,7 @@ import ler.robot.Robot;
 import ler.robot.RobotMap;
 import ler.robot.Tools;
 import ler.robot.subsystems.Drivetrain;
+//import ler.robot.subsystems.Gyro;
 
 /**
  * A command to drive the robot with joystick input (passed in as {@link DoubleSupplier}s). Written
@@ -23,6 +24,7 @@ import ler.robot.subsystems.Drivetrain;
  */
 public class DriveCommand extends CommandBase {
   private final Drivetrain drivetrain;
+  //private final Gyro gyro;
 
 
   /**
@@ -55,15 +57,16 @@ public class DriveCommand extends CommandBase {
 
     double leftSpeed = Tools.getAdaptedSpeed(left);
     double rightSpeed = Tools.getAdaptedSpeed(right);
+    
     double average = (leftSpeed + rightSpeed)/2;
 
     // if sticks are close and speed reasonable, go straight
-    if (Math.abs(leftSpeed - rightSpeed) < 0.05 && Math.abs(average) > 0.25) {
+    if (Math.abs(leftSpeed - rightSpeed) < 0.025 && Math.abs(average) > 0.25) {
       leftSpeed = average;
       rightSpeed = average;
     }
 
     //drivetrain.tankDrive(left.getAsDouble(), rightSpeed.getAsDouble());
-    drivetrain.tankDrive(leftSpeed*0.6, rightSpeed*0.6);
+    drivetrain.tankDrive(leftSpeed, rightSpeed);
     }
 }
