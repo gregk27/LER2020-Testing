@@ -44,6 +44,10 @@ public class Conveyor extends SubsystemBase {
 
   }
 
+  public void stopConveyor(){
+    setConveyorSpeed(0);
+  }
+
   public void setConveyorAngle (int angle){
     setSpecificConveyorAngle(ANGLES[angle]);
   }

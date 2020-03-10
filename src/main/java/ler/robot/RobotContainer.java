@@ -32,14 +32,14 @@ import ler.robot.subsystems.Climber;
 public class RobotContainer {
   // The robot's subsystems
   public final Gyro gyro = new Gyro();
-  final Shooter shooter = new Shooter();
-  final Intake intake = new Intake();
-  final Conveyor conveyor = new Conveyor();
-  final Drivetrain drivetrain = new Drivetrain();
-  final Limelight limelight = new Limelight();
-  final Climber climber = new Climber();
+  public final Shooter shooter = new Shooter();
+  public final Intake intake = new Intake();
+  public final Conveyor conveyor = new Conveyor();
+  public final Drivetrain drivetrain = new Drivetrain();
+  public final Limelight limelight = new Limelight();
+  public final Climber climber = new Climber();
 
-  final UsbCamera webcam;
+  public final UsbCamera webcam;
 
   // The autonomous routines
 

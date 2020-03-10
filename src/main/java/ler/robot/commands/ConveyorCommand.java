@@ -38,7 +38,7 @@ public class ConveyorCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    conveyor.StopConveyor();
+    conveyor.stopConveyor();
   }
 
   // Returns true when the command should end.

@@ -7,18 +7,15 @@
 
 package ler.robot;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import ler.robot.subsystems.Shooter;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.XboxController.Button;
+import ler.robot.subsystems.Shooter;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -97,6 +94,11 @@ public final class RobotMap {
     //TODO: change these as well
     public static final int CLIMBER_EXTEND_BUTTON = Button.kX.value;
     public static final int CLIMBER_WINCH_BUTTON = Button.kX.value;
+
+    public static final int GYRO_DRIVE_BUTTON = Button.kX.value;
+    public static final int REVERSE_BOTH_BUTTON = Button.kX.value;
+    public static final int REVERSE_INTAKE_BUTTON = Button.kX.value;
+    public static final int CONVEYOR_BUTTON = Button.kX.value;
 
   }
 

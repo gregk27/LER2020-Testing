@@ -93,7 +93,6 @@ public class OI {
         shooterRevButton.whenPressed(new ShooterStartCommand(container.shooter, container.limelight));
         shooterRevButton.whenReleased(new ShooterStopCommand(container.shooter, container.conveyor));
         shootButton.whenHeld(new ShootCommand(container.shooter, container.conveyor, container.limelight));
-        shooterTiltButton.whenPressed(new ShooterTiltCommand());
   
         gyroButton.whenHeld(new GyroDriveCommand(container.drivetrain, container.gyro));
         intakeExtendButton.whenPressed(new IntakeExtendCommand(container.intake));
