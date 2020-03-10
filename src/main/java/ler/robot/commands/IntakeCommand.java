@@ -35,7 +35,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     //Drive the intake and conveyor
-    intake.StartIntake(Intake.ROLLER_SPEED);
+    intake.startIntake(-Intake.ROLLER_SPEED);
     conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
   }
 
@@ -43,7 +43,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.StopIntake();
-    conveyor.StopConveyor();
+    //conveyor.StopConveyor();
   }
 
   // Returns true when the command should end.

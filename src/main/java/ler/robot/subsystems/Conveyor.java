@@ -8,7 +8,10 @@
 package ler.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.revrobotics.ControlType;
+
 import ler.robot.RobotMap;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Conveyor extends SubsystemBase {
@@ -16,6 +19,18 @@ public class Conveyor extends SubsystemBase {
   public static final double INTAKE_SPEED = 0.30;
   public static final double NORMAL_SPEED = 0.80;
   public static final double SHOOTER_SPEED = 0.25;
+
+  //second item is the angle of the longbomb shot
+  //TODO: store the longbomb angle in a better place
+  public static final double[] ANGLES = {0, 60};
+
+  //TODO: change these values
+  //distance from where rod attaches to pase to pivot
+  public static final double BASE_DISTANCE = 1;
+  //distance from pivot to where rod attaches to conveyor, measured along conveyor
+  public static final double CONVEYOR_DISTANCE = 1;
+
+  public static final double CONVERT_DISTANCE_TO_MOTOR = 1;
 
   /**
    * Creates a new Conveyor.
@@ -29,10 +44,47 @@ public class Conveyor extends SubsystemBase {
 
   }
 
-  public void StopConveyor (){
-    RobotMap.conveyorMotor.set(ControlMode.PercentOutput, 0);
+  public void setConveyorAngle (int angle){
+    setSpecificConveyorAngle(ANGLES[angle]);
   }
-  
+
+  public void setSpecificConveyorAngle (double angle){
+    //https://www.desmos.com/calculator/0c4jqiqryo for the math stuff
+    //in this case, 0 is vertical, meanwhile 90 is horizontal
+
+    //point where rod touches conveyor
+    double[] p1 = {CONVEYOR_DISTANCE * Math.sin(angle), CONVEYOR_DISTANCE * Math.cos(angle)};
+    //point where rod touches base
+    double[] p2 = {-BASE_DISTANCE, 0};
+
+    double distance = Math.hypot(p1[0] - p2[0], p1[1] - p2[1]);
+
+    angle = distance * CONVERT_DISTANCE_TO_MOTOR;
+
+    RobotMap.angleElevation.getPIDController().setReference(angle, ControlType.kPosition);
+  }
+
+  public void setConveyorAngleVoltage (double voltage){
+    //TODO: this might need to be scaled or something
+    RobotMap.angleElevation.getPIDController().setReference(voltage, ControlType.kVoltage);
+  }
+
+  public void setValveState (boolean state){
+    if(state){
+      //open
+      RobotMap.conveyorValve.set(Value.kForward);
+    }else{
+      RobotMap.conveyorValve.set(Value.kReverse);
+    }
+  }
+
+  public boolean isExtended(){
+    if(RobotMap.conveyorValve.get() == Value.kForward){
+      return true;
+    }
+    return false;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
