@@ -15,6 +15,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import ler.robot.subsystems.Shooter;
 
 /**
@@ -26,7 +27,7 @@ import ler.robot.subsystems.Shooter;
  * constants are needed, to reduce verbosity.
  */
 public final class RobotMap {
-  public static final boolean XBOX_DRIVE = false;
+  public static boolean XBOX_DRIVE = false;
   public static final class CANConstants {
 
     public static final int LEFT_DRIVE_SPARK_1 = 2;
@@ -141,6 +142,8 @@ public final class RobotMap {
 
   public static void init(){
     gyro.calibrate();
+
+    XBOX_DRIVE = SmartDashboard.getBoolean("xbox drive", XBOX_DRIVE);
 
     leftDriveSpark1.getEncoder().setPositionConversionFactor(0.6*Math.PI);
     leftDriveSpark2.getEncoder().setPositionConversionFactor(0.6*Math.PI);
