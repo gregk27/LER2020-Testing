@@ -37,9 +37,9 @@ public class ShooterStopCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setSpecificShooterSpeed(0);
+    shooter.setSpecificShootersSpeed(0);
 
-    //conveyor.setConveyorSpeed(0);
+    conveyor.setConveyorSpeed(0);
     /*
     RobotMap.shooterTopTalon.set(ControlMode.PercentOutput, 0);
     RobotMap.shooterBottomTalon.set(ControlMode.PercentOutput, 0);

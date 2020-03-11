@@ -32,6 +32,8 @@ public class ShootCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    //close the conveyor
+    conveyor.setValveState(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,14 +44,21 @@ public class ShootCommand extends CommandBase {
     double closeness = 250;
     double conveyorSpeed = 0.6;
 
-    //System.out.println("Top: " + shooter.getTopSparkSpeed() + "\t" + Shooter.SHOOTER_TOP_TARGET_SPEED + "\t" + (shooter.getTopSparkSpeed()-Shooter.SHOOTER_TOP_TARGET_SPEED));
-    //System.out.println("Bottom: " + shooter.getBottomSparkSpeed() + "\t" + Shooter.SHOOTER_BOTTOM_TARGET_SPEED + "\t" + (shooter.getBottomSparkSpeed()-Shooter.SHOOTER_BOTTOM_TARGET_SPEED));
+    System.out.println("TopLeft: " + shooter.getTopLeftSparkSpeed() + "\t" + Shooter.SHOOTER_TOP_TARGET_SPEED + "\t" + (shooter.getTopLeftSparkSpeed()-Shooter.SHOOTER_TOP_TARGET_SPEED));
+    System.out.println("TopRight: " + shooter.getTopRightSparkSpeed() + "\t" + Shooter.SHOOTER_TOP_TARGET_SPEED + "\t" + (shooter.getTopRightSparkSpeed()-Shooter.SHOOTER_TOP_TARGET_SPEED));
+    System.out.println("BottomLeft: " + shooter.getBottomLeftSparkSpeed() + "\t" + Shooter.SHOOTER_BOTTOM_TARGET_SPEED + "\t" + (shooter.getBottomLeftSparkSpeed()-Shooter.SHOOTER_BOTTOM_TARGET_SPEED));
+    System.out.println("BottomRight: " + shooter.getBottomRightSparkSpeed() + "\t" + Shooter.SHOOTER_BOTTOM_TARGET_SPEED + "\t" + (shooter.getBottomRightSparkSpeed()-Shooter.SHOOTER_BOTTOM_TARGET_SPEED));
 
-
+    // TODO determine how to calculate if it is fast enough to run
+    //remember kids, don't make your if statements like this
+    /*
     if(Math.abs(shooter.getTopSparkSpeed() - Shooter.SHOOTER_TOP_TARGET_SPEED)< closeness && 
        Math.abs(shooter.getBottomSparkSpeed()- Shooter.SHOOTER_BOTTOM_TARGET_SPEED)< closeness &&
        System.currentTimeMillis()>= shooter.spoolTime) {
-      
+         */
+    if(Math.abs(shooter.getAverageSparksSpeed() - Shooter.SHOOTER_TOP_TARGET_SPEED)< closeness && 
+      System.currentTimeMillis()>= shooter.spoolTime) {
+
       conveyor.setConveyorSpeed(conveyorSpeed);
 
     } 

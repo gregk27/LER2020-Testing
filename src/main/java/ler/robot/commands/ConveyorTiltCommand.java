@@ -7,13 +7,21 @@
 
 package ler.robot.commands;
 
+import ler.robot.subsystems.Conveyor;
+import ler.robot.Robot;
+
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ShooterTiltCommand extends CommandBase {
+public class ConveyorTiltCommand extends CommandBase {
+  Conveyor conveyor;
   /**
-   * Creates a new ShooterTiltCommand.
+   * Creates a new ConveyorTiltCommand.
    */
-  public ShooterTiltCommand() {
+  public ConveyorTiltCommand(Conveyor conveyor) {
+    this.conveyor = conveyor;
+    addRequirements(conveyor);
+    //we wont have a working bot so what's the point
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -25,6 +33,9 @@ public class ShooterTiltCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //TODO: change this and say what hand it should be elsewhere
+    double voltage = Robot.oi.operatorController.getY(Hand.kRight);
+    conveyor.setConveyorAngleVoltage(voltage);
   }
 
   // Called once the command ends or is interrupted.

@@ -1,19 +1,17 @@
 package ler.robot.commands.autonomous;
 
-import static ler.robot.Tools.closestEquivalentAngle;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.Robot;
+import ler.robot.Tools;
 import ler.robot.subsystems.Drivetrain;
 import ler.robot.subsystems.Gyro;
 
 public class GyroTurnCommand extends CommandBase {
-
-	private Drivetrain drivetrain;
-	private Gyro gyro;
 	private double target_angle;
 	private boolean finished = false;
 	private boolean absolute;
+	private Drivetrain drivetrain;
+	private Gyro gyro;
 	final double HIGH_SPEED = 0.4;
 	final double LOW_SPEED = 0.20;
 	final double LOW_SPEED_LIMIT = 0.3;
@@ -42,12 +40,12 @@ public class GyroTurnCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		if (!absolute) {
-			gyro.resetAngle();
+			gyro.zero();
 			// target_angle -= target_angle * GYRO_MULTIPLIER; // gyro tends to increase in
 			// error as it turns, this compensates (somewhat)
 			clockwise = target_angle < 0; // gyro tends to increase in error as it turns, this compensates (somewhat)
 		} else {
-			target_angle = closestEquivalentAngle(gyro, target_angle);
+			target_angle = Tools.closestEquivalentAngle(gyro, target_angle);
 //    		target_angle += (target_angle - Robot.gyro.getAbsoluteAngle()) * GYRO_MULTIPLIER; // gyro tends to increase in error as it turns, this compensates (somewhat)	
     		clockwise = gyro.getAbsoluteAngle() > target_angle;
     	}
@@ -90,7 +88,26 @@ public class GyroTurnCommand extends CommandBase {
     	}
     	r = calculated_speed;
     	l = -calculated_speed;
-    	drivetrain.setPercentVoltage(l, r);
+    	drivetrain.tankDrive(l, r);
     }
 
+    // Make this return true when this Command no longer needs to run execute()
+    public boolean isFinished() {
+    	// if (isTimedOut()) {
+    		// Robot.autonomous_command_group.cancel();
+		// }
+		//TODO: re-add finished condition
+        return false;// finished || isTimedOut();
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    	drivetrain.tankDrive(0, 0);
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    	drivetrain.tankDrive(0, 0);
+    }
 }

@@ -9,6 +9,7 @@ package ler.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import ler.robot.Robot;
 import ler.robot.RobotMap;
@@ -44,13 +45,19 @@ public class DriveCommand extends CommandBase {
     //System.out.println("Driving");
     
     //Using the logistic function for adapted speed
-    double leftSpeed = Tools.getAdaptedSpeed(Robot.oi.leftDriverJoystick.getY());
-    double rightSpeed = Tools.getAdaptedSpeed(Robot.oi.rightDriverJoystick.getY());
+    double left;
+    double right;
+    if(RobotMap.XBOX_DRIVE){
+      left = Robot.oi.driverXboxController.getY(Hand.kLeft);
+      right = Robot.oi.driverXboxController.getY(Hand.kRight);
+    }else{
+      left = Robot.oi.leftDriverJoystick.getY();
+      right = Robot.oi.rightDriverJoystick.getY();
+    }
 
-    //double leftSpeed = Robot.oi.leftDriverJoystick.getY();
-    //double rightSpeed = Robot.oi.rightDriverJoystick.getY();
+    double leftSpeed = Tools.getAdaptedSpeed(left);
+    double rightSpeed = Tools.getAdaptedSpeed(right);
     
-    System.out.println("Speeds: " + leftSpeed + "  :  " + rightSpeed);
     double average = (leftSpeed + rightSpeed)/2;
 
     // if sticks are close and speed reasonable, go straight

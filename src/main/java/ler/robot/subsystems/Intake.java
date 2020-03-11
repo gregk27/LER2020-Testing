@@ -8,6 +8,7 @@
 package ler.robot.subsystems;
 
 import ler.robot.RobotMap;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -24,14 +25,30 @@ public class Intake extends SubsystemBase {
 
   }
 
-  public void StartIntake (double speed){
+  public void startIntake(double speed){
     RobotMap.intakeRoller.set(ControlMode.PercentOutput, speed );
 
   }
-  public void StopIntake (){
+  public void stopIntake(){
     RobotMap.intakeRoller.set(ControlMode.PercentOutput, 0);
 
   }
+
+  public void extendIntake(){
+    RobotMap.intakeArm.set(Value.kForward);
+  }
+
+  public void retractIntake(){
+    RobotMap.intakeArm.set(Value.kReverse);
+  }
+
+  public boolean isExtended(){
+    if(RobotMap.intakeArm.get() == Value.kForward){
+      return true;
+    }
+    return false;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

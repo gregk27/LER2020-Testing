@@ -35,15 +35,15 @@ public class InverseBothCommand extends CommandBase {
   @Override
   public void execute() {
     //Drive the intake and conveyor (INVERSE)
-    intake.StartIntake(-Intake.ROLLER_SPEED);
+    intake.startIntake(-Intake.ROLLER_SPEED);
     conveyor.setConveyorSpeed(-Conveyor.INTAKE_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.StopIntake();
-    conveyor.StopConveyor();
+    intake.stopIntake();
+    conveyor.stopConveyor();
   }
 
   // Returns true when the command should end.
