@@ -1,0 +1,9 @@
+<module name="Checker">
+    <property name="basedir" value="src/main/java/ler/robot">
+    <property name="fileExtensions" value="java"/>
+    <module name="JavadocPackage"/>
+    <module name="TreeWalker">
+        <module name="ConstantName"/>
+        <module name="AvoidStarImport"/>
+    </module>
+</module>

@@ -1,6 +1,23 @@
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2020.2.2"
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '8.33'
+    // configFile = file("${rootDir}/checkstyle.xml")
+    // sourceSets = []
+}
+task Checkstyle(type: Checkstyle) {
+    source 'src/main/java/ler/robot/*'
+    // empty classpath
+    classpath = rootProject.files()
+
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
