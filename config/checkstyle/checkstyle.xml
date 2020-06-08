@@ -120,7 +120,67 @@
             </module>
             <!-- Warn about multiline javadoc that could be single line -->
             <module name="SingleLineJavadoc"/>
-            
 
+        <!-- Miscellaneous -->
+            <!-- Array [] positioning -->
+            <module name="ArrayTypeStyle"/>
+            <!-- Warn against use of unicode escapes instead of caharters (unless trailing comment) -->
+            <module name="AvoidEscapedUnicodeCharacters">
+                <property name="allowEscapesForControlCharacters" value="true"/>
+                <property name="allowByTailComment" value="true"/>
+                <property name="severity" value="warning"/>
+            </module>
+            <!-- Keep comment indentation level with code -->
+            <module name="CommentsIndentation"/>
+        
+        <!-- Modifiers -->
+            <!-- Ensure consistent modifier order -->
+            <module name="ModifierOrder"/>
+
+        <!-- Naming -->
+            <!-- Ensure catch variables are named either e# or t# (for exeption or throwable) -->
+            <module name="CatchParameterName">
+                <property name="format" value="^[et]\d*"/>
+            </module>
+            <!-- Ensure constants are CAPITAL_CASE (allows for lower k at start)-->
+            <module name="ConstantName">
+                <property name="format" value="^[A-Zk][_A-Z0-9]*$"/>
+            </module>
+            <module name="LocalFinalVariableName">
+                <property name="format" value="^[A-Zk][_A-Z0-9]*$"/>
+            </module>
+            <!-- Ensure variables are camelCase -->
+            <module name="LocalVariableName"/>
+            <module name="MemberName"/> <!-- This also applies to final members, IDK how to fix-->
+            <module name="StaticVariableName"/>
+            <!-- Ensure functions are camelCase -->
+            <module name="MethodName"/>
+            <!-- Ensure function parameters are camelCase -->
+            <module name="ParameterName"/>
+            <!-- Ensure class names are UpperCamelCase -->
+            <module name="TypeName"/>
+
+        <!-- Whitespace -->
+            <!-- Require line spacing between things -->
+            <module name="EmptyLineSeparator">
+                <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            </module>
+            <!-- Require no space between function name and () -->
+            <module name="MethodParamPad">
+                <!-- <property name="severity" value="warning"/> -->
+            </module>
+            <!-- Reduce whitespace around tokens -->
+            <module name="NoWhitespaceBefore">
+                <property name="severity" value="warning"/>
+            </module>
+            <!-- Prevent excess padding around parentheses -->
+            <module name="ParenPad">
+                <property name="severity" value="warning"/>
+            </module>
+            <module name="TypecastParenPad"/>
+            <!-- Keep commas on same line -->
+            <module name="SeparatorWrap">
+                <property name="tokens" value="COMMA"/>
+            </module>
     </module>
 </module>
