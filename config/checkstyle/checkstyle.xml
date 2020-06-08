@@ -4,15 +4,123 @@
           "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
-    <property name="basedir" value="src/main/java/ler/robot">
+    <!-- <property name="basedir" value="src/main/java/ler/robot"> -->
     <property name="fileExtensions" value="java"/>
-    <property name="cacheFile" value="cache"/>
     <property name="severity" value="error"/>
-    <module name="JavadocPackage"/>
-    <module name="NewlineAtEndOfFile"
     <module name="TreeWalker">
-        <module name="JavadocVaraible"/>
-        <module name="ConstantName"/>
-        <module name="AvoidStarImport"/>
+        <!-- Annotations -->
+            <!-- Prevent same-line annotations -->
+            <module name="AnnotationLocation">
+                <property name="allowSamelineMultipleAnnotations" value="false"/>
+                <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
+                <property name="allowSamelineParameterizedAnnotation" value="false"/>
+            </module>
+        
+        <!-- Blocks -->
+            <!-- Warn about sub-blocks -->
+            <module name="AvoidNestedBlocks">
+                <property name="severity" value="warning"/>
+            </module>
+            <!-- Require statements to have curly brackets unless on one line, prevents ambiguity-->
+            <module name="NeedBraces">
+                <property name="allowSingleLineStatement" value="true"/>
+            </module>
+            <!-- Open curly brackets on same line -->
+            <module name="LeftCurly">
+                <property name="ignoreEnums" value="false"/>
+            </module>
+            <!-- Close curly brackets on newline (unless single line) -->
+            <module name="RightCurly">
+                <property name="option" value="alone_or_singleline"/>
+            </module>
+
+        <!-- General practices -->
+            <!-- Ensure declarations are in a resonable order. See:https://checkstyle.sourceforge.io/config_coding.html#DeclarationOrder -->
+            <module name="DeclarationOrder">
+                <property name="ignoreModifiers" value="true"/>
+                <property name="severity" value="warning"/>
+            </module>
+            <!-- Ensure default is last option in switch -->
+            <module name="DefaultComesLast">
+                <property name="severity" value="warning"/>
+            </module>
+            <!-- Prevent accidental if(cond); statements -->
+            <module name="EmptyStatement">
+                <property name="severity" value="warning"/>
+            </module>
+            <!-- Prevent accidental fogotten break; statements. Can be overidden by "fallthrough" comment-->
+            <module name="FallThrough"/>
+            <!-- Require lowercase x and b in hex/bin numbers -->
+            <module name="IllegalTokenText">
+                <property name="tokens" value="NUM_INT,NUM_LONG"/>
+                <property name="format" value="^0[XB]\w*"/>
+                <property name="message" value="Use lowercase x/b in hex/binary"/>
+            </module>
+            <!-- Prevent accidental assignment instead of equality -->
+            <module name="InnerAssignment"/>
+            <!-- Enforce constants to define values. see:https://checkstyle.sourceforge.io/config_coding.html#MagicNumber -->
+            <!-- This may need to be removed -->
+            <module name="MagicNumber"/>
+            <!-- Prevent the same string being used 3 times without a dedicated variable -->
+            <module name="MultipleStringLiterals">
+                <property name="allowedDuplicates" value="2"/>
+                <property name="severity" value="warning"/>
+            </module>
+            <!-- Enforce one statement per line -->
+            <module name="OneStatementPerLine"/>
+            <!-- Keep overloads are together -->
+            <module name="OverloadMethodsDeclarationOrder"/>
+            <!-- Keep boolean logic simple -->
+            <module name="SimplifyBooleanExpression"/>
+            <!-- Enforce .equals() instead of == for strings -->
+            <module name="StringLiteralEquality"/>
+            <!-- Remove semicolon after closed curly brace -->
+            <module name="UnnecessarySemicolonAfterOuterTypeDeclaration"/>
+            <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
+            <!-- Remove semicolon in enum -->
+            <module name="UnnecessarySemicolonInEnumeration"/>
+        
+        <!-- Imports -->
+            <!-- Prevent redundant imports -->
+            <module name="RedundantImport">
+                <property name="severity" value="warning"/>
+            </module>
+
+        <!-- Javadoc -->
+            <!-- Enforce consistend tag order, may be cancelled by function annotations -->
+            <module name="AtclauseOrder"/>
+            <!-- Ensure javadoc is in a valid position -->
+            <module name="InvalidJavadocPosition"/>
+            <!-- Ensure tags have own line -->
+            <module name="JavadocBlockTagLocation"/>
+            <!-- Ensure multiline javadoc starts on second line -->
+            <module name="JavadocContentLocationCheck"/>
+            <!-- Ensure whitespace after asterix -->
+            <module name="JavadocMissingWhitespaceAfterAsterisk"/>
+            <!-- Various minor grammatical checks (notably punctuation) -->
+            <module name="JavadocStyle">
+                <property name="severity" value="warning"/>
+            </module>
+            <!-- Ensure correct indentaion and closed tags -->
+            <module name="JavadocTagContinuationIndentation">
+                <property name="violateExecutionOnNonTightHtml" value="true"/>
+            </module>
+            <!-- Ensure that methods (barring overrides and set/get) have javadoc -->
+            <module name="MissingJavadocMethod">
+                <property name="scope" value="private"/>
+                <property name="allowMissingPropertyJavadoc" value="true"/>
+            </module>
+            <!-- Ensure classes/enums have javadoc -->
+            <module name="MissingJavadocType">
+                <property name="scope" value="private"/>
+            </module>
+            <!-- Warn about blank @clauses -->
+            <module name="NonEmptyAtclauseDescription">
+                <property name="severity" value="warning"/>
+            </module>
+            <!-- Warn about multiline javadoc that could be single line -->
+            <module name="SingleLineJavadoc"/>
+            
+
     </module>
 </module>

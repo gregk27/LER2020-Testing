@@ -6,17 +6,18 @@ plugins {
 
 checkstyle {
     toolVersion = '8.33'
-    // configFile = file("${rootDir}/checkstyle.xml")
-    // sourceSets = []
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+    sourceSets = []
 }
 task Checkstyle(type: Checkstyle) {
-    source 'src/main/java/ler/robot/*'
+    dependsOn 'checkstyleMain'
+    source 'src/main/*'
     // empty classpath
     classpath = rootProject.files()
 
     reports {
         xml.enabled false
-        html.enabled true
+        html.enabled false
     }
 }
 
