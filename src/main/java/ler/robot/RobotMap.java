@@ -24,10 +24,14 @@ import ler.robot.subsystems.Shooter;
  * declared globally (i.e. public static).  Do not put anything functional in this class.
  *
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
+ * constants are needed, to reduce verbosity.</p>
  */
 public final class RobotMap {
   public static boolean XBOX_DRIVE = false;
+
+  /**
+   * Constants used for CAN loop elements.
+   */
   public static final class CANConstants {
 
     public static final int LEFT_DRIVE_SPARK_1 = 2;
@@ -51,6 +55,9 @@ public final class RobotMap {
   
   }
 
+  /**
+   * Constants used for solenoids attached to the PCM.
+   */
   public static final class SOLENOIDConstants {
     
     public static final int CONVEYOR_DOWN = 0;
@@ -63,6 +70,9 @@ public final class RobotMap {
     public static final int CLIMBER_UP = 5;
   }
 
+  /**
+   * Constants used to map OI controls.
+   */
   public static final class OIConstants {
     public static final int DRIVER_XBOX_CONTROLLER = 0;
 
@@ -104,6 +114,10 @@ public final class RobotMap {
   }
 
 
+  /* 
+    CHECKSTYLE OFF: ConstantNameCheck
+    Motor controllers are an exception to naming conventions, so checkstyle must be disabled for this block
+  */
   // The motors on the left side of the drive.
   public static final CANSparkMax leftDriveSpark1 = new CANSparkMax(CANConstants.LEFT_DRIVE_SPARK_1, MotorType.kBrushless);
   public static final CANSparkMax leftDriveSpark2 = new CANSparkMax(CANConstants.LEFT_DRIVE_SPARK_2, MotorType.kBrushless);
@@ -137,7 +151,7 @@ public final class RobotMap {
 
   // Gyro
   public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-
+  /* CHECKSTYLE ON: ConstantNameCheck */
 
 
   public static void init(){
