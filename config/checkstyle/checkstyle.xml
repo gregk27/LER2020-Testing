@@ -64,10 +64,16 @@
             <module name="InnerAssignment"/>
             <!-- Enforce constants to define values. see:https://checkstyle.sourceforge.io/config_coding.html#MagicNumber -->
             <!-- This may need to be removed -->
-            <module name="MagicNumber"/>
+            <module name="MagicNumber">
+                <property name="severity" value="warning"/>
+                <property name="ignoreNumbers" value="-360,-2,-1,-0.5,-0.25,0,0.25,0.5,1,2,360"/>
+                <property name="ignoreFieldDeclaration" value="true"/>
+                <message key="magic.number" value="''{0}'' is a magic number, and should have a dedicated constant."/>
+            </module>
             <!-- Prevent the same string being used 3 times without a dedicated variable -->
             <module name="MultipleStringLiterals">
                 <property name="allowedDuplicates" value="2"/>
+                <property name="ignoreStringsRegexp" value='^"\\[tn]"$'/>
                 <property name="severity" value="warning"/>
             </module>
             <!-- Enforce one statement per line -->
@@ -115,6 +121,8 @@
                 <property name="scope" value="private"/>
                 <property name="allowMissingPropertyJavadoc" value="true"/>
             </module>
+            <!-- Ensure methods have complete javadoc -->
+            <module name="JavadocMethod"/>
             <!-- Ensure classes/enums have javadoc -->
             <module name="MissingJavadocType">
                 <property name="scope" value="private"/>
@@ -184,6 +192,7 @@
             <!-- Require line spacing between things -->
             <module name="EmptyLineSeparator">
                 <property name="allowNoEmptyLineBetweenFields" value="true"/>
+                <message key="empty.line.separator" value="This should be separated from the above statement by a newline"/>
             </module>
             <!-- Require no space between function name and () -->
             <module name="MethodParamPad">
@@ -202,19 +211,30 @@
             <module name="SeparatorWrap">
                 <property name="tokens" value="COMMA"/>
             </module>
-
             <!-- Ensure brackets adjacent to if/for/while/catch -->
             <module name="RegexpSinglelineJava">
-                <property name="format" value="(if|for|while|catch) +\(.*\)"/>
+                <property name="format" value="(if|for|while|catch) +\(.*\) *\{"/>
                 <property name="ignoreComments" value="true"/>
                 <property name="message" value="Remove space before open bracket"/>
             </module>
-            
             <!-- Ensure brackets adjacent to if/for/while/catch -->
             <module name="RegexpSinglelineJava">
-                <property name="format" value="(if|for|while|catch) *\(.*\) +"/>
+                <property name="format" value="(if|for|while|catch) *\(.*\) +\{"/>
                 <property name="ignoreComments" value="true"/>
                 <property name="message" value="Remove space before curly brace"/>
             </module>
+            <!-- Ensure space before else -->
+            <module name="RegexpSinglelineJava">
+                <property name="format" value="}else"/>
+                <property name="ignoreComments" value="true"/>
+                <property name="message" value="Add space before else"/>
+            </module>
+            <!-- Ensure space after else -->
+            <module name="RegexpSinglelineJava">
+                <property name="format" value="else\{"/>
+                <property name="ignoreComments" value="true"/>
+                <property name="message" value="Add space after else"/>
+            </module>
+
     </module>
 </module>
