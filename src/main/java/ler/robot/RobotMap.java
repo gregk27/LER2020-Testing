@@ -27,7 +27,9 @@ import ler.robot.subsystems.Shooter;
  * constants are needed, to reduce verbosity.</p>
  */
 public final class RobotMap {
-  public static boolean XBOX_DRIVE = false;
+  public static boolean xboxDrive = false;
+  static final double CONVERSION_FACTOR = 0.6;
+  static final double RAMP_RATE = 0.2;
 
   /**
    * Constants used for CAN loop elements.
@@ -154,17 +156,19 @@ public final class RobotMap {
   /* CHECKSTYLE ON: ConstantNameCheck */
 
 
+  /** Initialize robot systems.*/
   public static void init(){
     gyro.calibrate();
 
-    XBOX_DRIVE = SmartDashboard.getBoolean("xbox drive", XBOX_DRIVE);
+    xboxDrive = SmartDashboard.getBoolean("xbox drive", xboxDrive);
 
-    leftDriveSpark1.getEncoder().setPositionConversionFactor(0.6*Math.PI);
-    leftDriveSpark2.getEncoder().setPositionConversionFactor(0.6*Math.PI);
-    leftDriveSpark3.getEncoder().setPositionConversionFactor(0.6*Math.PI);
-    rightDriveSpark1.getEncoder().setPositionConversionFactor(0.6*Math.PI);
-    rightDriveSpark2.getEncoder().setPositionConversionFactor(0.6*Math.PI);
-    rightDriveSpark3.getEncoder().setPositionConversionFactor(0.6*Math.PI);
+
+    leftDriveSpark1.getEncoder().setPositionConversionFactor(CONVERSION_FACTOR*Math.PI);
+    leftDriveSpark2.getEncoder().setPositionConversionFactor(CONVERSION_FACTOR*Math.PI);
+    leftDriveSpark3.getEncoder().setPositionConversionFactor(CONVERSION_FACTOR*Math.PI);
+    rightDriveSpark1.getEncoder().setPositionConversionFactor(CONVERSION_FACTOR*Math.PI);
+    rightDriveSpark2.getEncoder().setPositionConversionFactor(CONVERSION_FACTOR*Math.PI);
+    rightDriveSpark3.getEncoder().setPositionConversionFactor(CONVERSION_FACTOR*Math.PI);
 
     // leftDriveSpark1.getEncoder().
 
@@ -174,8 +178,8 @@ public final class RobotMap {
     leftDriveSpark1.setInverted(false);
     rightDriveSpark1.setInverted(true);
 
-    leftDriveSpark1.setOpenLoopRampRate(0.2);
-    rightDriveSpark1.setOpenLoopRampRate(0.2);
+    leftDriveSpark1.setOpenLoopRampRate(RAMP_RATE);
+    rightDriveSpark1.setOpenLoopRampRate(RAMP_RATE);
 
     rightDriveSpark2.follow(rightDriveSpark1);
     rightDriveSpark3.follow(rightDriveSpark1);

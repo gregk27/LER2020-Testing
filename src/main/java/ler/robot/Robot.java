@@ -8,25 +8,11 @@
 package ler.robot;
 
 
-import javax.rmi.ssl.SslRMIClientSocketFactory;
-
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.vision.VisionRunner;
-import edu.wpi.first.vision.VisionThread;
-import edu.wpi.first.cameraserver.CameraServer;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.core.Rect;
-
-import ler.robot.vision.GripPipeline;
-
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import ler.robot.commands.autonomous.AutoDriveStraightCommand;
 import ler.robot.commands.autonomous.TestAutoCommand;
-import ler.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -39,20 +25,19 @@ public class Robot extends TimedRobot {
 
   private RobotContainer robotContainer;
   public static OI oi = new OI();
-  final int test = 1;
-
 
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
+   * @throws test test
+   * @return nothing
+   * @author Greg
    */
-
-  @Override
+  @Override  
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     RobotMap.init();
-
     robotContainer = new RobotContainer();
   }
 
@@ -61,7 +46,7 @@ public class Robot extends TimedRobot {
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
    *
    * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
+   * LiveWindow and SmartDashboard integrated updating.</p>
    */
   @Override
   public void robotPeriodic() {
@@ -109,8 +94,8 @@ public class Robot extends TimedRobot {
 
     // schedule the autonomous command (example)
     // if (autonomousCommand != null) {
-      System.out.println("Starting Scheduler");
-      autonomousCommand.schedule();
+    System.out.println("Starting Scheduler");
+    autonomousCommand.schedule();
     // }
   }
 
@@ -130,7 +115,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (autonomousCommand != null) {
+    if(autonomousCommand != null){
       autonomousCommand.cancel();
     }
     

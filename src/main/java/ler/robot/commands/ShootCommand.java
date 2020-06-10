@@ -61,8 +61,7 @@ public class ShootCommand extends CommandBase {
 
       conveyor.setConveyorSpeed(conveyorSpeed);
 
-    } 
-    else {
+    } else {
       conveyor.setConveyorSpeed(0);
     
     }
