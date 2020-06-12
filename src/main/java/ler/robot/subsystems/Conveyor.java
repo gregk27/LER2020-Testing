@@ -8,9 +8,11 @@
 package ler.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 
-import ler.robot.RobotMap;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -32,15 +34,21 @@ public class Conveyor extends SubsystemBase {
 
   public static final double CONVERT_DISTANCE_TO_MOTOR = 1;
 
+
+  TalonSRX driveMotor;
+  CANSparkMax angleMotor;
+  DoubleSolenoid valve;
   /**
    * Creates a new Conveyor.
    */
-  public Conveyor() {
-
+  public Conveyor(TalonSRX driveMotor, CANSparkMax angleMotor, DoubleSolenoid valve) {
+    this.driveMotor = driveMotor;
+    this.angleMotor = angleMotor;
+    this.valve = valve;
   }
 
   public void setConveyorSpeed (double speed){
-    RobotMap.conveyorMotor.set(ControlMode.PercentOutput, -speed);
+    driveMotor.set(ControlMode.PercentOutput, -speed);
 
   }
 
@@ -65,25 +73,25 @@ public class Conveyor extends SubsystemBase {
 
     angle = distance * CONVERT_DISTANCE_TO_MOTOR;
 
-    RobotMap.angleElevation.getPIDController().setReference(angle, ControlType.kPosition);
+    angleMotor.getPIDController().setReference(angle, ControlType.kPosition);
   }
 
   public void setConveyorAngleVoltage (double voltage){
     //TODO: this might need to be scaled or something
-    RobotMap.angleElevation.getPIDController().setReference(voltage, ControlType.kVoltage);
+    angleMotor.getPIDController().setReference(voltage, ControlType.kVoltage);
   }
 
   public void setValveState (boolean state){
     if(state){
       //open
-      RobotMap.conveyorValve.set(Value.kForward);
+      valve.set(Value.kForward);
     }else{
-      RobotMap.conveyorValve.set(Value.kReverse);
+      valve.set(Value.kReverse);
     }
   }
 
   public boolean isExtended(){
-    if(RobotMap.conveyorValve.get() == Value.kForward){
+    if(valve.get() == Value.kForward){
       return true;
     }
     return false;

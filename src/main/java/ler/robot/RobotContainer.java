@@ -34,8 +34,8 @@ public class RobotContainer {
   // The robot's subsystems
   public final Gyro gyro = new Gyro();
   public final Shooter shooter = new Shooter();
-  public final Intake intake = new Intake();
-  public final Conveyor conveyor = new Conveyor();
+  public final Intake intake = new Intake(RobotMap.intakeRoller, RobotMap.intakeArm);
+  public final Conveyor conveyor = new Conveyor(RobotMap.conveyorMotor, RobotMap.angleElevation, RobotMap.conveyorValve);
   public final Drivetrain drivetrain = new Drivetrain();
   public final Limelight limelight = new Limelight();
   public final Climber climber = new Climber();
