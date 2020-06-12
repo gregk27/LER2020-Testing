@@ -24,19 +24,16 @@ public class IntakeCommand extends CommandBase {
     
     addRequirements(intake);
     addRequirements(conveyor);
-    System.out.println("Constructing");
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("Initializing");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Executing");
     //Drive the intake and conveyor
     intake.extendIntake();
     intake.startIntake(-Intake.ROLLER_SPEED);
@@ -47,6 +44,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.stopIntake();
+    intake.retractIntake();
     //conveyor.StopConveyor();
   }
 

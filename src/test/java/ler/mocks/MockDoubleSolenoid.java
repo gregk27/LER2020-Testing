@@ -16,7 +16,6 @@ public class MockDoubleSolenoid {
        
        //Update when position set
        doAnswer(invocation -> {
-        System.out.println("Updating state");
         Object[] args = invocation.getArguments();
         state = (Value) args[0];
         return null; // void method in a block-style lambda, so return null
@@ -24,7 +23,6 @@ public class MockDoubleSolenoid {
       
       //Return state upon request (in lambda, as simpler function was slower than above lambda)
       doAnswer(invocation->{
-        System.out.println(state);
         return state;
       }).when(ds).get();
     }
