@@ -14,8 +14,8 @@ import com.robototes.helpers.MockHardwareExtension;
 import com.robototes.helpers.TestWithScheduler;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import ler.mocks.MockCTREController;
-import ler.mocks.MockDoubleSolenoid;
+import ler.mocks.ctre.MockCTREController;
+import ler.mocks.wpilib.MockDoubleSolenoid;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Intake;
 
