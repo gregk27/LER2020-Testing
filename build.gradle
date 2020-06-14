@@ -67,3 +67,20 @@ jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
 }
+
+task subsystemTest( type: Test ) {
+    include 'ler/robot/subsystems/**'
+}
+
+task commandTest( type: Test ) {
+    include 'ler/robot/commands/**'
+    exclude 'ler/robot/commands/autonomous/**'
+}
+
+task autoTest( type:Test ) {
+    include 'ler/robot/commands/autonomous/**'
+}
+
+task simTest( type: Test ) {
+    include 'ler/robot/*'
+}
