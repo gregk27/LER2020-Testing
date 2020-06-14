@@ -1,20 +1,22 @@
 package ler.robot.commands;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.robototes.helpers.MockButton;
-import com.robototes.helpers.MockHardwareExtension;
-import com.robototes.helpers.TestWithScheduler;
-
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import ler.mocks.ctre.MockCTREController;
+import ler.mocks.scheduler.MockButton;
+import ler.mocks.scheduler.MockHardwareExtension;
+import ler.mocks.scheduler.TestWithScheduler;
 import ler.mocks.wpilib.MockDoubleSolenoid;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Intake;
