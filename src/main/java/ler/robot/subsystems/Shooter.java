@@ -10,7 +10,6 @@ package ler.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import ler.robot.RobotMap;
 
 public class Shooter extends SubsystemBase{
   
@@ -33,13 +32,21 @@ public class Shooter extends SubsystemBase{
 
   public long spoolTime = System.currentTimeMillis();
 
+  CANSparkMax topLeftSpark;
+  CANSparkMax topRightSpark;
+  CANSparkMax bottomRightSpark;
+  CANSparkMax bottomLeftSpark;
+
   //Cycles per revolution of encoders on shooter
   public static final int cPR = 64;
   /**
    * Creates a new ShooterSubsystem.
    */
-  public Shooter() {
-
+  public Shooter(CANSparkMax tlSpark, CANSparkMax trSpark, CANSparkMax brSpark, CANSparkMax blSpark) {
+    topLeftSpark = tlSpark;
+    topRightSpark = trSpark;
+    bottomRightSpark = brSpark;
+    bottomLeftSpark = blSpark;
   }
 
   public void setShootersSpeed(int speedArrayPosition){
@@ -49,18 +56,18 @@ public class Shooter extends SubsystemBase{
   public void setSpecificShootersSpeed(double speed){
     spoolTime = System.currentTimeMillis()+100;
     setSpecificShooterSpeed(speed, LEFT_SHOOTER);
-    setSpecificShooterSpeed(-speed * SPIN_CONSTANT, RIGHT_SHOOTER);
+    setSpecificShooterSpeed(-speed, RIGHT_SHOOTER);
   }
 
   public void setSpecificShooterSpeed(double speed, int shooter){
     CANSparkMax topShooter;
     CANSparkMax bottomShooter;
     if(shooter == LEFT_SHOOTER){
-      topShooter = RobotMap.shooterTopLeftSpark;
-      bottomShooter = RobotMap.shooterBottomLeftSpark;
+      topShooter = topLeftSpark;
+      bottomShooter = bottomLeftSpark;
     }else{
-      topShooter = RobotMap.shooterTopRightSpark;
-      bottomShooter = RobotMap.shooterTopRightSpark;
+      topShooter = topRightSpark;
+      bottomShooter = bottomRightSpark;
     }
 
     if(speed == 0){
@@ -75,19 +82,19 @@ public class Shooter extends SubsystemBase{
   }
 
   public double getTopLeftSparkSpeed(){
-    return(RobotMap.shooterTopLeftSpark.getEncoder().getVelocity());
+    return(topLeftSpark.getEncoder().getVelocity());
   }
   
   public double getTopRightSparkSpeed(){
-    return(RobotMap.shooterTopRightSpark.getEncoder().getVelocity());
+    return(topRightSpark.getEncoder().getVelocity());
   }
 
   public double getBottomLeftSparkSpeed(){
-    return(RobotMap.shooterBottomLeftSpark.getEncoder().getVelocity());
+    return(bottomLeftSpark.getEncoder().getVelocity());
   }
   
   public double getBottomRightSparkSpeed(){
-    return(RobotMap.shooterBottomRightSpark.getEncoder().getVelocity());
+    return(bottomRightSpark.getEncoder().getVelocity());
   }
 
   public double getAverageSparksSpeed(){
