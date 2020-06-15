@@ -50,10 +50,10 @@ jobs:
       #If there is a failure, re-run all tests to generate the complete report
     - name: Generate report (on fail)
       if: ${{ failure() }}
-      run: ./gradlew test || git_hash=$(git rev-parse --short "$GITHUB_SHA") || echo Report generated
+      run: ./gradlew test || echo Report generated
     - name: Upload report (on fail)
       if: ${{ failure() }}
       uses: actions/upload-artifact@v1
       with:
-        name: Test Report - ${{ git_hash }}
+        name: Test Report - ${{ github.sha }}
         path: build/reports/tests/test/
