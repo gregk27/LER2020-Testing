@@ -38,36 +38,22 @@ jobs:
       #Test subsystems first, as they are the lowest-level tests
     - name: Test Subsystems
       run: ./gradlew subsystemTest
-    - name: Test results
-      if: ${{ failure() }}
-      uses: actions/upload-artifact@v1
-      with:
-        name: app
-        path: build/reports/subsystemTest/
       #Command tests depend on subsystems, so they are next
     - name: Test commands
       run: ./gradlew commandTest
-    - name: Test results
-      if: ${{ failure() }}
-      uses: actions/upload-artifact@v1
-      with:
-        name: app
-        path: build/reports/commandTest/
       #Auto commands depend on commands, so they are next
     - name: Test auto commands
       run: ./gradlew autoTest
-    - name: Test results
-      if: ${{ failure() }}
-      uses: actions/upload-artifact@v1
-      with:
-        name: app
-        path: build/reports/autoTest/
       #Finally simulation tests may include many of the above
     - name: Simulation tests
       run: ./gradlew simTest
-    - name: Test results
+      #If there is a failure, re-run all tests to generate the complete report
+    - name: Generate report (on fail)
+      if: ${{ failure() }}
+      run: ./gradlew test
+    - name: Upload report (on fail)
       if: ${{ failure() }}
       uses: actions/upload-artifact@v1
       with:
         name: app
-        path: build/reports/simTest/
+        path: build/reports/tests/test/
