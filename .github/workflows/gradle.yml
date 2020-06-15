@@ -17,6 +17,7 @@ jobs:
         java-version: 1.11
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      #Build without testing so we know whether it builds
     - name: Build
       run: ./gradlew build -x test
 
@@ -34,15 +35,39 @@ jobs:
         java-version: 1.11
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      #Test subsystems first, as they are the lowest-level tests
     - name: Test Subsystems
       run: ./gradlew subsystemTest
+    - name: Test results
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v1
+      with:
+        name: app
+        path: build/reports/subsystemTest/
+      #Command tests depend on subsystems, so they are next
     - name: Test commands
       run: ./gradlew commandTest
+    - name: Test results
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v1
+      with:
+        name: app
+        path: build/reports/commandTest/
+      #Auto commands depend on commands, so they are next
     - name: Test auto commands
       run: ./gradlew autoTest
+    - name: Test results
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v1
+      with:
+        name: app
+        path: build/reports/autoTest/
+      #Finally simulation tests may include many of the above
     - name: Simulation tests
       run: ./gradlew simTest
-    - uses: ashley-taylor/junit-report-annotations-action@master
-      if: always()
+    - name: Test results
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v1
       with:
-        access-token: ${{ secrets.GITHUB_TOKEN }}
+        name: app
+        path: build/reports/simTest/
