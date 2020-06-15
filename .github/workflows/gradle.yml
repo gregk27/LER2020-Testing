@@ -55,5 +55,5 @@ jobs:
       if: ${{ failure() }}
       uses: actions/upload-artifact@v1
       with:
-        name: Test Report
+        name: Test Report - $(git rev-parse --short "$GITHUB_SHA")
         path: build/reports/tests/test/
