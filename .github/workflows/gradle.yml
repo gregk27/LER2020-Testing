@@ -42,3 +42,7 @@ jobs:
       run: ./gradlew autoTest
     - name: Simulation tests
       run: ./gradlew simTest
+    - uses: ashley-taylor/junit-report-annotations-action@master
+      if: always()
+      with:
+        access-token: ${{ secrets.GITHUB_TOKEN }}
