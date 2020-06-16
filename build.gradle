@@ -68,19 +68,42 @@ jar {
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
 }
 
+test {
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
+}
+
 task subsystemTest( type: Test ) {
     include 'ler/robot/subsystems/**'
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
 }
 
 task commandTest( type: Test ) {
     include 'ler/robot/commands/**'
     exclude 'ler/robot/commands/autonomous/**'
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
 }
 
 task autoTest( type:Test ) {
     include 'ler/robot/commands/autonomous/**'
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
 }
 
 task simTest( type: Test ) {
     include 'ler/robot/*'
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
 }
