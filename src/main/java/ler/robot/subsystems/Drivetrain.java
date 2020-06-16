@@ -7,41 +7,31 @@
 
 package ler.robot.subsystems;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import ler.robot.RobotMap;
 
 public class Drivetrain extends SubsystemBase {
   
   double maxOutput=1;
   private boolean isInverted = false;
 
-  
+  CANSparkMax leftSide;
+  CANSparkMax rightSide;
 
+  public Drivetrain(CANSparkMax leftLead, CANSparkMax rightLead){
+    
+  }
 
   public double getLeftEncoder() {
-    return(((RobotMap.leftDriveSpark1.getEncoder().getPosition())));// + (RobotMap.leftDriveSpark2.getEncoder().getPosition()) + (RobotMap.leftDriveSpark3.getEncoder().getPosition())/3.00));
+    return(((leftSide.getEncoder().getPosition())));// + (RobotMap.leftDriveSpark2.getEncoder().getPosition()) + (RobotMap.leftDriveSpark3.getEncoder().getPosition())/3.00));
   }
   public double getRightEncoder() {
-    return(((RobotMap.rightDriveSpark1.getEncoder().getPosition())));// + (RobotMap.rightDriveSpark2.getEncoder().getPosition()) + (RobotMap.rightDriveSpark3.getEncoder().getPosition())/3.00));
+    return(((rightSide.getEncoder().getPosition())));// + (RobotMap.rightDriveSpark2.getEncoder().getPosition()) + (RobotMap.rightDriveSpark3.getEncoder().getPosition())/3.00));
   }
   public void resetPosition(){
-    RobotMap.leftDriveSpark1.getEncoder().setPosition(0);
-    RobotMap.leftDriveSpark2.getEncoder().setPosition(0);
-    RobotMap.leftDriveSpark3.getEncoder().setPosition(0);
-    RobotMap.rightDriveSpark1.getEncoder().setPosition(0);
-    RobotMap.rightDriveSpark2.getEncoder().setPosition(0);
-    RobotMap.rightDriveSpark3.getEncoder().setPosition(0);
-  }
-
-
-
-
-  /**
-   * Creates a new DriveSubsystem.
-   */
-  public Drivetrain() {
-
+    leftSide.getEncoder().setPosition(0);
+    rightSide.getEncoder().setPosition(0);
   }
 
   /**
@@ -61,14 +51,14 @@ public class Drivetrain extends SubsystemBase {
       left = right * -1;
       right = tempRight;
     }
-    RobotMap.leftDriveSpark1.set(left);
-    RobotMap.rightDriveSpark1.set(right);
+    leftSide.set(left);
+    rightSide.set(right);
     //System.out.println("Actual Left" + left+"\t"+ "Actual Right" + right);
   }
 
   public void tankStop() {
-    RobotMap.leftDriveSpark1.set(0);
-    RobotMap.rightDriveSpark1.set(0);
+    leftSide.set(0);
+    rightSide.set(0);
   }
 
   //@todo currently not mapped to anything
@@ -86,7 +76,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void setPercentVoltage(double l, double r) {
-		RobotMap.leftDriveSpark1.set(l);	// because talons 2 and 3 follow 1, we only need to set 1
-		RobotMap.rightDriveSpark1.set( -r);
+		leftSide.set(l);	// because talons 2 and 3 follow 1, we only need to set 1
+		rightSide.set( -r);
 	}
 }

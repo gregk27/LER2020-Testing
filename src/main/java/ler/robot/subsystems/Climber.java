@@ -10,25 +10,35 @@ package ler.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import ler.robot.RobotMap;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class Climber extends SubsystemBase{
     
+    DoubleSolenoid piston;
+    TalonFX winch;
+
+    public Climber(DoubleSolenoid piston, TalonFX winch){
+        this.piston = piston;
+        this.winch = winch;
+    }
+    
     public void raiseElevator() {
-        RobotMap.climberPiston.set(Value.kForward);
+        piston.set(Value.kForward);
     }
 
     public void lowerElevator() {
-        RobotMap.climberPiston.set(Value.kReverse);
+        piston.set(Value.kReverse);
     }
 
     public void driveWinch(double speed) {
-        RobotMap.climbingMech.set(ControlMode.PercentOutput, speed);
+        winch.set(ControlMode.PercentOutput, speed);
     }
 
     public boolean isElevatorExtended(){
-        if(RobotMap.climberPiston.get() == Value.kForward){
+        if(piston.get() == Value.kForward){
             return true;
         }
         return false;
