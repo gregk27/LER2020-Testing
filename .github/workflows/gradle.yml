@@ -31,3 +31,7 @@ jobs:
         run: chmod +x gradlew
       - name: Checkstyle
         run: ./gradlew checkstyle
+      - uses: jwgmeligmeyling/checkstyle-github-action@v1
+        with:
+          path: 'build/reports/checkstyle/main.xml'
+  
