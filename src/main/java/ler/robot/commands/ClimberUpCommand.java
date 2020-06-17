@@ -17,7 +17,9 @@ public class ClimberUpCommand extends CommandBase {
   Climber climber;
 
   /**
-   * Creates a new invertControlsCommand.
+   * Creates a new ClimberUpCommand.
+   * 
+   * @param climber The climber subsystem
    */
   public ClimberUpCommand(Climber climber) {
     this.climber = climber;

@@ -22,7 +22,10 @@ public class GyroDriveCommand extends CommandBase {
   Gyro gyro;
 
   /**
-   * Creates a new GyroDriveComman.
+   * Creates a new GyroDriveCommand.
+   * 
+   * @param d The drivetrain subsystem
+   * @param g The gyro subsystem
    */
   public GyroDriveCommand(Drivetrain d, Gyro g) {
     // Use addRequirements() here to declare subsystem dependencies.
