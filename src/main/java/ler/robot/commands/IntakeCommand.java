@@ -40,6 +40,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     //Drive the intake and conveyor
+    intake.extendIntake();
     intake.startIntake(-Intake.ROLLER_SPEED);
     conveyor.setConveyorSpeed(Conveyor.INTAKE_SPEED);
   }
@@ -48,6 +49,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.stopIntake();
+    intake.retractIntake();
     //conveyor.StopConveyor();
   }
 

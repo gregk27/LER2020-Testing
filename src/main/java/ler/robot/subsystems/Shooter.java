@@ -10,7 +10,6 @@ package ler.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import ler.robot.RobotMap;
 
 /**
  * Subsystem to control Shooter wheels.
@@ -36,14 +35,31 @@ public class Shooter extends SubsystemBase{
 
   public long spoolTime = System.currentTimeMillis();
 
+  CANSparkMax topLeftSpark;
+  CANSparkMax topRightSpark;
+  CANSparkMax bottomRightSpark;
+  CANSparkMax bottomLeftSpark;
+
   //Cycles per revolution of encoders on shooter
   public static final int CYCLES_PER_REV = 64;
 
   /**
    * Creates a new ShooterSubsystem.
+   * <p> Args order: 
+   * <p>1 > 2
+   * <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v
+   * <p>4 < 3
+   * 
+   * @param tlSpark The spark controlling the top-left flywheel
+   * @param trSpark The spark controlling the top-right flywheel
+   * @param brSpark The spark controlling the bottom-right flywheel
+   * @param blSpark The spark controlling the bottom-left flywheel
    */
-  public Shooter() {
-
+  public Shooter(CANSparkMax tlSpark, CANSparkMax trSpark, CANSparkMax brSpark, CANSparkMax blSpark) {
+    topLeftSpark = tlSpark;
+    topRightSpark = trSpark;
+    bottomRightSpark = brSpark;
+    bottomLeftSpark = blSpark;
   }
 
   /**
@@ -65,7 +81,7 @@ public class Shooter extends SubsystemBase{
     spoolTime = System.currentTimeMillis()+100;
     // CHECKSTYLE ON: MagicNumber
     setSpecificShooterSpeed(speed, LEFT_SHOOTER);
-    setSpecificShooterSpeed(-speed * SPIN_CONSTANT, RIGHT_SHOOTER);
+    setSpecificShooterSpeed(-speed, RIGHT_SHOOTER);
   }
 
   /**
@@ -78,11 +94,11 @@ public class Shooter extends SubsystemBase{
     CANSparkMax topShooter;
     CANSparkMax bottomShooter;
     if(shooter == LEFT_SHOOTER){
-      topShooter = RobotMap.shooterTopLeftSpark;
-      bottomShooter = RobotMap.shooterBottomLeftSpark;
+      topShooter = topLeftSpark;
+      bottomShooter = bottomLeftSpark;
     } else {
-      topShooter = RobotMap.shooterTopRightSpark;
-      bottomShooter = RobotMap.shooterTopRightSpark;
+      topShooter = topRightSpark;
+      bottomShooter = bottomRightSpark;
     }
 
     if(speed == 0){
@@ -97,19 +113,19 @@ public class Shooter extends SubsystemBase{
   }
 
   public double getTopLeftSparkSpeed(){
-    return(RobotMap.shooterTopLeftSpark.getEncoder().getVelocity());
+    return(topLeftSpark.getEncoder().getVelocity());
   }
   
   public double getTopRightSparkSpeed(){
-    return(RobotMap.shooterTopRightSpark.getEncoder().getVelocity());
+    return(topRightSpark.getEncoder().getVelocity());
   }
 
   public double getBottomLeftSparkSpeed(){
-    return(RobotMap.shooterBottomLeftSpark.getEncoder().getVelocity());
+    return(bottomLeftSpark.getEncoder().getVelocity());
   }
   
   public double getBottomRightSparkSpeed(){
-    return(RobotMap.shooterBottomRightSpark.getEncoder().getVelocity());
+    return(bottomRightSpark.getEncoder().getVelocity());
   }
 
   public double getAverageSparksSpeed(){

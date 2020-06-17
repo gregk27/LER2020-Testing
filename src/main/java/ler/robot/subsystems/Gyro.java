@@ -7,6 +7,7 @@
 
 package ler.robot.subsystems;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import ler.robot.RobotMap;
 
@@ -16,6 +17,8 @@ import ler.robot.RobotMap;
 public class Gyro extends SubsystemBase {
 
   double setpoint = 0;
+
+  ADXRS450_Gyro gyro;
 
   /**
    * Creates a new Gyro.
@@ -28,14 +31,14 @@ public class Gyro extends SubsystemBase {
    * Initialize the gyro. This should be called once in robot initialisation
    */
   public void init(){
-    RobotMap.gyro.calibrate();
+    gyro.calibrate();
   }
 
   /**
    * Make getAngle return 0 for current heading.
    */
   public void zero(){
-    setpoint = RobotMap.gyro.getAngle();
+    setpoint = gyro.getAngle();
   }
 
   /**
@@ -71,7 +74,7 @@ public class Gyro extends SubsystemBase {
    * @return Current heading, relative to init or last zero
    */
   public double getAngle(){
-    return setpoint - RobotMap.gyro.getAngle();
+    return setpoint - gyro.getAngle();
   }
 
   /**
@@ -79,6 +82,6 @@ public class Gyro extends SubsystemBase {
    * @return Current heading, relative to init
    */
   public double getAbsoluteAngle() {
-    return -RobotMap.gyro.getAngle();
+    return -gyro.getAngle();
   }
 }

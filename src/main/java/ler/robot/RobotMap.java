@@ -148,7 +148,7 @@ public final class RobotMap {
   
 
   // Climber control
-  public static final TalonFX climbingMech = new TalonFX(CANConstants.CLIMBER_TALON);
+  public static final TalonFX climberFalcon = new TalonFX(CANConstants.CLIMBER_TALON);
   public static final DoubleSolenoid climberPiston = new DoubleSolenoid(SOLENOIDConstants.CLIMBER_DOWN, SOLENOIDConstants.CLIMBER_UP);
 
   // Gyro

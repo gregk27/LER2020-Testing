@@ -10,28 +10,42 @@
 package ler.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import ler.robot.RobotMap;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 /**
  * Subsystem representing the climber mech.
  */
 public class Climber extends SubsystemBase{
     
+    DoubleSolenoid piston;
+    TalonFX winch;
 
+    /**
+     * Raise the climber.
+     * 
+     * @param piston The piston attached to the climber
+     * @param winch The winch motor
+     */
+    public Climber(DoubleSolenoid piston, TalonFX winch){
+        this.piston = piston;
+        this.winch = winch;
+    }
+    
     /**
      * Raise the climber.
      */
     public void raiseElevator() {
-        RobotMap.climberPiston.set(Value.kForward);
+        piston.set(Value.kForward);
     }
 
     /**
      * Lower the climber.
      */
     public void lowerElevator() {
-        RobotMap.climberPiston.set(Value.kReverse);
+        piston.set(Value.kReverse);
     }
 
     /**
@@ -40,7 +54,7 @@ public class Climber extends SubsystemBase{
      * @param speed Output % to winch with
      */
     public void driveWinch(double speed) {
-        RobotMap.climbingMech.set(ControlMode.PercentOutput, speed);
+        winch.set(ControlMode.PercentOutput, speed);
     }
 
     /**
@@ -49,7 +63,7 @@ public class Climber extends SubsystemBase{
      * @return <code>true</code> if the climber is extended
      */
     public boolean isElevatorExtended(){
-        if(RobotMap.climberPiston.get() == Value.kForward){
+        if(piston.get() == Value.kForward){
             return true;
         }
         return false;
