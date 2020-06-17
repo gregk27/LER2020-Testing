@@ -41,7 +41,13 @@ public class Tools {
         return value;
     }
 
-    /** does a thing. */
+    /** 
+     * Ensure that value is further from 0 than +/- min.
+     * 
+     * @param value The value to check against
+     * @param min The closest output to 0
+     * @return <code>IF |min| > |value| THEN +/- min ELSE value </code>
+     */
     public static double setAbsoluteMinimum(double value, double min) {
 		value = (value < min && value > 0) ? min : value;
 		value = (value > -min && value < 0) ? -min : value;
@@ -49,7 +55,13 @@ public class Tools {
     }
     
     /**
-     * helper for auto gyro.
+     * Get the equivalent (<360) agnle for an absolute angle.
+     * <p> This is used as the gyro may have >360 values after driving for some time
+     * <p> NOTE: This documentation may not be accurate the function's exact behaviour
+     * 
+     * @param gyro The {@link Gyro} subsystem
+     * @param targetAngle Target angle
+     * @return The angle to robot should turn towards
      */ 
     public static double closestEquivalentAngle(Gyro gyro, double targetAngle) {
 		double t = targetAngle;
