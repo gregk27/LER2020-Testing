@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 //Copied directly from turret bot code
+
 package ler.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,20 +14,40 @@ import ler.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+/**
+ * Subsystem representing the climber mech.
+ */
 public class Climber extends SubsystemBase{
     
+
+    /**
+     * Raise the climber.
+     */
     public void raiseElevator() {
         RobotMap.climberPiston.set(Value.kForward);
     }
 
+    /**
+     * Lower the climber.
+     */
     public void lowerElevator() {
         RobotMap.climberPiston.set(Value.kReverse);
     }
 
+    /**
+     * Winch up the climber.
+     * 
+     * @param speed Output % to winch with
+     */
     public void driveWinch(double speed) {
         RobotMap.climbingMech.set(ControlMode.PercentOutput, speed);
     }
 
+    /**
+     * Check if the elevator is extended.
+     * 
+     * @return <code>true</code> if the climber is extended
+     */
     public boolean isElevatorExtended(){
         if(RobotMap.climberPiston.get() == Value.kForward){
             return true;

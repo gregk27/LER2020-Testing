@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+/**
+ * Subsystem representing the intake arm and rollers.
+ */
 public class Intake extends SubsystemBase {
   
   
@@ -25,23 +28,43 @@ public class Intake extends SubsystemBase {
 
   }
 
+  /**
+   * Drive the intake roller.
+   *
+   * @param speed The % to drive at
+   */
   public void startIntake(double speed){
-    RobotMap.intakeRoller.set(ControlMode.PercentOutput, speed );
+    RobotMap.intakeRoller.set(ControlMode.PercentOutput, speed);
 
   }
+
+  /**
+   * Stop the intake roller.
+   */
   public void stopIntake(){
     RobotMap.intakeRoller.set(ControlMode.PercentOutput, 0);
 
   }
 
+  /**
+   * Deploy intake.
+   */
   public void extendIntake(){
     RobotMap.intakeArm.set(Value.kForward);
   }
 
+  /**
+   * Retract intake.
+   */
   public void retractIntake(){
     RobotMap.intakeArm.set(Value.kReverse);
   }
 
+  /**
+   * Get if the intake is deployed.
+   * 
+   * @return <code>true</code> if the intake is deployed
+   */
   public boolean isExtended(){
     if(RobotMap.intakeArm.get() == Value.kForward){
       return true;

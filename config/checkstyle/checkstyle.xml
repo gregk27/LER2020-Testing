@@ -114,7 +114,7 @@
             </module>
             <!-- Ensure correct indentaion and closed tags -->
             <module name="JavadocTagContinuationIndentation">
-                <property name="violateExecutionOnNonTightHtml" value="true"/>
+                <!-- <property name="violateExecutionOnNonTightHtml" value="true"/> -->
             </module>
             <!-- Ensure that methods (barring overrides and set/get) have javadoc -->
             <module name="MissingJavadocMethod">
