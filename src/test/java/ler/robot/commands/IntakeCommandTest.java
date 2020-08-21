@@ -13,11 +13,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import ler.mocks.ctre.MockCTREController;
-import ler.mocks.scheduler.MockButton;
-import ler.mocks.scheduler.MockHardwareExtension;
-import ler.mocks.scheduler.TestWithScheduler;
-import ler.mocks.wpilib.MockDoubleSolenoid;
+import ca.gregk.frcmocks.ctre.MockCTREController;
+import ca.gregk.frcmocks.ctre.MockTalonSRX;
+import ca.gregk.frcmocks.scheduler.MockButton;
+import ca.gregk.frcmocks.scheduler.MockHardwareExtension;
+import ca.gregk.frcmocks.scheduler.TestWithScheduler;
+import ca.gregk.frcmocks.wpilib.MockDoubleSolenoid;
 import ler.robot.subsystems.Conveyor;
 import ler.robot.subsystems.Intake;
 
@@ -43,9 +44,9 @@ public class IntakeCommandTest {
     @Test
     public void startIntake() {
         // Arrange
-        MockCTREController<TalonSRX> intakeMotor = new MockCTREController<TalonSRX>(TalonSRX.class);
+        MockTalonSRX intakeMotor = new MockTalonSRX();
         MockDoubleSolenoid intakePiston = new MockDoubleSolenoid();
-        Intake intake = new Intake((TalonSRX) intakeMotor.getMock(), intakePiston.getMock());
+        Intake intake = new Intake(intakeMotor.getMock(), intakePiston.getMock());
         Conveyor conveyor = mock(Conveyor.class);
 
         IntakeCommand command = new IntakeCommand(intake, conveyor);
@@ -72,9 +73,9 @@ public class IntakeCommandTest {
     @Test
     public void stopIntake() {
         // Arrange
-        MockCTREController<TalonSRX> intakeMotor = new MockCTREController<TalonSRX>(TalonSRX.class);
+        MockTalonSRX intakeMotor = new MockTalonSRX();
         MockDoubleSolenoid intakePiston = new MockDoubleSolenoid();
-        Intake intake = new Intake((TalonSRX) intakeMotor.getMock(), intakePiston.getMock());
+        Intake intake = new Intake(intakeMotor.getMock(), intakePiston.getMock());
         Conveyor conveyor = mock(Conveyor.class);
 
         IntakeCommand command = new IntakeCommand(intake, conveyor);

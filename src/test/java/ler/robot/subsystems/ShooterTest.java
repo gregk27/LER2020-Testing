@@ -8,7 +8,7 @@ import com.revrobotics.ControlType;
 
 import org.junit.Test;
 
-import ler.mocks.rev.MockCANSparkMax;
+import ca.gregk.frcmocks.rev.MockCANSparkMax;
 
 /**
  * JUnit tests to ensure functionality of the shooter subsystem.
