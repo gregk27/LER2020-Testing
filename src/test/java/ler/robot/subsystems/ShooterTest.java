@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.revrobotics.ControlType;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ca.gregk.frcmocks.rev.MockCANSparkMax;
@@ -14,39 +15,55 @@ import ca.gregk.frcmocks.rev.MockCANSparkMax;
  * JUnit tests to ensure functionality of the shooter subsystem.
  */
 public class ShooterTest {
-    
+
+    private MockCANSparkMax tlSpark;
+    private MockCANSparkMax trSpark;
+    private MockCANSparkMax brSpark;
+    private MockCANSparkMax blSpark;
+
+    private Shooter shooter;
+
+    static final double SPEED_TOLERANCE = 0.01;
+
+    /**
+     * Setup the test subsystem.
+     */
+    @Before
+    public void setup(){
+        // Arrange
+        tlSpark = new MockCANSparkMax();
+        trSpark = new MockCANSparkMax();
+        brSpark = new MockCANSparkMax();
+        blSpark = new MockCANSparkMax();
+
+        shooter = new Shooter(tlSpark.getMock(), trSpark.getMock(), brSpark.getMock(), blSpark.getMock());
+
+    }
+
     /**
      * Ensure that the wheel speeds are set properly (top at full, bottom at a multiple of that).
      */
     @Test
     public void setSpeed(){
-        // Arrange
-        MockCANSparkMax tlSpark = new MockCANSparkMax();
-        MockCANSparkMax trSpark = new MockCANSparkMax();
-        MockCANSparkMax brSpark = new MockCANSparkMax();
-        MockCANSparkMax blSpark = new MockCANSparkMax();
-
-        Shooter shooter = new Shooter(tlSpark.getMock(), trSpark.getMock(), brSpark.getMock(), blSpark.getMock());
-
         // Act
         shooter.setSpecificShootersSpeed(Shooter.SHOOTER_TARGET_SPEED);
 
         // Assert
         assertTrue("TL Spark in wrong mode", tlSpark.pidMode);
         assertEquals(ControlType.kVelocity, tlSpark.controlType);
-        assertEquals(Shooter.SHOOTER_TOP_TARGET_SPEED, tlSpark.setpoint, 0.01);
+        assertEquals(Shooter.SHOOTER_TOP_TARGET_SPEED, tlSpark.setpoint, SPEED_TOLERANCE);
 
         assertTrue("TR Spark in wrong mode", trSpark.pidMode);
         assertEquals(ControlType.kVelocity, trSpark.controlType);
-        assertEquals(-Shooter.SHOOTER_TOP_TARGET_SPEED, trSpark.setpoint, 0.01);
+        assertEquals(-Shooter.SHOOTER_TOP_TARGET_SPEED, trSpark.setpoint, SPEED_TOLERANCE);
 
         assertTrue("BR Spark in wrong mode", brSpark.pidMode);
         assertEquals(ControlType.kVelocity, brSpark.controlType);
-        assertEquals(-Shooter.SHOOTER_BOTTOM_TARGET_SPEED, brSpark.setpoint, 0.01);
+        assertEquals(-Shooter.SHOOTER_BOTTOM_TARGET_SPEED, brSpark.setpoint, SPEED_TOLERANCE);
 
         assertTrue("BL Spark in wrong mode", blSpark.pidMode);
         assertEquals(ControlType.kVelocity, blSpark.controlType);
-        assertEquals(Shooter.SHOOTER_BOTTOM_TARGET_SPEED, blSpark.setpoint, 0.01);
+        assertEquals(Shooter.SHOOTER_BOTTOM_TARGET_SPEED, blSpark.setpoint, SPEED_TOLERANCE);
     }
 
     /**
@@ -54,14 +71,6 @@ public class ShooterTest {
      */
     @Test
     public void stopShooter(){        
-        // Arrange
-        MockCANSparkMax tlSpark = new MockCANSparkMax();
-        MockCANSparkMax trSpark = new MockCANSparkMax();
-        MockCANSparkMax brSpark = new MockCANSparkMax();
-        MockCANSparkMax blSpark = new MockCANSparkMax();
-
-        Shooter shooter = new Shooter(tlSpark.getMock(), trSpark.getMock(), brSpark.getMock(), blSpark.getMock());
-
         // Act
         // Set speeds
         shooter.setSpecificShootersSpeed(Shooter.SHOOTER_TARGET_SPEED);
