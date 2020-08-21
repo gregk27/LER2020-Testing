@@ -1,3 +1,0 @@
-[submodule "src/test/java/ler/mocks"]
-	path = src/test/java/ler/mocks
-	url = https://github.com/Aree-Vanier/FRCMocks.git
