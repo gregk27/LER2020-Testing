@@ -10,5 +10,3 @@ WORKDIR /root/
 RUN git config --global user.name "LER-Programming"
 RUN git config --global user.email "github.lakeeffectrobotics@gmail.com"
 RUN git config --global core.hooksPath /root/git-hooks
-
-CMD ["sh", "test.bash"]
