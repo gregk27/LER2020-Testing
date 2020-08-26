@@ -1,5 +1,4 @@
-image:
-  file: .devcontainer/Dockerfile
+image: wpilib/roborio-cross-ubuntu
 
 tasks:
   - init: ./gradlew build
