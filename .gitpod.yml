@@ -1,4 +1,4 @@
-image: wpilib/roborio-cross-ubuntu
+image: wpilib/roborio-cross-ubuntu:2020-18.04
 
 tasks:
   - init: ./gradlew build
