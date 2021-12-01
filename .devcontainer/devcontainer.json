@@ -14,7 +14,13 @@
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": []
+	"extensions": [
+		"wpilibsuite.vscode-wpilib@2020.3.2",
+		"vscjava.vscode-java-pack",
+		"richardwillis.vscode-gradle-extension-pack",
+		"gregk.botbuilder",
+		"shengchen.vscode-checkstyle"
+	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
